@@ -1,8 +1,8 @@
-#include "LCWhitespaceAnalyzer.h"
-#include "LCWhitespaceTokenizer.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
-#include "TestAnalyzer.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCWhitespaceTokenizer.h"
+
+#import  <UnitKit/UnitKit.h>
+#import  "TestAnalyzer.h"
 
 @interface TestWhitespaceAnalyzer: NSObject <UKTest>
 @end

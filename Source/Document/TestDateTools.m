@@ -1,6 +1,6 @@
-#include "LCDateTools.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCDateTools.h"
+
+#import  <UnitKit/UnitKit.h>
 
 @interface TestDateTools: NSObject <UKTest>
 @end

@@ -1,11 +1,11 @@
-#include "LCDocument.h"
-#include "LCField.h"
-#include "LCRAMDirectory.h"
-#include "LCIndexWriter.h"
-#include "LCIndexReader.h"
-#include "LCWhitespaceAnalyzer.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  "LCRAMDirectory.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
 
 @interface TestIndexWriter: NSObject <UKTest>
 @end

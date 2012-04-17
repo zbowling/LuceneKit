@@ -1,7 +1,7 @@
 #ifndef __LUCENE_INDEX_TERM__
 #define __LUCENE_INDEX_TERM__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @interface LCTerm: NSObject <NSCopying>
 {

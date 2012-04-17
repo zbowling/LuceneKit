@@ -1,5 +1,5 @@
-#include "LCConjunctionScorer.h"
-#include "GNUstep.h"
+#import  "LCConjunctionScorer.h"
+
 
 @interface LCScorer (LCCompare_Document)
 - (NSComparisonResult) compareDocument: (LCScorer *) other;
@@ -34,8 +34,7 @@
 
 - (void) dealloc
 {
-	DESTROY(scorers);
-	[super dealloc];
+	scorers=nil;;
 }
 
 - (void) addScorer: (LCScorer *) scorer

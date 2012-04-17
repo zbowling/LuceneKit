@@ -1,11 +1,11 @@
-#include "LCQueryParser.h"
-#include "LCBooleanQuery.h"
-#include "LCPrefixQuery.h"
-#include "LCTermQuery.h"
-#include "LCMetadataAttribute.h"
-#include "GNUstep.h"
-#include "CodeParser.h"
-#include "QueryHandler.h"
+#import  "LCQueryParser.h"
+#import  "LCBooleanQuery.h"
+#import  "LCPrefixQuery.h"
+#import  "LCTermQuery.h"
+#import  "LCMetadataAttribute.h"
+
+#import  "CodeParser.h"
+#import  "QueryHandler.h"
 
 @implementation LCQueryParser
 
@@ -16,9 +16,9 @@
 
 + (LCQuery *) parse: (NSString *) query defaultField: (NSString *) field
 {
-  QueryHandler *handler = AUTORELEASE([[QueryHandler alloc] init]);
+  QueryHandler *handler = [[QueryHandler alloc] init];
   [handler setDefaultField: field];
-  CodeParser *parser = AUTORELEASE([[CodeParser alloc] initWithCodeHandler: handler withString: query]);
+  CodeParser *parser = [[CodeParser alloc] initWithCodeHandler: handler withString: query];
   [parser parse];
 //  NSLog(@"%@", [handler query]);
   return [handler query];

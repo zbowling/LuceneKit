@@ -1,7 +1,7 @@
 #ifndef __LUCENE_INDEX_TERM_INFO__
 #define __LUCENE_INDEX_TERM_INFO__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @interface LCTermInfo: NSObject <NSCopying>
 {

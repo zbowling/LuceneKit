@@ -1,9 +1,9 @@
-#include "LCFieldsReader.h"
-#include "LCFieldsWriter.h"
-#include "LCDirectory.h"
-#include "LCIndexInput.h"
-#include "NSData+Additions.h"
-#include "GNUstep.h"
+#import  "LCFieldsReader.h"
+#import  "LCFieldsWriter.h"
+#import  "LCDirectory.h"
+#import  "LCIndexInput.h"
+#import  "NSData+Additions.h"
+
 
 /**
 * Class responsible for access to stored document fields.
@@ -19,19 +19,18 @@
 			  fieldInfos: (LCFieldInfos *) fn
 {
 	self = [super init];
-	ASSIGN(fieldInfos, fn);
-	ASSIGN(fieldsStream, [d openInput: [segment stringByAppendingPathExtension: @"fdt"]]);
-	ASSIGN(indexStream, [d openInput: [segment stringByAppendingPathExtension: @"fdx"]]);
+	fieldInfos = fn;
+	fieldsStream = [d openInput: [segment stringByAppendingPathExtension: @"fdt"]];
+	indexStream = [d openInput: [segment stringByAppendingPathExtension: @"fdx"]];
 	size = (int)([indexStream length]/8);
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(fieldInfos);
-	DESTROY(fieldsStream);
-	DESTROY(indexStream);
-	[super dealloc];
+	fieldInfos=nil;;
+	fieldsStream=nil;;
+	indexStream=nil;;
 }
 
 - (void) close
@@ -77,19 +76,19 @@
 															 data: d
 															 store: LCStore_Compress];
 					[doc addField: field];
-					DESTROY(field);
+					field=nil;;
 				//doc.add(new Field(fi.name, uncompress(b), Field.Store.COMPRESS));
 				}
 			}
 			else
 			{
 				LCField *field = [[LCField alloc] initWithName: [fi name]
-														 data: AUTORELEASE([b copy])
+														 data: [b copy]
 														 store: LCStore_YES];
 				[doc addField: field];
-				DESTROY(field);
+				field=nil;;
 			}
-			DESTROY(b);
+			b=nil;;
 		}
 		else {
 			LCIndex_Type index;
@@ -137,9 +136,9 @@
 				[field setOmitNorms: [fi omitNorms]];
 
 				[doc addField: field];
-				DESTROY(field);
-				DESTROY(s);
-				DESTROY(b);
+				field=nil;;
+				s=nil;;
+				b=nil;;
 			}
 			else // Not compressed
 			{
@@ -150,11 +149,11 @@
 													termVector: termVector];
 				[field setOmitNorms: [fi omitNorms]];
 				[doc addField: field];
-				DESTROY(field);
+				field=nil;;
 			}
 		}
     }
-    return AUTORELEASE(doc);
+    return doc;
 }
 
 @end

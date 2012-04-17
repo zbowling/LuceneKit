@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_FIELDS_READER__
 #define __LUCENE_INDEX_FIELDS_READER__
 
-#include <Foundation/Foundation.h>
-#include "LCFieldInfos.h"
+#import  <Foundation/Foundation.h>
+#import  "LCFieldInfos.h"
 
 @class LCIndexInput;
 

@@ -1,10 +1,10 @@
-#include "LCFSDirectory.h"
-#include "LCIndexInput.h"
-#include "LCIndexOutput.h"
-#include "LCRAMDirectory.h"
-#include "LCRAMFile.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCFSDirectory.h"
+#import  "LCIndexInput.h"
+#import  "LCIndexOutput.h"
+#import  "LCRAMDirectory.h"
+#import  "LCRAMFile.h"
+
+#import  <UnitKit/UnitKit.h>
 
 @interface TestStore: NSObject <UKTest>
 @end
@@ -106,35 +106,35 @@
     
 	id <LCDirectory> store = nil;
 	if (ram)
-		ASSIGN(store, AUTORELEASE([[LCRAMDirectory alloc] init]));
+		store = [[[LCRAMDirectory alloc] init] autorelease];
 	else
     {
-		ASSIGN(p, ([NSString stringWithFormat: @"LuceneKit_Test_%d_Can_Be_Deleted", (int)random()]));
-		ASSIGN(p, ([NSTemporaryDirectory() stringByAppendingPathComponent: p]));
-		ASSIGN(store, [LCFSDirectory directoryAtPath: [p stringByStandardizingPath]
-									 create: YES]);
+		p, ([NSString stringWithFormat: @"LuceneKit_Test_%d_Can_Be_Deleted" = (int)random()]);
+		p = ([NSTemporaryDirectory() stringByAppendingPathComponent: p]);
+		store = [LCFSDirectory directoryAtPath: [p stringByStandardizingPath]
+									 create: YES];
 
 		//store = FSDirectory.getDirectory("test.store", true);
     }
 	
 	NSString *name = @"1.dat";
 	LCIndexOutput *file = nil;
-        ASSIGN(file, [store createOutput: name]);
+        file = [store createOutput: name];
 	for (j = 0; j < 10; j++)
 		[file writeByte: (j+'0')];
 	for (j = 0; j < 26; j++)
 		[file writeByte: (j+'A')];
 	
 	[file close];
-	DESTROY(file);
+	[file release];file=nil;;
 	
 	LCIndexInput *input = nil;
-        ASSIGN(input, [store openInput: name]);
+        input = [store openInput: name];
 	UKIntsEqual('0', [input readByte]);
 	[input seekToFileOffset: 10];
 	UKIntsEqual('A', [input readByte]);
 	LCIndexInput *clone = nil;
-        ASSIGNCOPY(clone, input);
+        clone =[[ input copy] autorelease];
 	UKIntsEqual([input readByte], [clone readByte]);
 	UKIntsEqual('C', [clone readByte]);
 	[clone seekToFileOffset: 0];
@@ -146,10 +146,10 @@
 	[clone close];
 	if (!ram)
 		[[NSFileManager defaultManager] removeFileAtPath: p handler: nil];
-	DESTROY(input);
-	DESTROY(clone);
-	DESTROY(store);
-	DESTROY(p);
+	[input release];input=nil;;
+	[clone release];clone=nil;;
+	[store release];store=nil;;
+	[p release];p=nil;;
 }
 
 - (void) testRAMClone

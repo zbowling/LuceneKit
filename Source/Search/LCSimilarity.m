@@ -1,8 +1,8 @@
-#include "LCSimilarity.h"
-#include "LCDefaultSimilarity.h"
-#include "LCSearcher.h"
-#include "LCSmallFloat.h"
-#include "GNUstep.h"
+#import  "LCSimilarity.h"
+#import  "LCDefaultSimilarity.h"
+#import  "LCSearcher.h"
+#import  "LCSmallFloat.h"
+
 
 static float *NORM_TABLE = NULL;
 static LCSimilarity *defaultImpl = nil;
@@ -11,14 +11,14 @@ static LCSimilarity *defaultImpl = nil;
 
 + (void) setDefaultSimilarity: (LCSimilarity *) d
 {
-	ASSIGN(defaultImpl, d);
+	defaultImpl = d;
 }
 
 + (LCSimilarity *) defaultSimilarity
 {
 	if (defaultImpl == nil)
 	{
-		ASSIGN(defaultImpl, AUTORELEASE([[LCDefaultSimilarity alloc] init]));
+		defaultImpl = [[LCDefaultSimilarity alloc] init];
 	}
 	return defaultImpl;
 }
@@ -37,10 +37,6 @@ static LCSimilarity *defaultImpl = nil;
 	return self;
 }
 
-- (void) dealloc
-{
-	[super dealloc];
-}
 
 /** Decodes a normalization factor stored in an index.
 *  @see #encodeNorm(float)

@@ -1,7 +1,7 @@
-#include "LCAnalyzer.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
-#include "LCStringReader.h"
+#import  "LCAnalyzer.h"
+
+#import  <UnitKit/UnitKit.h>
+#import  "LCStringReader.h"
 
 @implementation LCAnalyzer (UKTest_Additions)
 
@@ -18,6 +18,6 @@
 		UKStringsEqual([a objectAtIndex: i++], [token termText]);
     }
 	
-	RELEASE(reader);
+	[reader release];
 }
 @end

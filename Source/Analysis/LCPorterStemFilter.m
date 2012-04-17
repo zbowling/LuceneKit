@@ -1,4 +1,4 @@
-#include "LCPorterStemFilter.h"
+#import  "LCPorterStemFilter.h"
 
 /** Transforms the token stream as per the Porter stemming algorithm.
 Note: the input to the stemming filter must already be in lower case,
@@ -30,7 +30,6 @@ class MyAnalyzer extends Analyzer {
 - (void) dealloc
 {
 	free_stemmer(st);
-	[super dealloc];
 }
 
 /** Returns the next input Token, after being stemmed */
@@ -43,7 +42,7 @@ class MyAnalyzer extends Analyzer {
     {
 		// FIXME: not i18n compatible
 		NSString *term = [token termText];
-		int k = stem(st, (char *)[term cString], [term length]);
+		int k = stem(st, (char *)[term cStringUsingEncoding:NSUTF8StringEncoding], [term length]);
 		NSString *sub = [term substringToIndex: k];
 		if (sub != term) // Yes, I mean object reference comparison here
 			[token setTermText: sub];

@@ -1,8 +1,8 @@
 #ifndef __LUCENE_STORE_RAM_OUTPUT_STREAM__
 #define __LUCENE_STORE_RAM_OUTPUT_STREAM__
 
-#include "LCIndexOutput.h"
-#include "LCRAMFile.h"
+#import  "LCIndexOutput.h"
+#import  "LCRAMFile.h"
 
 @interface LCRAMOutputStream: LCIndexOutput
 {

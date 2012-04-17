@@ -1,12 +1,12 @@
 #ifndef __LUCENE_INDEX_INDEX_READER__
 #define __LUCENE_INDEX_INDEX_READER__
 
-#include <Foundation/Foundation.h>
-#include "LCTermDocs.h"
-#include "LCTermFreqVector.h"
-#include "LCTermPositions.h"
-#include "LCSegmentInfos.h"
-#include "LCDocument.h"
+#import  <Foundation/Foundation.h>
+#import  "LCTermDocs.h"
+#import  "LCTermFreqVector.h"
+#import  "LCTermPositions.h"
+#import  "LCSegmentInfos.h"
+#import  "LCDocument.h"
 
 typedef enum _LCFieldOption
 {

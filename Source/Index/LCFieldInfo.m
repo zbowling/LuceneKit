@@ -1,5 +1,5 @@
-#include "LCFieldInfo.h"
-#include "GNUstep.h"
+#import  "LCFieldInfo.h"
+
 
 /**
 * Copyright 2004 The Apache Software Foundation
@@ -28,7 +28,7 @@
     omitNorms: (BOOL) ons
 {
 	self = [self init];
-	ASSIGN(name, na);
+	name = na;
 	isIndexed = tk;
 	number = nu;
 	storeTermVector = tv;
@@ -40,8 +40,7 @@
 
 - (void) dealloc
 {
-	DESTROY(name);
-	[super dealloc];
+	name=nil;;
 }
 
 - (NSString *) name

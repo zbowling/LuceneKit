@@ -1,5 +1,5 @@
-#include "LCField.h"
-#include "GNUstep.h"
+#import  "LCField.h"
+
 
 /**
 A field is a section of a Document.  Each field has two parts, a name and a
@@ -13,26 +13,21 @@ A field is a section of a Document.  Each field has two parts, a name and a
 - (id) init
 {
 	self = [super init];
-	ASSIGN(name, [NSString stringWithCString: "body"]);
-	fieldsData = nil;
-	storeTermVector = NO;
-	storeOffsetWithTermVector = NO;
-	storePositionWithTermVector = NO;
-	isStored = NO;
-	isIndexed = YES;
-	isTokenized = YES;
-	isBinary = NO;
-	isCompressed = NO;
-	omitNorms = NO;
-	boost = 1.0f;
+    if (self) {
+        name = @"body";
+        fieldsData = nil;
+        storeTermVector = NO;
+        storeOffsetWithTermVector = NO;
+        storePositionWithTermVector = NO;
+        isStored = NO;
+        isIndexed = YES;
+        isTokenized = YES;
+        isBinary = NO;
+        isCompressed = NO;
+        omitNorms = NO;
+        boost = 1.0f;
+    }
 	return self;
-}
-
-- (void) dealloc
-{
-	DESTROY(name);
-	DESTROY(fieldsData);
-	[super dealloc];
 }
 
 /** Sets the boost factor hits on this field.  This value will be
@@ -181,8 +176,8 @@ A field is a section of a Document.  Each field has two parts, a name and a
 		NSLog(@"cannot store term vector information for a field that is not indexed");
 		return nil;
     }
-	ASSIGN(name, n); // this.name = name.intern(); // field names are interned
-	ASSIGN(fieldsData, value);
+	name = n; // this.name = name.intern(; // field names are interned
+	fieldsData = value;
 	
 	if (store == LCStore_YES) {
 		isStored = YES;
@@ -261,8 +256,8 @@ A field is a section of a Document.  Each field has two parts, a name and a
 		return nil;
 	}
 	
-	ASSIGN(name, n);
-	ASSIGN(fieldsData, reader);
+	name = n;
+	fieldsData = reader;
 	isStored = NO;
 	isCompressed = NO;
 	isIndexed = YES;
@@ -294,8 +289,8 @@ A field is a section of a Document.  Each field has two parts, a name and a
 		return nil;
 	}
 	
-	ASSIGN(name, n);
-	ASSIGN(fieldsData, value);
+	name = n;
+	fieldsData = value;
 	
 	if (store == LCStore_YES) {
 		isStored = YES;

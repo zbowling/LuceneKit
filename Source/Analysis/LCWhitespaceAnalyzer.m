@@ -1,13 +1,13 @@
-#include "LCWhitespaceAnalyzer.h"
-#include "LCWhitespaceTokenizer.h"
-#include "GNUstep.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCWhitespaceTokenizer.h"
+
 
 @implementation LCWhitespaceAnalyzer
 
 - (LCTokenStream *) tokenStreamWithField: (NSString *) name
 								  reader: (id <LCReader>) reader
 {
-	return AUTORELEASE([[LCWhitespaceTokenizer alloc] initWithReader: reader]);
+	return [[LCWhitespaceTokenizer alloc] initWithReader: reader];
 }
 
 @end

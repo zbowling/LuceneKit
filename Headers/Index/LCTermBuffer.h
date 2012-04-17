@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_TERM_BUFFER__
 #define __LUCENE_INDEX_TERM_BUFFER__
 
-#include "LCTerm.h"
-#include "LCFieldInfos.h"
+#import  "LCTerm.h"
+#import  "LCFieldInfos.h"
 
 @class LCIndexInput;
 @class LCFieldInfos;

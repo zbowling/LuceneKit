@@ -1,11 +1,5 @@
-#include "LCWildcardTermEnum.h"
-#include "LCIndexReader.h"
-#include "GNUstep.h"
-#ifdef USE_PCREParser
-#include <PCREParser/PCREParser.h>
-#else
-#include <OgreKit/OgreKit.h>
-#endif
+#import  "LCWildcardTermEnum.h"
+#import  "LCIndexReader.h"
 
 
 static void replaceInString(NSMutableString* string, NSString* search, NSString* replace)
@@ -15,16 +9,8 @@ static void replaceInString(NSMutableString* string, NSString* search, NSString*
   unsigned int  newEnd;
   NSRange       searchRange;
 
-  if (search == nil)
-    {
-      [NSException raise: NSInvalidArgumentException
-                  format: @"replaceInString: nil search string"];
-    }
-  if (replace == nil)
-    {
-      [NSException raise: NSInvalidArgumentException
-                  format: @"replaceInString: nil search string"];
-    }
+    NSCParameterAssert(search);
+    NSCParameterAssert(replace);
 
   searchRange = NSMakeRange(0, [string length]);
   range = [string rangeOfString: search options: 0 range: searchRange];
@@ -80,38 +66,32 @@ static void replaceInString(NSMutableString* string, NSString* search, NSString*
 {
 	self = [self init];
 	endEnum = NO;
-	ASSIGNCOPY(searchTerm, term);
-	ASSIGNCOPY(field, [searchTerm field]);
-	ASSIGNCOPY(text, [searchTerm text]);
+	searchTerm =[ term copy];
+	field =[ [searchTerm field] copy];
+	text =[ [searchTerm text] copy];
 	
 	/* Make '*' to be '.*', '?' to be '.?' for regular expression */
 	NSMutableString *ms = [[NSMutableString alloc] initWithString: text];
         replaceInString(ms,@"*",@".*");
         replaceInString(ms,@"?",@".?");
-	
-#ifdef USE_PCREParser
-        regexp=[[PCREPattern alloc] initWithPattern:[NSString stringWithFormat: @"^%@$", ms]
-                                    options:0];
-#else
-	ASSIGN(regexp, ([OGRegularExpression regularExpressionWithString: [NSString stringWithFormat: @"^%@$", ms]]));
-#endif
-	DESTROY(ms);
+    NSError *error = NULL;
+    regexp = [NSRegularExpression regularExpressionWithPattern:@"^%@$" options:0 error:&error];
+    
+	ms=nil;;
 	
 	LCTerm *t = [[LCTerm alloc] initWithField: field text: @""];
 	LCTermEnumerator *e = [reader termEnumeratorWithTerm: t];
 	[self setEnumerator: e];
-	AUTORELEASE(t);
-	//AUTORELEASE(e);  // FIXME: cause segment fault
+	
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(searchTerm);
-	DESTROY(field);
-	DESTROY(text);
-	DESTROY(regexp);
-	[super dealloc];
+	searchTerm=nil;;
+	field=nil;;
+	text=nil;;
+	regexp=nil;;
 }
 
 - (BOOL) isEqualToTerm: (LCTerm *) term
@@ -137,30 +117,17 @@ static void replaceInString(NSMutableString* string, NSString* search, NSString*
 /* Use OgreKit to match wildcard */
 - (BOOL) wildcardEqualsTo: (NSString *) t
 {
-#ifdef USE_PCREParser
-  NSRange r=[t rangeOfPattern:regexp
-               range:NSMakeRange(0,[t length])];
-  return (r.length>0 ? YES : NO);
-#else
-	OGRegularExpressionMatch *match;
-	if ((match = [regexp matchInString: t]))
-        {
-		return YES;
-	}
-	else
-	{
-		return NO;
-	}
-#endif
+    NSRange rangeOfFirstMatch = [regexp rangeOfFirstMatchInString:t options:0 range:NSMakeRange(0, [t length])];
+    return (!NSEqualRanges(rangeOfFirstMatch, NSMakeRange(NSNotFound, 0)));
 }
 
 - (void) close
 {
 	[super close];
-	DESTROY(searchTerm);
-	DESTROY(field);
-	DESTROY(text);
-	DESTROY(regexp);
+	searchTerm=nil;;
+	field=nil;;
+	text=nil;;
+	regexp=nil;;
 }
 
 @end

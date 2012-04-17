@@ -1,7 +1,7 @@
 #ifndef __LUCENE_UTIL_PRIORITY_QUEUE__
 #define __LUCENE_UTIL_PRIORITY_QUEUE__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 /** Used by LCPriorityQueue 
 * to decide which one is less (NSOrderedAscending)

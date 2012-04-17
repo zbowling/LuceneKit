@@ -1,5 +1,5 @@
-#include "LCFieldInfos.h"
-#include "GNUstep.h"
+#import  "LCFieldInfos.h"
+
 
 /** Access to the Field Info file that describes document fields and whether or
 *  not they are indexed. Each segment has a separate Field Info file. Objects
@@ -36,9 +36,8 @@
 
 - (void) dealloc
 {
-	DESTROY(byNumber);
-	DESTROY(byName);
-	[super dealloc];
+	byNumber=nil;;
+	byName=nil;;
 }
 
 /**
@@ -218,7 +217,7 @@
          isStoreOffsetWithTermVector: (BOOL) isStoreOffsetWithTermVector
 	omitNorms: (BOOL) ons;
 {
-	LCFieldInfo *fi = [[LCFieldInfo alloc] initWithName: AUTORELEASE([name copy])
+	LCFieldInfo *fi = [[LCFieldInfo alloc] initWithName: [name copy]
 											  isIndexed: isIndexed
 												 number: [byNumber count]
 										storeTermVector: isTermVectorStored
@@ -227,7 +226,7 @@
 	omitNorms: ons];
 	[byNumber addObject: fi];
 	[byName setObject: fi forKey: name];
-	DESTROY(fi);
+	fi=nil;;
 }
 
 - (int) fieldNumber: (NSString *) fieldName

@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_INDEX_SEARCHER__
 #define __LUCENE_SEARCH_INDEX_SEARCHER__
 
-#include "LCSearcher.h"
-#include "LCDirectory.h"
+#import  "LCSearcher.h"
+#import  "LCDirectory.h"
 
 @class LCIndexReader;
 @class LCTerm;

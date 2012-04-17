@@ -1,8 +1,8 @@
-#include "LCIndexModifier.h"
-#include "LCRAMDirectory.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "LCSimpleAnalyzer.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCIndexModifier.h"
+#import  "LCRAMDirectory.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCSimpleAnalyzer.h"
+#import  <UnitKit/UnitKit.h>
 
 static int docCount = 0;
 

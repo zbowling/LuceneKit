@@ -1,14 +1,14 @@
-#include "GNUstep.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCDocument.h"
-#include "LCField.h"
-#include "LCIndexWriter.h"
-#include "LCIndexReader.h"
-#include "LCTermEnum.h"
-#include "LCTerm.h"
-#include "LCRAMDirectory.h"
-#include "LCWhitespaceAnalyzer.h"
+
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCTermEnum.h"
+#import  "LCTerm.h"
+#import  "LCRAMDirectory.h"
+#import  "LCWhitespaceAnalyzer.h"
 
 @interface TestSegmentTermEnum: NSObject <UKTest>
 @end

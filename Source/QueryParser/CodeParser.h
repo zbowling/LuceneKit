@@ -23,9 +23,9 @@
 #ifndef _CodeParser_H_
 #define _CodeParser_H_
 
-#include <Foundation/NSObject.h>
-#include <Foundation/NSString.h>
-#include "CodeHandler.h"
+#import  <Foundation/NSObject.h>
+#import  <Foundation/NSString.h>
+#import  "CodeHandler.h"
 
 @interface CodeParser: NSObject
 {

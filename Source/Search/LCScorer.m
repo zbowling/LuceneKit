@@ -1,5 +1,5 @@
-#include "LCScorer.h"
-#include "GNUstep.h"
+#import  "LCScorer.h"
+
 
 /** Expert: Common scoring functionality for different types of queries.
 * <br>A <code>Scorer</code> either iterates over documents matching a query,
@@ -13,14 +13,13 @@
 - (id) initWithSimilarity: (LCSimilarity *) si
 {
 	self = [self init];
-	ASSIGN(similarity, si);
+	similarity = si;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(similarity);
-	[super dealloc];
+	similarity=nil;;
 }
 
 /** Returns the Similarity implementation used by this scorer. */

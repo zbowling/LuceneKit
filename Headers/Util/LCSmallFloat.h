@@ -1,7 +1,7 @@
 #ifndef __LuceneKit_Util_SmallFont__
 #define __LuceneKit_Util_SmallFont__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 float IntBitsToFloat(int b);
 int FloatToIntBits (float f);

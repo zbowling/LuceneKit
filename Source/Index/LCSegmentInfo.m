@@ -1,5 +1,5 @@
-#include "LCSegmentInfo.h"
-#include "GNUstep.h"
+#import  "LCSegmentInfo.h"
+
 
 @implementation LCSegmentInfo
 
@@ -8,17 +8,16 @@
 		  directory: (id <LCDirectory>) d
 {
 	self = [super init];
-	ASSIGN(name, n);
+	name = n;
 	docCount = count;
-	ASSIGN(dir, d);
+	dir = d;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(name);
-	DESTROY(dir);
-	[super dealloc];
+	name=nil;;
+	dir=nil;;
 }
 
 - (NSString *) name

@@ -1,7 +1,7 @@
-#include "LCSimpleAnalyzer.h"
-#include "LCLowerCaseTokenizer.h"
-#include "TestAnalyzer.h"
-#include "GNUstep.h"
+#import  "LCSimpleAnalyzer.h"
+#import  "LCLowerCaseTokenizer.h"
+#import  "TestAnalyzer.h"
+
 
 @interface TestSimpleAnalyzer: NSObject <UKTest>
 @end

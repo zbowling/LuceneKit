@@ -1,6 +1,6 @@
-#include "LCWildcardQuery.h"
-#include "LCWildcardTermEnum.h"
-#include "GNUstep.h"
+#import  "LCWildcardQuery.h"
+#import  "LCWildcardTermEnum.h"
+
 
 /* Use OgreKit for wildcard, which is caseless by default */
 /** Implements the wildcard search query. Supported wildcards are <code>*</code>, which
@@ -16,7 +16,7 @@
 
 - (LCFilteredTermEnumerator *) enumerator: (LCIndexReader *) reader
 {
-	return AUTORELEASE([[LCWildcardTermEnumerator alloc] initWithReader: reader term: [self term]]);
+	return [[LCWildcardTermEnumerator alloc] initWithReader: reader term: [self term]];
 }
 
 - (BOOL) isEqual: (id) o

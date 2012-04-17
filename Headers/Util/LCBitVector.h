@@ -1,8 +1,8 @@
 #ifndef __LUCENE_UTIL_BIT_VECTOR__
 #define __LUCENE_UTIL_BIT_VECTOR__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
 
 /** An array of bits.
  * <author>Yen-Ju Chen</author>

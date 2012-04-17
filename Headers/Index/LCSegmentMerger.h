@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_SEGMENT_MERGER__
 #define __LUCENE_INDEX_SEGMENT_MERGER__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
 
 @class LCFieldInfos;
 @class LCIndexOutput;

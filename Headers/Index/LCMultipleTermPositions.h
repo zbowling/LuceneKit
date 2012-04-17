@@ -1,10 +1,10 @@
 #ifndef __LUCENE_INDEX_MULTIPLE_TERM_POSITION__
 #define __LUCENE_INDEX_MULTIPLE_TERM_POSITION__
 
-#include <Foundation/Foundation.h>
-#include "LCTermPositions.h"
-#include "LCPriorityQueue.h"
-#include "LCIndexReader.h"
+#import  <Foundation/Foundation.h>
+#import  "LCTermPositions.h"
+#import  "LCPriorityQueue.h"
+#import  "LCIndexReader.h"
 
 @class LCTermPositionsQueue; // Private
 @class LCIntQueue; //Private

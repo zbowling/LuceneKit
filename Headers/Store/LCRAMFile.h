@@ -1,7 +1,7 @@
 #ifndef __LUCENE_STORE_RAM_FILE__
 #define __LUCENE_STORE_RAM_FILE__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @interface LCRAMFile: NSObject
 {

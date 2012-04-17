@@ -1,5 +1,5 @@
-#include "LuceneKit.h"
-#include <UnitKit/UnitKit.h>
+#import  "LuceneKit.h"
+#import  <UnitKit/UnitKit.h>
 
 @interface TestPrefixQuery: NSObject <UKTest>
 @end

@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_EXACT_PHRASE_SCORER__
 #define __LUCENE_SEARCH_EXACT_PHRASE_SCORER__
 
-#include "LCPhraseScorer.h"
+#import  "LCPhraseScorer.h"
 
 @interface LCExactPhraseScorer: LCPhraseScorer
 - (id) initWithWeight: (id <LCWeight>) weight

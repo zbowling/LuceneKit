@@ -1,6 +1,6 @@
-#include "LCDisjunctionSumScorer.h"
-#include "LCPriorityQueue.h"
-#include "GNUstep.h"
+#import  "LCDisjunctionSumScorer.h"
+#import  "LCPriorityQueue.h"
+
 
 @interface LCScorerQueue: LCPriorityQueue
 @end
@@ -34,7 +34,7 @@
 		return nil;
 	}
 	minimumNrMatchers = m;
-	ASSIGN(subScorers, s);
+	subScorers = s;
 	return self;
 }
 
@@ -58,9 +58,8 @@
 
 - (void) dealloc
 {
-	DESTROY(subScorers);
-        DESTROY(scorerQueue);
-	[super dealloc];
+	subScorers=nil;;
+        scorerQueue=nil;;
 }
 
 - (BOOL) next
@@ -155,7 +154,7 @@
 	{
 		[res addDetail: [sr explain: doc]];
 	}
-	return AUTORELEASE(res);
+	return res;
 }
 
 @end

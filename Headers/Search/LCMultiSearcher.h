@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_MULTI_SEARCHER__
 #define __LUCENE_SEARCH_MULTI_SEARCHER__
 
-#include "LCSearcher.h"
+#import  "LCSearcher.h"
 
 @class LCExplanation;
 @class LCDocument;

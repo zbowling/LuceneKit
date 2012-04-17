@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_HIT_COLLECTOR__
 #define __LUCENE_SEARCH_HIT_COLLECTOR__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @interface LCHitCollector: NSObject
 {

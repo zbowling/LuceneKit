@@ -1,10 +1,10 @@
 #ifndef __LUCENE_INDEX_MULTI_READER__
 #define __LUCENE_INDEX_MULTI_READER__
 
-#include "LCIndexReader.h"
-#include "LCTermDocs.h"
-#include "LCTermPositions.h"
-#include "LCDirectory.h"
+#import  "LCIndexReader.h"
+#import  "LCTermDocs.h"
+#import  "LCTermPositions.h"
+#import  "LCDirectory.h"
 
 @class LCSegmentMergeQueue;
 

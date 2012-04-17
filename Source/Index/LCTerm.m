@@ -1,5 +1,5 @@
-#include "LCTerm.h"
-#include "GNUstep.h"
+#import  "LCTerm.h"
+
 
 /**
 A Term represents a word from text.  This is the unit of search.  It is
@@ -20,17 +20,16 @@ A Term represents a word from text.  This is the unit of search.  It is
 - (id) initWithField: (NSString *) fld text: (NSString *) txt
 {
 	self = [super init];
-	ASSIGNCOPY(field, fld);
-	ASSIGNCOPY(text, txt);
+	field =[ fld copy];
+	text =[ txt copy];
 	return self;
 	//  this(fld, txt, true);
 }
 
 - (void) dealloc
 {
-	DESTROY(field);
-	DESTROY(text);
-	[super dealloc];
+	field=nil;;
+	text=nil;;
 }
 
 #if 0
@@ -92,12 +91,12 @@ The ordering of terms is first by field, then by text.*/
 /** Resets the field and text of a Term. */
 - (void) setField: (NSString *) fld
 {
-	ASSIGNCOPY(field, fld);
+	field =[ fld copy];
 }
 
 - (void) setText: (NSString *) txt
 {
-	ASSIGNCOPY(text, txt);
+	text =[ txt copy];
 }
 
 - (void) setTerm: (LCTerm *) other

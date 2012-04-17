@@ -1,8 +1,8 @@
 #ifndef __LUCENE_DOCUMENT_DOCUMENT__
 #define __LUCENE_DOCUMENT_DOCUMENT__
 
-#include <Foundation/Foundation.h>
-#include "LCField.h"
+#import  <Foundation/Foundation.h>
+#import  "LCField.h"
 
 /** Documents are the unit of indexing and search.
 *
@@ -19,7 +19,7 @@
 */
 
 #ifdef HAVE_UKTEST
-#include <UnitKit/UnitKit.h>
+#import  <UnitKit/UnitKit.h>
 @interface LCDocument: NSObject <UKTest>
 #else
 @interface LCDocument: NSObject

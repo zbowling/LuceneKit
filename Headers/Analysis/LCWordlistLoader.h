@@ -1,7 +1,7 @@
 #ifndef __LUCENE_ANALYSIS_WORDLIST_LOADER__
 #define __LUCENE_ANALYSIS_WORDLIST_LOADER__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @interface LCWordlistLoader: NSObject
 

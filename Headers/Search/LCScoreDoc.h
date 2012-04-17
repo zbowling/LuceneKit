@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_SCORE_DOC__
 #define __LUCENE_SEARCH_SCORE_DOC__
 
-#include <Foundation/Foundation.h>
-#include "LCPriorityQueue.h"
+#import  <Foundation/Foundation.h>
+#import  "LCPriorityQueue.h"
 
 @interface LCScoreDoc: NSObject <LCComparable>
 {

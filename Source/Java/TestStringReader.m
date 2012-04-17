@@ -1,5 +1,5 @@
-#include "LCStringReader.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCStringReader.h"
+#import  <UnitKit/UnitKit.h>
 
 @interface TestStringReader: NSObject <UKTest>
 @end

@@ -9,7 +9,7 @@ static const int TYPICAL_LONGEST_WORD_IN_INDEX = 19;
 
 int min(int a, int b, int c);
 
-#include "LCFilteredTermEnum.h"
+#import  "LCFilteredTermEnum.h"
 
 @class LCTerm;
 @class LCIndexReader;

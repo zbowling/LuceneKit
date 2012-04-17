@@ -1,7 +1,7 @@
 #ifndef __LUCENE_ANALYSIS_PERFIELD_ANALYZER_WRAPPER__
 #define __LUCENE_ANALYSIS_PERFIELD_ANALYZER_WRAPPER__
 
-#include "LCAnalyzer.h"
+#import  "LCAnalyzer.h"
 
 @interface LCPerFieldAnalyzerWrapper: LCAnalyzer
 {

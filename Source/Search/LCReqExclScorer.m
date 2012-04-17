@@ -1,6 +1,6 @@
-#include "LCReqExclScorer.h"
-#include "LCExplanation.h"
-#include "GNUstep.h"
+#import  "LCReqExclScorer.h"
+#import  "LCExplanation.h"
+
 
 @interface LCReqExclScorer (LCPrivate)
 - (BOOL) toNonExcluded;
@@ -11,17 +11,16 @@
 - (id) initWithRequired: (LCScorer *) r excluded: (LCScorer *) e
 {
 	self = [self initWithSimilarity: nil]; // No similarity used
-	ASSIGN(reqScorer, r);
-	ASSIGN(exclScorer, e);
+	reqScorer = r;
+	exclScorer = e;
 	firstTime = YES;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(reqScorer);
-	DESTROY(exclScorer);
-	[super dealloc];
+	reqScorer=nil;;
+	exclScorer=nil;;
 }
 
 - (BOOL) next
@@ -29,13 +28,13 @@
 	if (firstTime)
 	{
 		if (![exclScorer next]) {
-			DESTROY(exclScorer); // exhausted at start
+			exclScorer=nil;; // exhausted at start
 		}
 		firstTime = NO;
 	}
 	if (reqScorer == nil) return NO;
 	if (![reqScorer next]) {
-		DESTROY(reqScorer); // exhausted, nothing left
+		reqScorer=nil;; // exhausted, nothing left
 		return NO;
 	}
 	if (exclScorer == nil) {
@@ -53,7 +52,7 @@
 			return YES; // reqScorer advanced to before exclScorer, ie. not excluded
 		} else if (reqDoc > exclDoc) {
 			if (! [exclScorer skipTo: reqDoc]) {
-				DESTROY(exclScorer); // exhausted, no more exclusions
+				exclScorer=nil;; // exhausted, no more exclusions
 				return YES;
 			}
 			exclDoc = [exclScorer document];
@@ -62,7 +61,7 @@
 			}
 		}
 	} while ([reqScorer next]);
-	DESTROY(reqScorer); // exhausted, nothing left
+	reqScorer=nil;; // exhausted, nothing left
 	return NO;
 }
 
@@ -81,7 +80,7 @@
 	if (firstTime) {
 		firstTime = NO;
 		if (![exclScorer skipTo: target]) {
-			DESTROY(exclScorer);
+			exclScorer=nil;;
 		}
 	}
 	if (reqScorer == nil) {
@@ -91,7 +90,7 @@
 		return [reqScorer skipTo: target];
 	}
 	if (![reqScorer skipTo: target]) {
-		DESTROY(reqScorer);
+		reqScorer=nil;;
 		return NO;
 	}
 	return [self toNonExcluded];
@@ -106,7 +105,7 @@
 		[res setRepresentation: @"not excluded"];
 		[res addDetail: [reqScorer explain: doc]];
 	}
-	return AUTORELEASE(res);
+	return res;
 }
 
 @end

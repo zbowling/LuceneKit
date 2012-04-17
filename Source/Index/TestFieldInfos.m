@@ -1,8 +1,8 @@
-#include "LCFieldInfos.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
-#include "TestDocHelper.h"
-#include "LCRAMDirectory.h"
+#import  "LCFieldInfos.h"
+
+#import  <UnitKit/UnitKit.h>
+#import  "TestDocHelper.h"
+#import  "LCRAMDirectory.h"
 
 @interface TestFieldInfos: NSObject <UKTest>
 @end

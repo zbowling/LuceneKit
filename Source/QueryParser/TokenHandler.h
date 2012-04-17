@@ -23,8 +23,8 @@
 #ifndef _TokenHandler_H_
 #define _TokenHandler_H_
 
-#include "CodeHandler.h"
-#include <Foundation/Foundation.h>
+#import  "CodeHandler.h"
+#import  <Foundation/Foundation.h>
 
 @interface TokenHandler: NSObject <CodeHandler>
 {

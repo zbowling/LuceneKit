@@ -1,13 +1,13 @@
-#include "LCRAMDirectory.h"
-#include "LCTermVectorsWriter.h"
-#include "LCTermVectorsReader.h"
-#include "LCFieldInfos.h"
-#include "LCTermVectorOffsetInfo.h"
-#include "LCTermFreqVector.h"
-#include "LCTermPositionVector.h"
-#include "GNUstep.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
+#import  "LCRAMDirectory.h"
+#import  "LCTermVectorsWriter.h"
+#import  "LCTermVectorsReader.h"
+#import  "LCFieldInfos.h"
+#import  "LCTermVectorOffsetInfo.h"
+#import  "LCTermFreqVector.h"
+#import  "LCTermPositionVector.h"
+
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
 
 @interface TestTermVectorsReader: NSObject <UKTest>
 {
@@ -61,14 +61,14 @@ isStoreOffsetWithTermVector: storeOff];
 			[a addObject :[NSNumber numberWithInt: (int)(j*10+random()*10)]];
 		}
         [positions addObject: a];
-        DESTROY(a);
+        [a release];a=nil;;
 		a = [[NSMutableArray alloc] init];
 		for(j = 0; j < 3; j++)
 		{
 			[a addObject: [[LCTermVectorOffsetInfo alloc] initWithStartOffset: j * 10 endOffset: j * 10+[(NSString *)[testTerms objectAtIndex: i] length]]];
 		}
 		[offsets addObject: a];
-		DESTROY(a);
+		[a release];a=nil;;
     }
     
     [testTerms sortUsingSelector: @selector(compare:)];

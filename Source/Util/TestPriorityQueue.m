@@ -1,6 +1,6 @@
-#include "LCPriorityQueue.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCPriorityQueue.h"
+
+#import  <UnitKit/UnitKit.h>
 
 @interface LCIntegerQueue: LCPriorityQueue <UKTest>
 @end

@@ -1,6 +1,6 @@
-#include "LCDocument.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCDocument.h"
+
+#import  <UnitKit/UnitKit.h>
 
 @interface TestDocument: NSObject <UKTest>
 @end

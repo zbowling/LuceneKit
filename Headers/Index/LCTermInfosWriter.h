@@ -1,11 +1,11 @@
 #ifndef __LUCENE_INDEX_TERM_INFOS_WRITER__
 #define __LUCENE_INDEX_TERM_INFOS_WRITER__
 
-#include <Foundation/Foundation.h>
-#include "LCFieldInfos.h"
-#include "LCIndexOutput.h"
-#include "LCTerm.h"
-#include "LCTermInfo.h"
+#import  <Foundation/Foundation.h>
+#import  "LCFieldInfos.h"
+#import  "LCIndexOutput.h"
+#import  "LCTerm.h"
+#import  "LCTermInfo.h"
 
 /** The file format version, a negative number. */
 #define LCTermInfos_FORMAT -2

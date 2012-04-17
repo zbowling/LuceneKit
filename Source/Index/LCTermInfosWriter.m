@@ -1,6 +1,6 @@
-#include "LCTermInfosWriter.h"
-#include "NSString+Additions.h"
-#include "GNUstep.h"
+#import  "LCTermInfosWriter.h"
+#import  "NSString+Additions.h"
+
 
 /** This stores a monotonically increasing set of <Term, TermInfo> pairs in a
 Directory.  A TermInfos can be written once, in order.  */
@@ -17,8 +17,8 @@ Directory.  A TermInfos can be written once, in order.  */
 - (id) init
 {
 	self = [super init];
-	ASSIGN(lastTerm, AUTORELEASE([[LCTerm alloc] initWithField: @"" text: @""]));
-	ASSIGN(lastTi, AUTORELEASE([[LCTermInfo alloc] init]));
+	lastTerm = [[LCTerm alloc] initWithField: @"" text: @""];
+	lastTi = [[LCTermInfo alloc] init];
 	size = 0;
 	
 	// TODO: the default values for these two parameters should be settable from
@@ -60,11 +60,11 @@ Directory.  A TermInfos can be written once, in order.  */
 						  interval: interval
 						   isIndex: NO];
         // Other is own only for !isIndex
-	ASSIGN(other, AUTORELEASE([[LCTermInfosWriter alloc] initWithDirectory: directory
+	other = [[LCTermInfosWriter alloc] initWithDirectory: directory
 													   segment: segment
 													fieldInfos: fis
 													  interval: interval
-													   isIndex: YES]));
+													   isIndex: YES];
 	[other setOther: self];
 	return self;
 }
@@ -82,7 +82,7 @@ Directory.  A TermInfos can be written once, in order.  */
 {
 	self = [self init];
     indexInterval = interval;
-    ASSIGN(fieldInfos, fis);
+    fieldInfos = fis;
     isIndex = isi;
     NSString *s;
     if (isIndex)
@@ -93,7 +93,7 @@ Directory.  A TermInfos can be written once, in order.  */
     {
 	    s = [segment stringByAppendingPathExtension: @"tis"];
     }
-    ASSIGN(output, [directory createOutput: s]);
+    output = [directory createOutput: s];
     [output writeInt: LCTermInfos_FORMAT]; //write format
     [output writeLong: 0];                          // leave space for size
     [output writeInt: indexInterval];             // write indexInterval
@@ -103,13 +103,11 @@ Directory.  A TermInfos can be written once, in order.  */
 
 - (void) dealloc
 {
-	DESTROY(lastTerm);
-	DESTROY(lastTi);
-	if (!isIndex)
-          DESTROY(other);
-	DESTROY(fieldInfos);
-	DESTROY(output);
-	[super dealloc];
+	lastTerm=nil;;
+	lastTi=nil;;
+	other=nil;;
+	fieldInfos=nil;;
+	output=nil;;
 }
 
 /** Adds a new <Term, TermInfo> pair to the set.
@@ -182,7 +180,6 @@ TermInfo pointers must be positive and greater than all previous.*/
     [output writeVInt: [fieldInfos fieldNumber: [term field]]]; // write field num
 	
     /* Cache lastTerm. DO NOT use ASSIGN() because term might change */
-    //ASSIGN(lastTerm, term);
     [lastTerm setField: [term field]];
     [lastTerm setText: [term text]];
 }

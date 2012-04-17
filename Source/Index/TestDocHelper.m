@@ -1,10 +1,10 @@
-#include "TestDocHelper.h"
-#include "LCField.h"
-#include "LCDocument.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "LCSimilarity.h"
-#include "LCDocumentWriter.h"
-#include "GNUstep.h"
+#import  "TestDocHelper.h"
+#import  "LCField.h"
+#import  "LCDocument.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCSimilarity.h"
+#import  "LCDocumentWriter.h"
+
 
 static NSString *FIELD_1_TEXT;
 static NSString *TEXT_FIELD_1_KEY;
@@ -310,7 +310,7 @@ static NSArray *fields;
 		NO_NORMS_TEXT, NO_NORMS_KEY,
 		UNSTORED_1_FIELD_TEXT, UNSTORED_FIELD_1_KEY, 
 		UNSTORED_2_FIELD_TEXT, UNSTORED_FIELD_2_KEY, nil];
-    return AUTORELEASE(nameValues);
+    return [nameValues autorelease];
 }
 
 /**

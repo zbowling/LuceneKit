@@ -23,8 +23,8 @@
 #ifndef _QueryHandler_H_
 #define _QueryHandler_H_
 
-#include "TokenHandler.h"
-#include "LCBooleanQuery.h"
+#import  "TokenHandler.h"
+#import  "LCBooleanQuery.h"
 
 typedef enum _TokenType {
 	ReadyType = 0, /* Usually set when start or a query is finished */

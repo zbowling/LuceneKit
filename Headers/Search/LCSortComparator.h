@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_SORT_COMPARATOR__
 #define __LUCENE_SEARCH_SORT_COMPARATOR__
 
-#include "LCSortComparatorSource.h"
+#import  "LCSortComparatorSource.h"
 
 @interface LCSortComparator: NSObject <LCSortComparatorSource>
 {

@@ -1,22 +1,21 @@
-#include "LCReqOptSumScorer.h"
-#include "GNUstep.h"
+#import  "LCReqOptSumScorer.h"
+
 
 @implementation LCReqOptSumScorer
 
 - (id) initWithRequired: (LCScorer *) r optional: (LCScorer *) o
 {
 	self = [self initWithSimilarity: nil];
-	ASSIGN(reqScorer, r);
-	ASSIGN(optScorer, o);
+	reqScorer = r;
+	optScorer = o;
 	firstTimeOptScorer = YES;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(reqScorer);
-	DESTROY(optScorer);
-	[super dealloc];
+	reqScorer=nil;;
+	optScorer=nil;;
 }
 
 - (BOOL) next
@@ -41,13 +40,13 @@
 	if (firstTimeOptScorer) {
 		firstTimeOptScorer = NO;
 		if (![optScorer skipTo: curDoc]) {
-			DESTROY(optScorer);
+			optScorer=nil;;
 			return reqScore;
 		}
 	} else if (optScorer == nil) {
 		return reqScore;
 	} else if (([optScorer document] < curDoc) && (![optScorer skipTo: curDoc])) {
-		DESTROY(optScorer);
+		optScorer=nil;;
 		return reqScore;
 	}
 	
@@ -60,7 +59,7 @@
 	[res setRepresentation: @"required, optional"];
 	[res addDetail: [reqScorer explain: doc]];
 	[res addDetail: [optScorer explain: doc]];
-	return AUTORELEASE(res);
+	return res;
 }
 
 @end

@@ -1,9 +1,9 @@
-#include "LCIndexReader.h"
-#include "LCSegmentReader.h"
-#include "LCMultiReader.h"
-#include "LCFSDirectory.h"
-#include "LCSimilarity.h"
-#include "GNUstep.h"
+#import  "LCIndexReader.h"
+#import  "LCSegmentReader.h"
+#import  "LCMultiReader.h"
+#import  "LCFSDirectory.h"
+#import  "LCSimilarity.h"
+
 
 /** IndexReader is an abstract class, providing an interface for accessing an
 index.  Search of an index is done entirely through this abstract interface,
@@ -41,7 +41,7 @@ rely on a given document having the same number between sessions.
 - (id) initWithDirectory: (id <LCDirectory>) d
 {
 	self = [self init];
-	ASSIGN(directory, d);
+	directory = d;
 	return self;
 }
 
@@ -70,7 +70,7 @@ rely on a given document having the same number between sessions.
 		  directoryOwner: (BOOL) owner
 {
 	self = [self initWithDirectory: dir];
-	ASSIGN(segmentInfos, seg);
+	segmentInfos = seg;
 	directoryOwner = owner;
 	closeDirectory = close;
 	return self;
@@ -87,9 +87,8 @@ rely on a given document having the same number between sessions.
 		}
 	}
 #endif
-	DESTROY(directory);
-	DESTROY(segmentInfos);
-	[super dealloc];
+	directory=nil;;
+	segmentInfos=nil;;
 }
 
 + (LCIndexReader *) openPath: (NSString *) path
@@ -106,7 +105,6 @@ rely on a given document having the same number between sessions.
 							close: (BOOL) close
 {
 	LCSegmentInfos *infos = [[LCSegmentInfos alloc] init];
-	AUTORELEASE(infos);
 	[infos readFromDirectory: dir];
 	if ([infos numberOfSegments] == 1)
 	{
@@ -114,16 +112,15 @@ rely on a given document having the same number between sessions.
 												  info: [infos segmentInfoAtIndex: 0]   close: close];
 	}
 	NSMutableArray *readers = [[NSMutableArray alloc] init];
-	AUTORELEASE(readers);
 	int i;
 	for(i = 0; i < [infos numberOfSegments]; i++)
 	{
 		[readers addObject: [LCSegmentReader segmentReaderWithInfo: [infos segmentInfoAtIndex: i]]];
 	}
-	return AUTORELEASE([[LCMultiReader alloc] initWithDirectory: dir
+	return [[LCMultiReader alloc] initWithDirectory: dir
 												   segmentInfos: infos
 														  close: close
-														readers: readers]);
+														readers: readers];
 	
 }
 
@@ -192,21 +189,21 @@ public static long getCurrentVersion(String directory) throws IOException {
 }
 
 #if 0 // FIXME: LuceneKit. Check newest version first !!
-  /**
-   	    * Check whether this IndexReader still works on a current version of the index.
-	     	    * If this is not the case you will need to re-open the IndexReader to
-		     	    * make sure you see the latest changes made to the index.
-			     	    *
-				     	    * @throws IOException
-					     	    */
-						     	   public boolean isCurrent() throws IOException {
-							    	     if (SegmentInfos.readCurrentVersion(directory) != segmentInfos.getVersion()) {
-								      	       return false;
-									        	     }
-											      	     return true;
-												      	   }
-													    	 
-														 #endif
+/**
+ * Check whether this IndexReader still works on a current version of the index.
+ * If this is not the case you will need to re-open the IndexReader to
+ * make sure you see the latest changes made to the index.
+ *
+ * @throws IOException
+ */
+public boolean isCurrent() throws IOException {
+if (SegmentInfos.readCurrentVersion(directory) != segmentInfos.getVersion()) {
+    return false;
+}
+return true;
+}
+
+#endif
 
 /**
 *  Return an array of term frequency vectors for the specified document.
@@ -587,7 +584,6 @@ public static boolean isLocked(String directory) throws IOException {
 	
 - (id) copyWithZone: (NSZone *) zone
 {
-	RETAIN(self);
 	return self;
 }
 	

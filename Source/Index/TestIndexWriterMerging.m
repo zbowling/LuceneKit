@@ -1,13 +1,13 @@
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "GNUstep.h"
-#include "LCSimpleAnalyzer.h"
-#include "LCDirectory.h"
-#include "LCDocument.h"
-#include "LCField.h"
-#include "LCIndexReader.h"
-#include "LCIndexWriter.h"
-#include "LCRAMDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+
+#import  "LCSimpleAnalyzer.h"
+#import  "LCDirectory.h"
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  "LCIndexReader.h"
+#import  "LCIndexWriter.h"
+#import  "LCRAMDirectory.h"
 
 @interface TestIndexWriterMerging: NSObject <UKTest>
 @end
@@ -32,8 +32,8 @@
     LCDocument *document = [[LCDocument alloc] init];
     [document addField: field];
     [writer addDocument: document];
-    DESTROY(document);
-    DESTROY(field);
+    [document release];document=nil;;
+    [field release];field=nil;;
   }
   [writer close];
 }

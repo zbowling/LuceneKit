@@ -1,9 +1,9 @@
-#include "LCTopDocCollector.h"
-#include "LCHitQueue.h"
-#include "LCScoreDoc.h"
-#include "LCTopDocs.h"
-#include "GNUstep.h"
-#include <float.h>
+#import  "LCTopDocCollector.h"
+#import  "LCHitQueue.h"
+#import  "LCScoreDoc.h"
+#import  "LCTopDocs.h"
+
+#import  <float.h>
 
 /** A {@link HitCollector} implementation that collects the top-scoring
  * documents, returning them as a {@link TopDocs}.  This is used by {@link
@@ -30,21 +30,20 @@
 - (id) initWithMaximalHits: (int) max
 {
 	LCHitQueue *queue = [[LCHitQueue alloc] initWithSize: max];
-	return [self initWithMaximalHits: max queue: AUTORELEASE(queue)];
+	return [self initWithMaximalHits: max queue: queue];
 }
 
 - (id) initWithMaximalHits: (int) max queue: (LCPriorityQueue *) q
 {
 	self = [self init];
 	numHits = max;
-	ASSIGN(hq, q);
+	hq = q;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(hq);
-	[super dealloc];
+	hq=nil;;
 }
 
   // inherited
@@ -58,7 +57,7 @@
 			LCScoreDoc *d = [[LCScoreDoc alloc] initWithDocument: doc score: score];
 			[hq insert: d];
 			minScore = [(LCScoreDoc *)[hq top] score]; // maintain minScore
-			DESTROY(d);
+			d=nil;;
 		}
 	}
 }
@@ -72,14 +71,14 @@
   /** The top-scoring hits. */
 - (LCTopDocs *) topDocs
 {
-	NSMutableArray *scoreDocs = AUTORELEASE([[NSMutableArray alloc] init]);
+	NSMutableArray *scoreDocs = [[NSMutableArray alloc] init];
 	int i, count = [hq size]-1;
 	for (i = count; i >= 0; i--) // put docs in array
 	{
 		[scoreDocs insertObject: [hq pop] atIndex: 0];
 	}
 	float ms = (totalHits == 0) ? FLT_MIN : [[scoreDocs objectAtIndex: 0] score];
-	return AUTORELEASE([[LCTopDocs alloc] initWithTotalHits: totalHits scoreDocuments: scoreDocs maxScore: ms]);
+	return [[LCTopDocs alloc] initWithTotalHits: totalHits scoreDocuments: scoreDocs maxScore: ms];
 }
 
 @end

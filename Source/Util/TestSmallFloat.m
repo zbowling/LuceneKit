@@ -1,5 +1,5 @@
-#include "LCSmallFloat.h"
-#include <UnitKit/UnitKit.h>
+#import  "LCSmallFloat.h"
+#import  <UnitKit/UnitKit.h>
 
 @interface TestSmallFloat: NSObject <UKTest>
 @end

@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_TERM_ENUM__
 #define __LUCENE_INDEX_TERM_ENUM__
 
-#include <Foundation/Foundation.h>
-#include "LCTerm.h"
+#import  <Foundation/Foundation.h>
+#import  "LCTerm.h"
 
 @interface LCTermEnumerator: NSObject
 {

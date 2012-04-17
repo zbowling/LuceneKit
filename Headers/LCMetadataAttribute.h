@@ -1,20 +1,20 @@
 #ifndef __LuceneKit_LCMetadata_Attribute__
 #define __LuceneKit_LCMetadata_Attribute__
 
-#include <Foundation/NSString.h>
+#import  <Foundation/NSString.h>
 
 /* These attributes will be stored in index data. */
   /* Importer usually doesn't set LCMetadataChangeDateAttribute. LCIndexManager will do. */
-extern NSString *LCMetadataChangeDateAttribute;
-extern NSString *LCContentCreationDateAttribute;
-extern NSString *LCContentModificationDateAttribute;
-extern NSString *LCContentTypeAttribute;
-extern NSString *LCCreatorAttribute;
-extern NSString *LCEmailAddressAttribute;
-extern NSString *LCIdentifierAttribute;
-extern NSString *LCPathAttribute;
+extern NSString * const LCMetadataChangeDateAttribute;
+extern NSString * const LCContentCreationDateAttribute;
+extern NSString * const LCContentModificationDateAttribute;
+extern NSString * const LCContentTypeAttribute;
+extern NSString * const LCCreatorAttribute;
+extern NSString * const LCEmailAddressAttribute;
+extern NSString * const LCIdentifierAttribute;
+extern NSString * const LCPathAttribute;
 
 /* These attributes will NOT be stored in index data */
-extern NSString *LCTextContentAttribute;
+extern NSString * const LCTextContentAttribute;
 
 #endif /*  __LuceneKit_LCMetadata_Attribute__ */

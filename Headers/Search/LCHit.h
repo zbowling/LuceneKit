@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_HIT__
 #define __LUCENE_SEARCH_HIT__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @class LCDocument;
 @class LCHits;

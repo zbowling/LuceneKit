@@ -1,7 +1,7 @@
-#include "LCFSDirectory.h"
-#include "LCFSIndexInput.h"
-#include "LCFSIndexOutput.h"
-#include "GNUstep.h"
+#import  "LCFSDirectory.h"
+#import  "LCFSIndexInput.h"
+#import  "LCFSIndexOutput.h"
+
 
 /**
 * Straightforward implementation of {@link Directory} as a directory of files.
@@ -18,7 +18,7 @@
 {
 	LCFSDirectory *dir = [[LCFSDirectory alloc] initWithPath: absolutePath
 													  create: create];
-	return AUTORELEASE(dir);
+	return dir;
 }
 
 - (BOOL) create // Create new directory, remove existed
@@ -27,11 +27,11 @@
 	NSString *p = nil;
 	BOOL isDir;
 	int i, count = [paths count];
-	ASSIGN(p, [NSString string]);
+	p = [NSString string];
 	
 	for(i = 0; i < count; i++)
     {
-		ASSIGN(p, [p stringByAppendingPathComponent: [paths objectAtIndex: i]]);
+		p = [p stringByAppendingPathComponent: [paths objectAtIndex: i]];
 		if ([manager fileExistsAtPath: p isDirectory: &isDir])
         {
 			if (isDir == NO)
@@ -39,18 +39,18 @@
 				NSLog(@"Error: Not a directory %@", p);
 				// Very dangerous !!
 				//[manager removeFileAtPath: p handle: nil];
-				DESTROY(p);
+				p=nil;;
 				return NO;
 			}
         }
 		else
         {
 			// Create directory
-			[manager createDirectoryAtPath: p attributes: nil];
+			[manager createDirectoryAtPath:p withIntermediateDirectories:YES attributes:nil error: NULL];
 		}
     }
 	
-	DESTROY(p);
+	p=nil;;
 	return YES;
 }
 
@@ -58,42 +58,32 @@
 {
 	BOOL isDir;
 	self = [self init];
-	ASSIGN(manager, [NSFileManager defaultManager]);
-	ASSIGNCOPY(path, p);
-	if (b) 
-    {
-		if ([self create] == NO)
-		{	
-			NSLog(@"Unable to create directory");
-			DESTROY(manager);
-			DESTROY(path);
-			return nil;
-		}
-    }
-	if ([manager fileExistsAtPath: path isDirectory: &isDir] && isDir)
-    {
-    }
-	else
-    {
-		NSLog(@"Not a directory");
-		DESTROY(manager);
-		DESTROY(path);
-		return nil;
+    if (self) {
+        manager = [NSFileManager defaultManager];
+        path =[ p copy];
+        if (b) 
+        {
+            if ([self create] == NO)
+            {	
+                NSLog(@"Unable to create directory");
+                manager=nil;;
+                path=nil;;
+                return nil;
+            }
+        }
+        if (!([manager fileExistsAtPath: path isDirectory: &isDir] && isDir))
+        {
+            NSLog(@"Not a directory");
+            return nil;
+        }
     }
 	return self;
-}
-
-- (void) dealloc
-{
-	DESTROY(manager);
-	DESTROY(path);
-	[super dealloc];
 }
 
 /** Returns an array of strings, one for each file in the directory. */
 - (NSArray *) fileList
 {
-	return [manager directoryContentsAtPath: path];
+	return [manager contentsOfDirectoryAtPath: path error:NULL];
 }
 
 /** Returns true iff a file with the given name exists. */
@@ -107,8 +97,7 @@
 - (NSTimeInterval) fileModified: (NSString *) name
 {
 	NSString *p = [path stringByAppendingPathComponent: name];
-	NSDictionary *d = [manager fileAttributesAtPath: p
-					   traverseLink: NO];
+	NSDictionary *d = [manager attributesOfItemAtPath:[p stringByResolvingSymlinksInPath] error:NULL];
 	return [[d objectForKey: NSFileModificationDate] timeIntervalSince1970];
 }
 
@@ -116,19 +105,17 @@
 - (void) touchFile: (NSString *) name
 {
 	NSString *p = [path stringByAppendingPathComponent: name];
-	NSDictionary *d = [manager fileAttributesAtPath: p
-					   traverseLink: NO];
+	NSDictionary *d = [manager attributesOfItemAtPath:[p stringByResolvingSymlinksInPath] error:NULL];
 	NSMutableDictionary *n = [NSMutableDictionary dictionaryWithDictionary: d];
 	[n setObject: [NSDate date] forKey: NSFileModificationDate];
-	[manager changeFileAttributes: n atPath: p];
+    [manager setAttributes:n ofItemAtPath:[p stringByResolvingSymlinksInPath] error:NULL];
 }
 
 /** Returns the length in bytes of a file in the directory. */
 - (unsigned long long) fileLength: (NSString *) name
 {
 	NSString *p = [path stringByAppendingPathComponent: name];
-	NSDictionary *d = [manager fileAttributesAtPath: p
-									   traverseLink: NO];
+	NSDictionary *d = [manager attributesOfItemAtPath:[p stringByResolvingSymlinksInPath] error:NULL];
 	return [[d objectForKey: NSFileSize] unsignedLongLongValue];
 }
 
@@ -138,11 +125,11 @@
 	NSString *p = [path stringByAppendingPathComponent: name];
     if ([manager fileExistsAtPath: p] == YES)
     {
-	if ([manager removeFileAtPath: p handler: nil] == NO)
-    	{
-		NSLog(@"Cannot remove file %@", p);
-		return NO;
-	}
+        if ([manager removeItemAtPath: p error:NULL] == NO)
+        {
+            NSLog(@"Cannot remove file %@", p);
+            return NO;
+        }
     }
 	return YES;
 }
@@ -160,14 +147,14 @@
     }
 	if ([manager fileExistsAtPath: nu] == YES)
     {
-		if ([manager removeFileAtPath: nu handler: nil] == NO)
+		if ([manager removeItemAtPath: nu error:NULL] == NO)
         {
 			NSLog(@"Cannot remove %@", nu);
 			return;
 		}
     }
 	
-	[manager movePath: old toPath: nu handler: nil];
+	[manager moveItemAtPath:old toPath:nu error:NULL];
 }
 
 /** Creates a new, empty file in the directory with the given name.
@@ -181,7 +168,7 @@ Returns a stream writing this file. */
 		       */
 	NSString *p = [path stringByAppendingPathComponent: name];
 	LCFSIndexOutput *output = [[LCFSIndexOutput alloc] initWithFile: p];
-	return AUTORELEASE(output);
+	return output;
 }
 
 /** Returns a stream reading an existing file. */
@@ -191,7 +178,7 @@ Returns a stream writing this file. */
        if ([manager fileExistsAtPath: p] == YES)
        {
 	  LCFSIndexInput *input = [[LCFSIndexInput alloc] initWithFile: p];
-	  return AUTORELEASE(input);
+	  return input;
        }
        else
        {

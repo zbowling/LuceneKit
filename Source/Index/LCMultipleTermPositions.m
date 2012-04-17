@@ -1,6 +1,6 @@
-#include "LCMultipleTermPositions.h"
-#include "LCPriorityQueue.h"
-#include "GNUstep.h"
+#import  "LCMultipleTermPositions.h"
+#import  "LCPriorityQueue.h"
+
 
 /**
 * Describe class <code>MultipleTermPositions</code> here.
@@ -65,8 +65,7 @@
 
 - (void) dealloc
 {
-	DESTROY(_array);
-	[super dealloc];
+	_array=nil;;
 }
 
 - (void) add: (int) i
@@ -125,15 +124,14 @@
 	
 	_termPositionsQueue = [[LCTermPositionsQueue alloc] initWithTermPositions: termPositions];
 	_posList = [[LCIntQueue alloc] init];
-        DESTROY(termPositions);
+        termPositions=nil;;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(_termPositionsQueue);
-	DESTROY(_posList);
-	[super dealloc];
+	_termPositionsQueue=nil;;
+	_posList=nil;;
 }
 
 - (BOOL) hasNextDocument

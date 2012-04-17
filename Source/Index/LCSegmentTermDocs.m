@@ -1,9 +1,9 @@
-#include "LCSegmentTermDocs.h"
-#include "LCSegmentTermEnum.h"
-#include "LCTermInfosReader.h"
-#include "LCIndexInput.h"
-#include "LCBitVector.h"
-#include "GNUstep.h"
+#import  "LCSegmentTermDocs.h"
+#import  "LCSegmentTermEnum.h"
+#import  "LCTermInfosReader.h"
+#import  "LCIndexInput.h"
+#import  "LCBitVector.h"
+
 
 @implementation LCSegmentTermDocuments
 
@@ -11,20 +11,19 @@
 {
 	self = [super init];
 	doc = 0;
-	ASSIGN(parent, p);
-	ASSIGNCOPY(freqStream, [parent freqStream]);
-	ASSIGN(deletedDocs, [parent deletedDocs]);
+	parent = p;
+	freqStream =[ [parent freqStream] copy];
+	deletedDocs = [parent deletedDocs];
 	skipInterval = [[parent termInfosReader] skipInterval];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(freqStream);
-	DESTROY(skipStream);
-	DESTROY(deletedDocs);
-	DESTROY(parent);
-	[super dealloc];
+	freqStream=nil;;
+	skipStream=nil;;
+	deletedDocs=nil;;
+	parent=nil;;
 }
 
 - (void) seekTerm: (LCTerm *) term
@@ -153,7 +152,7 @@
     if (df >= skipInterval) {                      // optimized case
 		
 		if (skipStream == nil)
-			ASSIGNCOPY(skipStream, freqStream);
+			skipStream =[ freqStream copy];
 		
 		if (!haveSkipped) {                          // lazily seek skip stream
 			[skipStream seekToFileOffset: skipPointer];

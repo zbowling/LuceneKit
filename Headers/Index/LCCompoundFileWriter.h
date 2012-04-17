@@ -1,8 +1,8 @@
 #ifndef __LUCENE_COMPOUND_FILE_WRITER__
 #define __LUCENE_COMPOUND_FILE_WRITER__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
 
 @interface LCCompoundFileWriter: NSObject
 {

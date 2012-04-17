@@ -1,11 +1,11 @@
 #ifndef __LUCENE_ANALYSIS_STOP_FILTER__
 #define __LUCENE_ANALYSIS_STOP_FILTER__
 
-#include "LCTokenFilter.h"
+#import  "LCTokenFilter.h"
 
 @interface LCStopFilter: LCTokenFilter
 {
-	NSMutableSet *stopWords;
+	NSSet *stopWords;
 }
 
 + (NSSet *) makeStopSet: (NSArray *) sw;

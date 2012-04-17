@@ -1,8 +1,8 @@
-#include "TestCheckHits.h"
-#include "LCQuery.h"
-#include "LCSearcher.h"
-#include "LCHits.h"
-#include <UnitKit/UnitKit.h>
+#import  "TestCheckHits.h"
+#import  "LCQuery.h"
+#import  "LCSearcher.h"
+#import  "LCHits.h"
+#import  <UnitKit/UnitKit.h>
 
 @implementation TestCheckHits
 

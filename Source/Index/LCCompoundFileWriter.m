@@ -1,6 +1,6 @@
-#include "LCCompoundFileWriter.h"
-#include "LCIndexOutput.h"
-#include "GNUstep.h"
+#import  "LCCompoundFileWriter.h"
+#import  "LCIndexOutput.h"
+
 
 /**
 * Combines multiple files into a single compound file.
@@ -44,16 +44,10 @@
 
 @implementation LCWriterFileEntry
 
-- (void) dealloc
-{
-	DESTROY(file);
-	[super dealloc];
-}
-
 - (NSString *) file { return file; }
 - (long long) directoryOffset { return directoryOffset; }
 - (long long) dataOffset { return dataOffset; }
-- (void) setFile: (NSString *) f { ASSIGN(file, f); }
+- (void) setFile: (NSString *) f { file = f; }
 - (void) setDirectoryOffset: (long long) f { directoryOffset = f; }
 - (void) setDataOffset: (long long) f { dataOffset = f; }
 
@@ -92,20 +86,11 @@
 	}
 	
 	self = [self init];
-	ASSIGN(directory, dir);
-	ASSIGN(fileName, name);
+	directory = dir;
+	fileName = name;
 	ids = [[NSMutableSet alloc] init];
 	entries = [[NSMutableArray alloc] init];
 	return self;
-}
-
-- (void) dealloc
-{
-	DESTROY(directory);
-	DESTROY(fileName);
-	DESTROY(ids);
-	DESTROY(entries);
-	[super dealloc];
 }
 
 /** Returns the directory of the compound file. */
@@ -152,7 +137,7 @@
 	[entry setFile: file];
 	[entries addObject: entry];
 	[ids addObject: file];
-	DESTROY(entry);
+	entry=nil;;
 }
 
 /** Merge files with the extensions added up to now.
@@ -206,7 +191,7 @@
 		buffer = [[NSMutableData alloc] init];
 		[fe setDataOffset: [os offsetInFile]];
 		[self copyFile: fe indexOutput: os data: buffer];
-		DESTROY(buffer);
+		buffer=nil;;
 	}
 	
 	// Write the data offsets into the directory of the compound stream

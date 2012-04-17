@@ -1,5 +1,5 @@
-#include "LCHitCollector.h"
-#include "GNUstep.h"
+#import  "LCHitCollector.h"
+
 
 @implementation LCHitCollector
 - (void) collect: (int) doc score: (float) score 
@@ -22,7 +22,7 @@
 
 - (void) setTarget: (id) t
 {
-	ASSIGN(target, t);
+	target = t;
 }
 - (void) setSelector: (SEL) s
 {
@@ -33,7 +33,6 @@
 
 - (void) dealloc
 {
-	DESTROY(target);
-	[super dealloc];
+	target=nil;;
 }
 @end

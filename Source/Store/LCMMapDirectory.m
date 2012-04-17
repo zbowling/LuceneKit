@@ -102,8 +102,7 @@ static int MAX_BBUF = INT_MAX;
      * subclasses and let them recreating a file handle when needed. 
      */
     NSString *subpath = [self->path stringByAppendingPathComponent: name];
-    NSFileHandle *file = [[NSFileHandle fileHandleForUpdatingAtPath: subpath]
-retain];
+    NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath: subpath];
   
     NS_DURING
             
@@ -136,14 +135,14 @@ retain];
 	LCMMapIndexInput *indexInput = [LCMMapIndexInput 
         MMapIndexInputWithURL: [NSURL fileURLWithPath: path]];
 	
-	return [indexInput autorelease];
+	return indexInput;
 }
 
 + (id) MMapIndexInputWithURL: (NSURL *)url
 {
 	LCMMapIndexInput *indexInput = [[LCMMapIndexInput alloc] initWithURL: url];
 	
-	return [indexInput autorelease];
+	return indexInput;
 }
 
 - (id) initWithPath: (NSString *)path
@@ -160,7 +159,6 @@ retain];
         if ([url isFileURL])
 		{
 			file = [NSFileHandle fileHandleForReadingAtPath: path];
-			[file retain];
 		}
 		else 
 		{
@@ -179,15 +177,6 @@ retain];
 	return nil;	
 }
 
-- (void) dealloc
-{
-    /* May be we should move this close call to -close method. */
-    if ([file retainCount] <= 1)
-        [file closeFile];
-    [file release];
-    [buffer release];
-    [super dealloc];   
-}
 
 - (char) readByte
 {
@@ -248,11 +237,9 @@ retain];
     LCMMapIndexInput *clone = [super copyWithZone:  NSDefaultMallocZone()];
 	
     /* [buffer copyWithZone: NSDefaultMallocZone()] */
-    clone->buffer = (NSMutableData *)NSCopyObject(buffer, 0,
-NSDefaultMallocZone()); 
+    clone->buffer = [buffer copy]; 
     // NOTE: clone->file must be closed only when its retain count equals 1;
     // the fact is we cannot copy NSFileHandle object, that's why we retain it.
-    [clone->file retain]; 
 	 
 	return clone;
 }
@@ -268,7 +255,7 @@ NSDefaultMallocZone());
         MultiMMapIndexInputWithURL: [NSURL fileURLWithPath: path] 
                      maxBufferSize: bufferSize];
 	
-	return [indexInput autorelease];
+	return indexInput;
 }
 
 + (id) MultiMMapIndexInputWithURL: (NSURL *)url 
@@ -277,7 +264,7 @@ NSDefaultMallocZone());
 	LCMultiMMapIndexInput *indexInput = [[LCMultiMMapIndexInput alloc]
          initWithURL: url maxBufferSize: bufferSize];
 	
-	return [indexInput autorelease];
+	return indexInput;
 }
 
 - (id) initWithPath: (NSString *)path maxBufferSize: (int)bufferSize
@@ -308,7 +295,7 @@ NSDefaultMallocZone());
         if ((buffersCount * maxBufferSize) < length) 
             buffersCount++;
       
-        self->buffers = [[NSArray alloc] initWithCapacity: buffersCount];
+        self->buffers = [[NSMutableArray alloc] initWithCapacity: buffersCount];
         self->bufferSizes = calloc(buffersCount, sizeof(int));
         self->positions = calloc(buffersCount, sizeof(int));
       
@@ -359,9 +346,6 @@ NSDefaultMallocZone());
     free(bufferSizes);
     free(positions);
     
-    [currentBuffer release];
-    [buffers release];
-    [super dealloc];   
 }
 
 - (char) readByte
@@ -458,8 +442,7 @@ NSDefaultMallocZone());
         /* Objects will be added at index i */
         NSMutableData *bufferToCopy = [buffers objectAtIndex: i];
         
-        bufferToCopy = (NSMutableData *)NSCopyObject((NSObject *)bufferToCopy,
-0, NSDefaultMallocZone());
+        bufferToCopy = [bufferToCopy mutableCopy];
         [(clone->buffers) addObject: bufferToCopy];
     }
     

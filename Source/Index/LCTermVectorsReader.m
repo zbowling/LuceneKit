@@ -1,9 +1,9 @@
-#include "LCTermVectorsReader.h"
-#include "LCTermVectorsWriter.h"
-#include "LCSegmentTermVector.h"
-#include "LCSegmentTermPositionVector.h"
-#include "LCTermVectorOffsetInfo.h"
-#include "GNUstep.h"
+#import  "LCTermVectorsReader.h"
+#import  "LCTermVectorsWriter.h"
+#import  "LCSegmentTermVector.h"
+#import  "LCSegmentTermPositionVector.h"
+#import  "LCTermVectorOffsetInfo.h"
+
 
 @interface LCTermVectorsReader (LCPrivate)
 - (long) checkValidFormat: (LCIndexInput *) input;
@@ -24,28 +24,24 @@
 	NSString *file = [segment stringByAppendingPathExtension: TVX_EXTENSION];
 	if ([d fileExists: file])
 	{
-		ASSIGN(tvx, [d openInput: file]);
+		tvx = [d openInput: file];
 		[self checkValidFormat: tvx];
 		file = [segment stringByAppendingPathExtension: TVD_EXTENSION];
-		ASSIGN(tvd, [d openInput: file]);
+		tvd = [d openInput: file];
 		tvdFormat = [self checkValidFormat: tvd];
 		file = [segment stringByAppendingPathExtension: TVF_EXTENSION];
-		ASSIGN(tvf, [d openInput: file]);
+		tvf = [d openInput: file];
 		tvfFormat = [self checkValidFormat: tvf];
 		size = (long) [tvx length] / 8;
 	}
 	
-	ASSIGN(fieldInfos, fis);
+	fieldInfos = fis;
 	return self;
 }
 
 - (void) dealloc
 {
-	RELEASE(tvx);
-	RELEASE(tvd);
-	RELEASE(tvf);
-	DESTROY(fieldInfos);
-	[super dealloc];
+	fieldInfos=nil;;
 }
 
 - (long) checkValidFormat: (LCIndexInput *) input
@@ -184,8 +180,8 @@
 			
 			result = [self readTermVectors: fields
 								  pointers: tvfPointers];
-			DESTROY(fields);
-			DESTROY(tvfPointers);
+			fields=nil;;
+			tvfPointers=nil;;
 		}
     } else {
 		NSLog(@"No tvx file");
@@ -202,7 +198,7 @@
 		[res addObject: [self readTermVector: [fields objectAtIndex: i]
 									 pointer: [[tvfPointers objectAtIndex: i] longLongValue]]];
     }
-    return AUTORELEASE(res);
+    return res;
 }
 
 /**
@@ -227,9 +223,9 @@
     // If no terms - return a constant empty termvector. However, this should never occur!
     if (numTerms == 0) 
     {
-		return AUTORELEASE([[LCSegmentTermVector alloc] initWithField: field
+		return [[LCSegmentTermVector alloc] initWithField: field
 																terms: nil
-															termFreqs: nil]);
+															termFreqs: nil];
     }
     
     BOOL storePositions;
@@ -253,9 +249,9 @@
     NSMutableArray *positions = nil;
     NSMutableArray *offsets = nil;
     if(storePositions)
-      positions = AUTORELEASE([[NSMutableArray alloc] init]);
+      positions = [[NSMutableArray alloc] init];
     if(storeOffsets)
-      offsets = AUTORELEASE([[NSMutableArray alloc] init]);
+      offsets = [[NSMutableArray alloc] init];
     
     long start = 0;
     long deltaLength = 0;
@@ -291,7 +287,7 @@
 			}
 		}
 		[positions addObject: pos];
-		DESTROY(pos);
+		pos=nil;;
 		
 		NSMutableArray *offs = [[NSMutableArray alloc] init];
 		if (storeOffsets) {
@@ -301,12 +297,12 @@
 			for (j = 0; j < freq; j++) {
 				long startOffset = prevOffset + [tvf readVInt];
 				long endOffset = startOffset + [tvf readVInt];
-				[offs addObject: AUTORELEASE([[LCTermVectorOffsetInfo alloc] initWithStartOffset: startOffset endOffset: endOffset])];
+				[offs addObject: [[LCTermVectorOffsetInfo alloc] initWithStartOffset: startOffset endOffset: endOffset]];
 				prevOffset = endOffset;
 			}
 		}
 		[offsets addObject: offs];
-		DESTROY(offs);
+		offs=nil;;
     }
     
     LCSegmentTermVector *tv;
@@ -322,25 +318,25 @@
 												  terms: terms
 											  termFreqs: termFreqs];
     }
-    DESTROY(buffer);
-    DESTROY(terms);
-    DESTROY(termFreqs);
-    return AUTORELEASE(tv);
+    buffer=nil;;
+    terms=nil;;
+    termFreqs=nil;;
+    return tv;
 }
 
 - (void) setTVX: (LCIndexInput *) vx
 {
-	ASSIGN(tvx, vx);
+	tvx = vx;
 }
 
 - (void) setTVD: (LCIndexInput *) vd
 {
-	ASSIGN(tvd, vd);
+	tvd = vd;
 }
 
 - (void) setTVF: (LCIndexInput *) vf
 {
-	ASSIGN(tvf, vf);
+	tvf = vf;
 }
 
 /* For clone */
@@ -361,7 +357,7 @@
 
 - (void) setFieldInfos: (LCFieldInfos *) fi
 {
-	ASSIGN(fieldInfos, fi);
+	fieldInfos = fi;
 }
 
 - (id) copyWithZone: (NSZone *) zone;
@@ -371,9 +367,9 @@
 		return nil;
     
     LCTermVectorsReader *clone = [[LCTermVectorsReader allocWithZone: zone] init];
-    [clone setTVX: AUTORELEASE([tvx copy])];
-    [clone setTVD: AUTORELEASE([tvd copy])];
-    [clone setTVF: AUTORELEASE([tvf copy])];
+    [clone setTVX: [tvx copy]];
+    [clone setTVD: [tvd copy]];
+    [clone setTVF: [tvf copy]];
     [clone setSize: size];
     [clone setTVDFormat: tvdFormat];
     [clone setTVFFormat: tvfFormat];

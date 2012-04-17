@@ -1,5 +1,5 @@
-#include "LCCompoundFileReader.h"
-#include "GNUstep.h"
+#import  "LCCompoundFileReader.h"
+
 
 /**
 * Class for accessing a compound stream.
@@ -48,27 +48,19 @@
 						   length: (long long) len
 {
 	self = [self init];
-	ASSIGN(reader, cr);
-	ASSIGNCOPY(base, b);//FIXME: Verify
+	reader = cr;
+	base =[ b copy];//FIXME: Verify
 	fileOffset = f;
 	length = len;
 	filePointer = 0;
 	return self;
 }
 
-- (void) dealloc
-{
-	DESTROY(reader);
-	DESTROY(base);
-	[super dealloc];
-}
-
 - (char) readByte
 {
 	char *dataBytes = NULL;
-	NSMutableData *data = [[NSMutableData alloc] init];
+	NSMutableData *data = [NSMutableData data];
 	[self readBytes: data offset: 0 length: 1];
-	AUTORELEASE(data);
 	dataBytes=(char *)[data bytes];
 	NSAssert1(dataBytes,@"No dataBytes: %@",[reader name]);
 	return *dataBytes;
@@ -109,7 +101,7 @@
 {
 	// Access the same file
 	LCCSIndexInput *clone = [[LCCSIndexInput allocWithZone: zone] initWithCompoundFileReader: reader
-																				  indexInput: AUTORELEASE([base copy]) offset: fileOffset
+																				  indexInput: [base copy] offset: fileOffset
 																					  length: length];
         //FIXME: Why doing a [copy ] f we also copy in init
 	[clone seekToFileOffset: filePointer];
@@ -134,11 +126,11 @@
 					name: (NSString *) name
 {
 	self = [self init];
-	ASSIGN(directory, dir);
-	ASSIGNCOPY(fileName, name);
+	directory = dir;
+	fileName =[ name copy];
 	
 	BOOL success = NO;
-	ASSIGN(stream, [dir openInput: name]);
+	stream = [dir openInput: name];
 	
 	// read the directory and init files
 	int count = [stream readVInt];
@@ -163,9 +155,9 @@
 		entry = [[LCFileEntry alloc] init];
 		[entry setOffset: offset];
 		[entries setObject: entry forKey: iden];
-		ASSIGNCOPY(prevIden, iden);
+		prevIden =[ iden copy];
 		prevOffset = offset;
-		DESTROY(entry);
+		entry=nil;;
 	}
 	
 #if 1
@@ -177,13 +169,13 @@
 		[entry setLength: [stream length] - [entry offset]];
 	}
 #endif
-	DESTROY(prevIden);
+	prevIden=nil;;
 	
 	success = YES;
 	
 	if (! success && (stream != nil)) {
 		[stream close];
-		DESTROY(stream);
+		stream=nil;;
 	}
 	
 	return self;
@@ -191,11 +183,10 @@
 
 - (void) dealloc
 {
-	DESTROY(entries);
-	DESTROY(directory);
-	DESTROY(fileName);
-	DESTROY(stream);
-	[super dealloc];
+	entries=nil;;
+	directory=nil;;
+	fileName=nil;;
+	stream=nil;;
 }
 
 - (id <LCDirectory>) directory { return directory; }
@@ -212,7 +203,7 @@
 	
 	[entries removeAllObjects];
 	[stream close];
-	DESTROY(stream);
+	stream=nil;;
 }
 
 - (LCIndexInput *) openInput: (NSString *) iden
@@ -229,10 +220,10 @@
 		NSLog(@"No sub-file with iden %@ found", iden);
 		return nil;
 	}
-    return AUTORELEASE([[LCCSIndexInput alloc] 
+    return [[LCCSIndexInput alloc] 
         initWithCompoundFileReader: self
 						indexInput: stream offset: [entry offset]
-							length: [entry length]]);
+							length: [entry length]];
 }
 
 /** Returns an array of strings, one for each file in the directory. */

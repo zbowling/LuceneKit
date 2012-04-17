@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_SIMILARITY__
 #define __LUCENE_SEARCH_SIMILARITY__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 //static float *NORM_TABLE = NULL;
 

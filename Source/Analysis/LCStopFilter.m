@@ -1,5 +1,5 @@
-#include "LCStopFilter.h"
-#include "GNUstep.h"
+#import  "LCStopFilter.h"
+
 
 /**
 * Removes stop words from a token stream.
@@ -20,7 +20,7 @@
     {
 		[set addObject: [sw objectAtIndex: i]];
     }
-	return AUTORELEASE(set);
+	return [set copy];
 }
 
 /**
@@ -52,8 +52,7 @@
 
 - (void) dealloc
 {
-	DESTROY(stopWords);
-	[super dealloc];
+	stopWords=nil;;
 }
 
 /**

@@ -1,13 +1,13 @@
-#include "LCTerm.h"
-#include "LCTermInfo.h"
-#include "LCFieldInfos.h"
-#include "LCTermInfosWriter.h"
-#include "LCTermInfosReader.h"
-#include "LCSegmentTermEnum.h"
-#include "LCIndexWriter.h"
-#include "LCRAMDirectory.h"
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
+#import  "LCTerm.h"
+#import  "LCTermInfo.h"
+#import  "LCFieldInfos.h"
+#import  "LCTermInfosWriter.h"
+#import  "LCTermInfosReader.h"
+#import  "LCSegmentTermEnum.h"
+#import  "LCIndexWriter.h"
+#import  "LCRAMDirectory.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
 
 @interface TestTermInfos: NSObject <UKTest>
 @end

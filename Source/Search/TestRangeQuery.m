@@ -1,6 +1,6 @@
-#include <UnitKit/UnitKit.h>
-#include "LuceneKit.h"
-#include "GNUstep.h"
+#import  <UnitKit/UnitKit.h>
+#import  "LuceneKit.h"
+
 
 @interface TestRangeQuery: LCRangeQuery <UKTest>
 {
@@ -18,13 +18,13 @@
 			store: LCStore_YES
 			index: LCIndex_Untokenized];
   [doc addField: field];
-  DESTROY(field);
+  [field release];field=nil;;
   field = [[LCField alloc] initWithName: @"content"
 			string: content
 			store: LCStore_NO
 			index: LCIndex_Tokenized];
   [doc addField: field];
-  DESTROY(field);
+  [field release];field=nil;;
   [writer addDocument: doc];
   docCount++;
 }
@@ -32,17 +32,17 @@
 - (void) addDoc: (NSString *) content
 {
   LCIndexWriter *writer = [[LCIndexWriter alloc] initWithDirectory: dir
-		analyzer: AUTORELEASE([[LCWhitespaceAnalyzer alloc] init])
+		analyzer: [[[LCWhitespaceAnalyzer alloc] init] autorelease]
 		create: NO];
   [self insertDoc: writer : content];
   [writer close];
-  DESTROY(writer);
+  [writer release];writer=nil;;
 }
 
 - (void) initIndex: (NSArray *) values
 {
   LCIndexWriter *writer = [[LCIndexWriter alloc] initWithDirectory: dir
-	analyzer: AUTORELEASE([[LCWhitespaceAnalyzer alloc] init])
+	analyzer: [[[LCWhitespaceAnalyzer alloc] init] autorelease]
 	create: YES];
   int i;
   for (i = 0; i < [values count]; i++)
@@ -50,7 +50,7 @@
     [self insertDoc: writer : [values objectAtIndex: i]];
   }
   [writer close];
-  DESTROY(writer);
+  [writer release];writer=nil;;
 }
 
 - (void) testInclusive
@@ -180,7 +180,7 @@
 
 - (void) dealloc
 {
-  DESTROY(dir);
+  [dir release];dir=nil;;
   [super dealloc];
 }
 

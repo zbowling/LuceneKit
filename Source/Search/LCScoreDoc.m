@@ -1,4 +1,4 @@
-#include "LCScoreDoc.h"
+#import  "LCScoreDoc.h"
 
 @implementation LCScoreDoc
 

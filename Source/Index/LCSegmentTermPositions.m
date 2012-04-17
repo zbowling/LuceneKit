@@ -1,8 +1,8 @@
-#include "LCSegmentTermPositions.h"
-#include "LCSegmentReader.h"
-#include "LCTermInfo.h"
-#include "LCIndexInput.h"
-#include "GNUstep.h"
+#import  "LCSegmentTermPositions.h"
+#import  "LCSegmentReader.h"
+#import  "LCTermInfo.h"
+#import  "LCIndexInput.h"
+
 
 
 @implementation LCSegmentTermPositions
@@ -10,14 +10,13 @@
 - (id) initWithSegmentReader: (LCSegmentReader *) p
 {
 	self = [super initWithSegmentReader: p];
-	ASSIGNCOPY(proxStream, [p proxStream]);
+	proxStream =[ [p proxStream] copy];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(proxStream);
-	[super dealloc];
+	proxStream=nil;;
 }
 
 - (void) seekTermInfo: (LCTermInfo *) ti

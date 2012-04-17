@@ -1,19 +1,19 @@
-#include "TestDocHelper.h"
-#include "LCDocument.h"
-#include "LCField.h"
-#include "LCRAMDirectory.h"
-#include "LCSegmentReader.h"
-#include "LCSegmentInfo.h"
-#include "LCSegmentTermDocs.h"
-#include "LCTerm.h"
-#include "LCIndexWriter.h"
-#include "LCIndexReader.h"
-#include "LCTermDocs.h"
-#include "LCWhitespaceAnalyzer.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCDirectory.h"
-#include "GNUstep.h"
+#import  "TestDocHelper.h"
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  "LCRAMDirectory.h"
+#import  "LCSegmentReader.h"
+#import  "LCSegmentInfo.h"
+#import  "LCSegmentTermDocs.h"
+#import  "LCTerm.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCTermDocs.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCDirectory.h"
+
 
 @interface TestSegmentTermDocs: NSObject <UKTest>
 {
@@ -86,9 +86,9 @@
 											 store: LCStore_NO
 											 index: LCIndex_Tokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	[writer addDocument: doc];
-	RELEASE(doc);
+	[doc release];
 }
 
 - (void) testSkipTo

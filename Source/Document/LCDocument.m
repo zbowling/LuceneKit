@@ -1,5 +1,5 @@
-#include "LCDocument.h"
-#include "GNUstep.h"
+#import  "LCDocument.h"
+
 
 /** Documents are the unit of indexing and search.
 *
@@ -25,11 +25,6 @@
 	return self;
 }
 
-- (void) dealloc
-{
-	DESTROY(fields);
-	[super dealloc];
-}
 
 /** Sets a boost factor for hits on any field of this document.  This value
 * will be multiplied into the score of all hits on this document.
@@ -88,6 +83,7 @@
  */
 - (void) removeField: (NSString *) n
 {
+    
 	LCField *field;
 	int i, count = [fields count];
 	for(i = 0; i < count; i++)
@@ -187,10 +183,10 @@
         }
 	}
 	if ([a count] > 0)
-		return AUTORELEASE(a);
+		return a;
 	else
     {
-		DESTROY(a);
+		a=nil;;
 		return nil;
     }
 }
@@ -214,10 +210,10 @@
 			[result addObject: [field string]];
     }
 	if ([result count] > 0)
-		return AUTORELEASE(result);
+		return result;
 	else
 	{
-		DESTROY(result);
+		result=nil;;
 		return nil;
 	}
 }
@@ -241,11 +237,11 @@
 		if ([[field name] isEqualToString: name] && [field isData])
 			[result addObject: [field data]];
 	}
-	if ([result count] > 0)
-		return AUTORELEASE(result);
+	if ([result count] > 0) {
+		return result;
+    }
 	else
 	{
-		DESTROY(result);
 		return nil;
 	}
 }
@@ -278,7 +274,7 @@
 			[s appendString: @" "];
     }
     [s appendString: @">"];
-    return AUTORELEASE(s);
+    return s;
 }
 
 - (NSArray *) fields

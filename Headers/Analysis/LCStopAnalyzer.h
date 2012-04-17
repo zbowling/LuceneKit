@@ -1,16 +1,16 @@
 #ifndef __LUCENE_ANALYSIS_STOP_ANALYZER__
 #define __LUCENE_ANALYSIS_STOP_ANALYZER__
 
-#include "LCAnalyzer.h"
+#import  "LCAnalyzer.h"
 
 #ifdef HAVE_UKTEST
-#include <UnitKit/UnitKit.h>
+#import  <UnitKit/UnitKit.h>
 @interface LCStopAnalyzer: LCAnalyzer <UKTest>
 #else
 @interface LCStopAnalyzer: LCAnalyzer
 #endif
 {
-	NSMutableSet *stopWords;
+	NSSet *stopWords;
 	NSArray *ENGLISH_STOP_WORDS;
 }
 

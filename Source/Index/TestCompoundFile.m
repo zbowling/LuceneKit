@@ -1,10 +1,10 @@
-#include "LCRAMDirectory.h"
-#include "LCIndexInput.h"
-#include "LCCompoundFileWriter.h"
-#include "LCCompoundFileReader.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCDirectory.h"
+#import  "LCRAMDirectory.h"
+#import  "LCIndexInput.h"
+#import  "LCCompoundFileWriter.h"
+#import  "LCCompoundFileReader.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCDirectory.h"
 
 @interface TestCompoundFile: NSObject <UKTest>
 {

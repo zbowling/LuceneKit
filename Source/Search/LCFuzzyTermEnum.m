@@ -1,6 +1,6 @@
-#include "LCFuzzyTermEnum.h"
-#include "LCFuzzyQuery.h"
-#include "GNUstep.h"
+#import  "LCFuzzyTermEnum.h"
+#import  "LCFuzzyQuery.h"
+
 
 @interface LCFuzzyTermEnumerator (LCPrivate)
 - (void) initDistanceArray;
@@ -115,8 +115,8 @@ int minOfTwo(int a, int b)
 
     minimumSimilarity = s;
     scale_factor = 1.0f / (1.0f - minimumSimilarity);
-    ASSIGN(searchTerm, term);
-    ASSIGN(field, [searchTerm field]);
+    searchTerm = term;
+    field = [searchTerm field];
 
     //The prefix could be longer than the word.
     //It's kind of silly though.  It means we must match the entire word.
@@ -124,26 +124,25 @@ int minOfTwo(int a, int b)
 	int realPrefixLength = (prefixLength > fullSearchTermLength) ? fullSearchTermLength : prefixLength;
 
     //this.text = searchTerm.text().substring(realPrefixLength);
-	ASSIGN(text, [[searchTerm text] substringFromIndex: realPrefixLength]);
-	ASSIGN(prefix, [[searchTerm text] substringToIndex: realPrefixLength]);
+	text = [[searchTerm text] substringFromIndex: realPrefixLength];
+	prefix = [[searchTerm text] substringToIndex: realPrefixLength];
 
     [self initializeMaxDistances];
 	[self initDistanceArray];
 
 	LCTerm *tt = [[LCTerm alloc] initWithField: [searchTerm field] text: prefix];
 	[self setEnumerator: [reader termEnumeratorWithTerm: tt]];
-	DESTROY(tt);
+	tt=nil;;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(maxDistances);
-	DESTROY(searchTerm);
-	DESTROY(field);
-	DESTROY(text);
-	DESTROY(prefix);
-	[super dealloc];
+	maxDistances=nil;;
+	searchTerm=nil;;
+	field=nil;;
+	text=nil;;
+	prefix=nil;;
 }
 
   /**

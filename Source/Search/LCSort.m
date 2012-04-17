@@ -1,5 +1,5 @@
-#include "LCSort.h"
-#include "GNUstep.h"
+#import  "LCSort.h"
+
 
 /**
 * Encapsulates sort criteria for returned hits.
@@ -167,8 +167,7 @@
 
 - (void) dealloc
 {
-	DESTROY(fields);
-	[super dealloc];
+	fields=nil;;
 }
 
 /**
@@ -190,8 +189,7 @@
 													type: LCSortField_AUTO
 												 reverse: reverse];
 	NSArray *array = [NSArray arrayWithObjects: sf, [LCSortField sortField_DOC], nil];
-	RELEASE(sf);
-	ASSIGN(fields, array);
+	fields = array;
 }
 
 /** Sets the sort to the terms in each field in succession. */
@@ -205,23 +203,21 @@
 		sf = [[LCSortField alloc] initWithField: [f objectAtIndex: i]
 										   type: LCSortField_AUTO];
 		[array addObject: sf];
-		RELEASE(sf);
 	}
-	ASSIGN(fields, array);
-	RELEASE(array);
+	fields = array;
 }
 
 /** Sets the sort to the given criteria. */
 - (void) setSortField: (LCSortField *) field
 {
 	NSArray *array = [NSArray arrayWithObjects: field, nil];
-	ASSIGN(fields, array);
+	fields = array;
 }
 
 /** Sets the sort to the given criteria in succession. */
 - (void) setSortFields: (NSArray *) f
 {
-	ASSIGN(fields, f);
+	fields = f;
 }
 
 /**
@@ -243,7 +239,7 @@
 		if ((i+1) < count)
 			[s appendString: @","];
 	}
-	return AUTORELEASE(s);
+	return s;
 }
 
 @end

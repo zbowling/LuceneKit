@@ -1,6 +1,6 @@
-#include "NSData+Additions.h"
-#include "GNUstep.h"
-#include <zlib.h>
+#import  "NSData+Additions.h"
+
+#import  <zlib.h>
 
 @implementation NSData (LuceneKit_Util)
 - (NSData *) compressedData
@@ -13,19 +13,18 @@
 		NSMutableData *compData = [[NSMutableData alloc] initWithCapacity:buffLength];
 		[compData increaseLengthBy:buffLength];
 		int error = compress( [compData mutableBytes], &buffLength,
-							  [self bytes], srcLength );
+                             [self bytes], srcLength );
 		switch( error ) {
 			case Z_OK:
 				[compData setLength: buffLength];
-				ASSIGNCOPY(result, compData);
+				result =[ compData copy];
 				break;
 			default:
 				NSAssert( YES, @"Error compressing: Memory Error!" );
 				break;
 		}
-		RELEASE(compData);
     }
-    return AUTORELEASE(result);
+    return result;
 }
 
 - (NSData *) decompressedData
@@ -70,7 +69,7 @@
 	}
 	else 
 		return nil;
-
+    
 }
 @end
 

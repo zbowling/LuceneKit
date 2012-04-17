@@ -1,6 +1,6 @@
-#include "LuceneKit.h"
-#include <UnitKit/UnitKit.h>
-#include "GNUstep.h"
+#import  "LuceneKit.h"
+#import  <UnitKit/UnitKit.h>
+
 
 static NSString *FIELD = @"field";
 
@@ -16,8 +16,8 @@ static NSString *FIELD = @"field";
 											 index: LCIndex_Tokenized];
 	[doc addField: field];
 	[writer addDocument: doc];
-	DESTROY(field);
-	DESTROY(doc);
+	[field release];field=nil;;
+	[doc release];doc=nil;;
 }
 
 - (void) testFuzziness

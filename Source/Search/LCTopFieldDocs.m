@@ -1,5 +1,5 @@
-#include "LCTopFieldDocs.h"
-#include "GNUstep.h"
+#import  "LCTopFieldDocs.h"
+
 
 @implementation LCTopFieldDocs
 - (id) initWithTotalHits: (int) th
@@ -8,13 +8,12 @@
 			maxScore: (float) max
 {
 	self = [self initWithTotalHits: th scoreDocuments: sd maxScore: max];
-	ASSIGN(fields, f);
+	fields = f;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(fields);
-	[super dealloc];
+	fields=nil;;
 }
 @end

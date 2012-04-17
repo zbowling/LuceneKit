@@ -2,7 +2,7 @@
 #define __LuceneKit_Util_NSData_Additions__
 
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 /** Compress and decompress data.
  * NSData have no idea whether the data is compressed.

@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_CONJUNCTION_SCORER__
 #define __LUCENE_SEARCH_CONJUNCTION_SCORER__
 
-#include "LCScorer.h"
+#import  "LCScorer.h"
 
 @interface LCConjunctionScorer: LCScorer
 {

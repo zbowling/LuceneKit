@@ -1,7 +1,7 @@
 #ifndef __LuceneKit_Wildcard_TermEnum__
 #define __LuceneKit_Wildcard_TermEnum__
 
-#include "LCFilteredTermEnum.h"
+#import  "LCFilteredTermEnum.h"
 
 @class LCTerm;
 @class LCIndexReader;

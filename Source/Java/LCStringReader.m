@@ -1,18 +1,17 @@
-#include "LCStringReader.h"
-#include "GNUstep.h"
+#import  "LCStringReader.h"
+
 
 @implementation LCStringReader
 - (id) initWithString: (NSString *) s
 {
 	self = [self init];
-	ASSIGNCOPY(source, s);
+	source =[ s copy];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(source);
-	[super dealloc];
+	source=nil;;
 }
 
 - (void) close

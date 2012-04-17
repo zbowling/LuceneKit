@@ -1,4 +1,4 @@
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @class LCQuery;
 @class LCSearcher;

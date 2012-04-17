@@ -1,12 +1,12 @@
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
-#include "LCRAMDirectory.h"
-#include "LCIndexWriter.h"
-#include "LCIndexReader.h"
-#include "LCSimpleAnalyzer.h"
-#include "LCTermQuery.h"
-#include "LCHitCollector.h"
-#include "LCIndexSearcher.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  "LCRAMDirectory.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCSimpleAnalyzer.h"
+#import  "LCTermQuery.h"
+#import  "LCHitCollector.h"
+#import  "LCIndexSearcher.h"
 
 @interface TestSetNorm: NSObject <UKTest>
 {

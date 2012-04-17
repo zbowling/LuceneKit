@@ -1,14 +1,14 @@
-#include "LCSegmentReader.h"
-#include "LCSegmentTermPositions.h"
-#include "LCDocument.h"
-#include "LCIndexInput.h"
-#include "LCIndexOutput.h"
-#include "LCDirectory.h"
-#include "LCFieldsReader.h"
-#include "LCTermVectorsReader.h"
-#include "LCTermInfo.h"
-#include "LCDefaultSimilarity.h"
-#include "GNUstep.h"
+#import  "LCSegmentReader.h"
+#import  "LCSegmentTermPositions.h"
+#import  "LCDocument.h"
+#import  "LCIndexInput.h"
+#import  "LCIndexOutput.h"
+#import  "LCDirectory.h"
+#import  "LCFieldsReader.h"
+#import  "LCTermVectorsReader.h"
+#import  "LCTermInfo.h"
+#import  "LCDefaultSimilarity.h"
+
 
 @interface LCNorm: NSObject
 {
@@ -37,7 +37,7 @@
 {
 	self = [self init];
 	reader = r; //Don't assign as reader retain us
-	ASSIGN(input, inp);
+	input = inp;
 	bytes = [[NSMutableData alloc] init];
 	number = num;
 	return self;
@@ -46,9 +46,8 @@
 - (void) dealloc
 {
 	//Don't destroy reader as we not retain it
-	DESTROY(input);
-	DESTROY(bytes);
-	[super dealloc];
+	input=nil;;
+	bytes=nil;;
 }
 
 - (void) rewrite
@@ -113,7 +112,7 @@
 	deletedDocsDirty = NO;
 	normsDirty = NO;
 	undeleteAll = NO;
-	ASSIGN(norms, AUTORELEASE([[NSMutableDictionary alloc] init]));
+	norms = [[NSMutableDictionary alloc] init];
 	termVectorsReaderOrig = nil;
 	return self;
 }
@@ -149,101 +148,100 @@
 															closeDirectory: closeDir
 															directoryOwner: ownDir];
 	[instance initWithSegmentInfo: si];
-	return AUTORELEASE(instance);
+	return instance;
 }
 
 - (void) initWithSegmentInfo: (LCSegmentInfo *) si
 {
-	ASSIGN(segment, [si name]);
+	segment = [si name];
 	if ((segment == nil) && ([segment length] == 0))
 		NSLog(@"Error: nil segment");
 	// Use compound file directory for some files, if it exists
 	id <LCDirectory> cfsDir = nil;
-	ASSIGN(cfsDir, [self directory]);
+	cfsDir = [self directory];
 	NSString *file = [segment stringByAppendingPathExtension: @"cfs"];
 	if ([directory fileExists: file]) {
-		ASSIGN(cfsReader, AUTORELEASE([[LCCompoundFileReader alloc] initWithDirectory: [self directory] name: file]));
-		ASSIGN(cfsDir, cfsReader);
+		cfsReader = [[LCCompoundFileReader alloc] initWithDirectory: [self directory] name: file];
+		cfsDir = cfsReader;
 	}
 	
 	// No compound file exists - use the multi-file format
 	file = [segment stringByAppendingPathExtension: @"fnm"];
-	ASSIGN(fieldInfos, AUTORELEASE([[LCFieldInfos alloc] initWithDirectory: cfsDir name: file]));
-	ASSIGN(fieldsReader, AUTORELEASE([[LCFieldsReader alloc] initWithDirectory: cfsDir
+	fieldInfos = [[LCFieldInfos alloc] initWithDirectory: cfsDir name: file];
+	fieldsReader = [[LCFieldsReader alloc] initWithDirectory: cfsDir
 																	   segment: segment
-																	fieldInfos: fieldInfos]));
+																	fieldInfos: fieldInfos];
 	
-	ASSIGN(tis, AUTORELEASE([[LCTermInfosReader alloc] initWithDirectory: cfsDir
+	tis = [[LCTermInfosReader alloc] initWithDirectory: cfsDir
 																 segment: segment
-															  fieldInfos: fieldInfos]));
+															  fieldInfos: fieldInfos];
 	
 	// NOTE: the bitvector is stored using the regular directory, not cfs
 	if ([LCSegmentReader hasDeletions: si])
     {
 		file = [segment stringByAppendingPathExtension: @"del"];
-		ASSIGN(deletedDocs, AUTORELEASE([[LCBitVector alloc] initWithDirectory: [self directory]
-																	   name: file]));
+		deletedDocs = [[LCBitVector alloc] initWithDirectory: [self directory]
+																	   name: file];
     }
 	
 	// make sure that all index files have been read or are kept open
 	// so that if an index update removes them we'll still have them
 	file = [segment stringByAppendingPathExtension: @"frq"];
-	ASSIGN(freqStream, [cfsDir openInput: file]);
+	freqStream = [cfsDir openInput: file];
 	file = [segment stringByAppendingPathExtension: @"prx"];
-	ASSIGN(proxStream, [cfsDir openInput: file]);
+	proxStream = [cfsDir openInput: file];
 	[self openNorms: cfsDir];
 	
 	if ([fieldInfos hasVectors]) { // open term vector files only as needed
-		ASSIGN(termVectorsReaderOrig, AUTORELEASE([[LCTermVectorsReader alloc] initWithDirectory: cfsDir segment: segment fieldInfos: fieldInfos]));
+		termVectorsReaderOrig = [[LCTermVectorsReader alloc] initWithDirectory: cfsDir segment: segment fieldInfos: fieldInfos];
 	}
-	DESTROY(cfsDir);
+	cfsDir=nil;;
 }
 
 - (void) dealloc
 {
-	DESTROY(norms);
-	DESTROY(segment);
-	DESTROY(fieldInfos);
-	DESTROY(fieldsReader);
-	DESTROY(tis);
-	DESTROY(termVectorsReaderOrig);
-	DESTROY(deletedDocs);
-	DESTROY(freqStream);
-	DESTROY(proxStream);
-	DESTROY(cfsReader);
-	[super dealloc];
+	norms=nil;;
+	segment=nil;;
+	fieldInfos=nil;;
+	fieldsReader=nil;;
+	tis=nil;;
+	termVectorsReaderOrig=nil;;
+	deletedDocs=nil;;
+	freqStream=nil;;
+	proxStream=nil;;
+	cfsReader=nil;;
 }
 
 - (void) doCommit
 {
-	CREATE_AUTORELEASE_POOL(pool);
-	NSString *file;
-	if (deletedDocsDirty) {               // re-write deleted 
-		file = [segment stringByAppendingPathExtension: @"tmp"];
-		[deletedDocs writeToDirectory: [self directory]
-							 name: file];
-		[[self directory] renameFile: file
-								  to: [segment stringByAppendingPathExtension: @"del"]];
-	}
-	
-	file = [segment stringByAppendingPathExtension: @"del"];
-	if (undeleteAll && [[self directory] fileExists:  file]){
-		[[self directory] deleteFile: file];
-	}
-	if (normsDirty) {               // re-write norms 
-		NSEnumerator *values = [norms objectEnumerator];
-		LCNorm *norm;
-		while ((norm = [values nextObject])) {
-			if ([norm dirty]) {
-				[norm rewrite];
+	@autoreleasepool {
+		NSString *file;
+		if (deletedDocsDirty) {               // re-write deleted 
+			file = [segment stringByAppendingPathExtension: @"tmp"];
+			[deletedDocs writeToDirectory: [self directory]
+								 name: file];
+			[[self directory] renameFile: file
+									  to: [segment stringByAppendingPathExtension: @"del"]];
+		}
+		
+		file = [segment stringByAppendingPathExtension: @"del"];
+		if (undeleteAll && [[self directory] fileExists:  file]){
+			[[self directory] deleteFile: file];
+		}
+		if (normsDirty) {               // re-write norms 
+			NSEnumerator *values = [norms objectEnumerator];
+			LCNorm *norm;
+			while ((norm = [values nextObject])) {
+				if ([norm dirty]) {
+					[norm rewrite];
+				}
 			}
 		}
+		
+		deletedDocsDirty = NO;
+		normsDirty = NO;
+		undeleteAll = NO;
 	}
-	
-	deletedDocsDirty = NO;
-	normsDirty = NO;
-	undeleteAll = NO;
-	DESTROY(pool);
 }
 
 - (void) doClose
@@ -297,13 +295,13 @@
 
 - (void) doDelete: (int) docNum
 {
-	CREATE_AUTORELEASE_POOL(pool);
-	if (deletedDocs == nil)
-		ASSIGN(deletedDocs, AUTORELEASE([(LCBitVector *)[LCBitVector alloc] initWithSize: [self maximalDocument]]));
-	deletedDocsDirty = YES;
-	undeleteAll = NO;
-	[deletedDocs setBit: docNum];
-	DESTROY(pool);
+	@autoreleasepool {
+		if (deletedDocs == nil)
+			deletedDocs = [(LCBitVector *)[LCBitVector alloc] initWithSize: [self maximalDocument]];
+		deletedDocsDirty = YES;
+		undeleteAll = NO;
+		[deletedDocs setBit: docNum];
+	}
 }
 
 - (void) doUndeleteAll
@@ -339,7 +337,7 @@
 				[files addObject: name];
 		}
     }
-    return AUTORELEASE(files);
+    return files;
 }
 
 - (LCTermEnumerator *) termEnumerator
@@ -369,12 +367,12 @@
 
 - (id <LCTermDocuments>) termDocuments
 {
-	return AUTORELEASE([[LCSegmentTermDocuments alloc] initWithSegmentReader: self]);
+	return [[LCSegmentTermDocuments alloc] initWithSegmentReader: self];
 }
 
 - (id <LCTermPositions>) termPositions
 {
-	return AUTORELEASE([[LCSegmentTermPositions alloc] initWithSegmentReader: self]);
+	return [[LCSegmentTermPositions alloc] initWithSegmentReader: self];
 }
 
 - (long) documentFrequency: (LCTerm *) t
@@ -451,7 +449,7 @@
 			[fieldSet addObject: [fi name]];
 		}
     }
-    return AUTORELEASE(fieldSet);
+    return fieldSet;
 }
 
 - (BOOL) hasNorms: (NSString *) field
@@ -475,7 +473,7 @@
 
 - (NSData *) fakeNorms
 {
-	if (ones == nil) ASSIGN(ones, [LCSegmentReader createFakeNorms: [self maximalDocument]]);
+	if (ones == nil) ones = [LCSegmentReader createFakeNorms: [self maximalDocument]];
 	return ones;
 }
 
@@ -489,7 +487,7 @@
                 NSMutableData *bytes = [[NSMutableData alloc] init];
                 [self setNorms: field bytes: bytes offset: 0];
                 [norm setBytes: bytes]; // cache it
-                DESTROY(bytes);
+                bytes=nil;;
     }
     return [norm bytes];
 }
@@ -518,7 +516,7 @@
 	NSRange r = NSMakeRange(doc, 1);
 	[d replaceBytesInRange: r withBytes: &value length: 1];
     [norm setBytes: d];
-	DESTROY(d);
+	d=nil;;
 #endif
 }
 
@@ -530,17 +528,17 @@
     if (norm == nil)
         {
                 NSRange r = NSMakeRange(offset, [self maximalDocument]);
-                [bytes replaceBytesInRange: r withBytes: [self fakeNorms]];
+                [bytes replaceBytesInRange: r withBytes: (__bridge const void *)([self fakeNorms])];
                 return;                                   // use zeros in array
         }
 	
     if (([norm bytes] != nil) && ([[norm bytes] length] > 0)) {                     // can copy from cache
 		NSRange r = NSMakeRange(offset, [self maximalDocument]);
-		[bytes replaceBytesInRange: r withBytes: [norm bytes]];
+		[bytes replaceBytesInRange: r withBytes: (__bridge const void *)([norm bytes])];
 		return;
     }
 	
-    LCIndexInput *normStream = (LCIndexInput *) AUTORELEASE([[norm input] copy]);
+    LCIndexInput *normStream = (LCIndexInput *) [[norm input] copy];
 	// read from disk
     [normStream seekToFileOffset: 0];
     [normStream readBytes: bytes offset: offset length: [self maximalDocument]];
@@ -562,8 +560,8 @@
 				fileName = [NSString stringWithFormat: @"%@.f%d", segment, [fi number]];
 				d = cfsDir;
 			}
-			[norms setObject: AUTORELEASE([[LCNorm alloc] initWithSegmentReader: self
-                                                                      indexInput: [d openInput: fileName] number: [fi number]])
+			[norms setObject: [[LCNorm alloc] initWithSegmentReader: self
+                                                                      indexInput: [d openInput: fileName] number: [fi number]]
 					  forKey: [fi name]];
 		}
     }

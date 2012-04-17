@@ -1,9 +1,9 @@
 #ifndef __LUCENE_ANALYSIS_ANALYZER__
 #define __LUCENE_ANALYSIS_ANALYZER__
 
-#include <Foundation/Foundation.h>
-#include "LCReader.h"
-#include "LCTokenStream.h"
+#import  <Foundation/Foundation.h>
+#import  "LCReader.h"
+#import  "LCTokenStream.h"
 
 @interface LCAnalyzer: NSObject
 {

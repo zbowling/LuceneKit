@@ -1,5 +1,5 @@
-#include "LCTermInfosReader.h"
-#include "GNUstep.h"
+#import  "LCTermInfosReader.h"
+
 
 /** This stores a monotonically increasing set of <Term, TermInfo> pairs in a
 * Directory.  Pairs are accessed either by Term or by ordinal position the
@@ -20,9 +20,9 @@
               fieldInfos: (LCFieldInfos *) fis
 {
 	self = [super init];
-	ASSIGN(directory, dir);
-	ASSIGN(segment, seg);
-	ASSIGN(fieldInfos, fis);
+	directory = dir;
+	segment = seg;
+	fieldInfos = fis;
 	origEnum = [[LCSegmentTermEnumerator alloc] initWithIndexInput: [dir openInput: [segment stringByAppendingPathExtension: @"tis"]]
 												  fieldInfos: fieldInfos
 													 isIndex: NO];
@@ -35,17 +35,16 @@
 
 - (void) dealloc
 {
-	DESTROY(origEnum);
-	DESTROY(indexEnum);
-        DESTROY(directory);
-        DESTROY(segment);
-        DESTROY(fieldInfos);
+	origEnum=nil;;
+	indexEnum=nil;;
+        directory=nil;;
+        segment=nil;;
+        fieldInfos=nil;;
 	
-	DESTROY(indexTerms);
-	DESTROY(indexInfos);
-	DESTROY(indexPointers);
+	indexTerms=nil;;
+	indexInfos=nil;;
+	indexPointers=nil;;
 
-	[super dealloc];
 }
 
 - (int) skipInterval
@@ -86,9 +85,9 @@
 		return;                                     // do nothing
 													//    int indexSize = (int)[indexEnum size];        // otherwise read index
 	
-    ASSIGN(indexTerms, AUTORELEASE([[NSMutableArray alloc] init]));
-    ASSIGN(indexInfos, AUTORELEASE([[NSMutableArray alloc] init]));
-    ASSIGN(indexPointers, AUTORELEASE([[NSMutableArray alloc] init]));
+    indexTerms = [[NSMutableArray alloc] init];
+    indexInfos = [[NSMutableArray alloc] init];
+    indexPointers = [[NSMutableArray alloc] init];
 	
     while([indexEnum hasNextTerm])
 	{
@@ -98,7 +97,7 @@
 	}
 	
 	[indexEnum close];
-	DESTROY(indexEnum);
+	indexEnum=nil;;
 }
 
 /** Returns the offset of the greatest index entry which is less than or equal to term.*/
@@ -217,7 +216,7 @@
 /** Returns an enumeration of all the Terms and TermInfos in the set. */
 - (LCSegmentTermEnumerator *) termEnumerator
 {
-	id result = AUTORELEASE([origEnum copy]);
+	id result = [origEnum copy];
 	return (LCSegmentTermEnumerator *)result;
 }
 

@@ -1,4 +1,4 @@
-#include "LCIndexOutput.h"
+#import  "LCIndexOutput.h"
 
 /** Abstract base class for output to a file in a Directory.  A random-access
 * output stream.  Used for all Lucene index output operations.

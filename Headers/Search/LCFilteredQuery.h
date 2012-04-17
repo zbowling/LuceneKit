@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_FILTERED_QUERY__
 #define __LUCENE_SEARCH_FILTERED_QUERY__
 
-#include "LCQuery.h"
-#include "LCWeight.h"
+#import  "LCQuery.h"
+#import  "LCWeight.h"
 
 @class LCFilter;
 

@@ -1,5 +1,5 @@
-#include "LCTopDocs.h"
-#include "GNUstep.h"
+#import  "LCTopDocs.h"
+
 
 /** Expert: Returned by low-level search implementations.
 * @see Searcher#search(Query,Filter,int) */
@@ -11,15 +11,14 @@
 {
 	self = [super init];
 	totalHits = th;
-	ASSIGN(scoreDocs, sd);
+	scoreDocs = sd;
 	maxScore = max;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(scoreDocs);
-	[super dealloc];
+	scoreDocs=nil;;
 }
 
 - (int) totalHits { return totalHits; }

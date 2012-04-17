@@ -1,5 +1,5 @@
-#include "LCPerFieldAnalyzerWrapper.h"
-#include "GNUstep.h"
+#import  "LCPerFieldAnalyzerWrapper.h"
+
 
 /**
 * This analyzer is used to facilitate scenarios where different
@@ -19,16 +19,15 @@
 - (id) initWithAnalyzer: (LCAnalyzer *) analyzer
 {
 	self = [self init];
-	ASSIGN(defaultAnalyzer, analyzer);
-	analyzerMap = [[NSDictionary alloc] init];
+	defaultAnalyzer = analyzer;
+	analyzerMap = [[NSMutableDictionary alloc] init];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(defaultAnalyzer);
-	DESTROY(analyzerMap);
-	[super dealloc];
+	defaultAnalyzer=nil;;
+	analyzerMap=nil;;
 }
 
 /**
@@ -47,13 +46,12 @@
 								  reader: (id <LCReader>) reader
 {
 	LCAnalyzer *analyzer = nil;
-	ASSIGN(analyzer, [analyzerMap objectForKey: name]);
+	analyzer = [analyzerMap objectForKey: name];
 	if (analyzer == nil) 
 	{
-		ASSIGN(analyzer, defaultAnalyzer);
+		analyzer = defaultAnalyzer;
 	}
-	
-	AUTORELEASE(analyzer);
+
 	return [analyzer tokenStreamWithField: name
 								   reader: reader];
 }

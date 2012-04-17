@@ -1,6 +1,6 @@
-#include "LCCharTokenizer.h"
-#include "LCReader.h"
-#include "GNUstep.h"
+#import  "LCCharTokenizer.h"
+#import  "LCReader.h"
+
 
 /** An abstract base class for simple, character-oriented tokenizers.*/
 @implementation LCCharTokenizer
@@ -15,17 +15,17 @@
 }
 
 /** Returns true iff a character should be included in a token.  This
-* tokenizer generates as tokens adjacent sequences of characters which
-* satisfy this predicate.  Characters for which this is false are used to
-* define token boundaries and are not included in tokens. */
+ * tokenizer generates as tokens adjacent sequences of characters which
+ * satisfy this predicate.  Characters for which this is false are used to
+ * define token boundaries and are not included in tokens. */
 - (BOOL) characterIsPartOfToken: (char) c
 {
 	return NO;
 }
 
 /** Called on each token character to normalize it before it is added to the
-* token.  The default implementation does nothing.  Subclasses may use this
-* to, e.g., lowercase tokens. */
+ * token.  The default implementation does nothing.  Subclasses may use this
+ * to, e.g., lowercase tokens. */
 - (char) normalize: (char) c
 {
 	return c;
@@ -75,7 +75,7 @@
 	NSString *s = [NSString stringWithCharacters: buffer length: length];
 	LCToken *t = [[LCToken alloc] initWithText: s start: start 
 										   end: start + length];
-	return AUTORELEASE(t);
+	return t;
 }
 
 @end

@@ -1,5 +1,5 @@
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
 
 @class LCRAMDirectory;
 @class LCDocument;

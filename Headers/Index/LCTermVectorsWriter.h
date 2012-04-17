@@ -1,7 +1,7 @@
 #ifndef __LUCENE_INDEX_TERM_VECTORS_WRITER__
 #define __LUCENE_INDEX_TERM_VECTORS_WRITER__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 #define STORE_POSITIONS_WITH_TERMVECTOR 0x1
 #define STORE_OFFSET_WITH_TERMVECTOR 0x2
@@ -12,7 +12,7 @@
 #define TVD_EXTENSION @"tvd"
 #define TVF_EXTENSION @"tvf"
 
-#include "LCFieldInfos.h"
+#import  "LCFieldInfos.h"
 
 @class LCIndexOutput;
 @class LCTVField; // private

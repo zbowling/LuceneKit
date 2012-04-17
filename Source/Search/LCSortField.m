@@ -1,5 +1,5 @@
-#include "LCSortField.h"
-#include "GNUstep.h"
+#import  "LCSortField.h"
+
 
 /**
 * Stores information about how to sort documents by terms in an individual
@@ -42,7 +42,7 @@
 - (id) initWithField: (NSString *) f
 {
 	self = [self init];
-	ASSIGN(field, f);
+	field = f;
 	return self;
 }
 
@@ -94,7 +94,7 @@
 - (id) initWithField: (NSString *) f locale: (id) l
 {
 	self = [self initWithField: f];
-	ASSIGN(locale, l);
+	locale = l;
 	type = LCSortField_STRING;
 	return self;
 }
@@ -108,7 +108,7 @@
 			 reverse: (BOOL) r
 {
 	self = [self initWithField: f];
-	ASSIGN(locale, l);
+	locale = l;
 	type = LCSortField_STRING;
 	reverse = r;
 	return self;
@@ -122,7 +122,7 @@
 		  comparator: (id) comparator
 {
 	self = [self initWithField: f type: LCSortField_CUSTOM];
-	ASSIGN(factory, comparator);
+	factory = comparator;
 	return self;
 }
 
@@ -142,10 +142,9 @@
 
 - (void) dealloc
 {
-	DESTROY(field);
-	DESTROY(factory);
-	DESTROY(locale);
-	[super dealloc];
+	field=nil;;
+	factory=nil;;
+	locale=nil;;
 }
 
 /** Returns the name of the field.  Could return <code>null</code>
@@ -209,7 +208,7 @@
 	if (locale != nil) [s appendFormat: @"(%@)", locale];
 	if (reverse) [s appendString: @"!"];
 	
-	return AUTORELEASE(s);
+	return s;
 }
 
 @end

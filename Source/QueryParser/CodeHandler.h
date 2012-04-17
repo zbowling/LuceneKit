@@ -23,7 +23,7 @@
 #ifndef _CodeHandler_H_
 #define _CodeHandler_H_
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 typedef enum _CommentStyle {
   NoComment,

@@ -1,7 +1,7 @@
-#include "LCBitVector.h"
-#include "LCIndexInput.h"
-#include "LCIndexOutput.h"
-#include "GNUstep.h"
+#import  "LCBitVector.h"
+#import  "LCIndexInput.h"
+#import  "LCIndexOutput.h"
+
 
 @implementation LCBitVector
 
@@ -19,7 +19,6 @@
 {
 	free(bits);
 	bits = NULL;
-	[super dealloc];
 }
 
 - (void) setBit: (int) bit
@@ -120,7 +119,7 @@ static char BYTE_COUNTS[] = {	  // table of bits/byte
 		NSMutableData *b = [[NSMutableData alloc] init];
 		[input readBytes: b offset: 0 length: (size >> 3) + 1];
 		[b getBytes: bits];
-		DESTROY(b);
+		b=nil;;
 		[input close];
 		return self;
 	}

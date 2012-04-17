@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_RANGE_QUERY_
 #define __LUCENE_SEARCH_RANGE_QUERY_
 
-#include "LCQuery.h"
+#import  "LCQuery.h"
 
 @class LCTerm;
 

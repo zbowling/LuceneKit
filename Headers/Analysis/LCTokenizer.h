@@ -1,9 +1,9 @@
 #ifndef __LUCENE_ANALYSIS_TOKENIZER__
 #define __LUCENE_ANALYSIS_TOKENIZER__
 
-#include <Foundation/Foundation.h>
-#include "LCTokenStream.h"
-#include "LCReader.h"
+#import  <Foundation/Foundation.h>
+#import  "LCTokenStream.h"
+#import  "LCReader.h"
 
 /* A token stream specified for LCReader */
 @interface LCTokenizer: LCTokenStream

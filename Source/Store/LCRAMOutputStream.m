@@ -1,5 +1,5 @@
-#include "LCRAMOutputStream.h"
-#include "GNUstep.h"
+#import  "LCRAMOutputStream.h"
+
 
 /**
 * A memory-resident {@link IndexOutput} implementation.
@@ -13,21 +13,20 @@
 - (id) init
 {
 	self = [super init];
-	ASSIGN(file, AUTORELEASE([[LCRAMFile alloc] init]));
+	file = [[LCRAMFile alloc] init];
 	pointer = 0;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(file);
-	[super dealloc];
+	file=nil;;
 }
 
 - (id) initWithFile: (LCRAMFile *) f
 {
 	self = [self init];
-	ASSIGN(file, f);
+	file = f;
 	return self;
 }
 

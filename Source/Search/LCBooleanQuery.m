@@ -1,11 +1,11 @@
-#include "LCBooleanQuery.h"
-#include "LCSimilarityDelegator.h"
-#include "LCSearcher.h"
-#include "LCBooleanScorer.h"
-#include "LCWeight.h"
-#include "LCSmallFloat.h"
-#include "NSString+Additions.h"
-#include "GNUstep.h"
+#import  "LCBooleanQuery.h"
+#import  "LCSimilarityDelegator.h"
+#import  "LCSearcher.h"
+#import  "LCBooleanScorer.h"
+#import  "LCWeight.h"
+#import  "LCSmallFloat.h"
+#import  "NSString+Additions.h"
+
 
 /* LuceneKit: this is actually BooleanWeight2 in lucene */
 @interface LCBooleanWeight: NSObject <LCWeight>
@@ -62,8 +62,7 @@ static int maxClauseCount = 1024;
 
 - (void) dealloc
 {
-	DESTROY(clauses);
-	[super dealloc];
+	clauses=nil;;
 }
 
 - (BOOL) isCoordinationDisabled { return disableCoord; }
@@ -73,7 +72,6 @@ static int maxClauseCount = 1024;
 	LCSimilarity *result = [super similarity: searcher];
 	if (disableCoord) { // disable coord as requested
 		result = [[LCBooleanSimilarityDelegator alloc] init];
-		AUTORELEASE(result);
 	}
 	return result;
 }
@@ -83,7 +81,7 @@ static int maxClauseCount = 1024;
 {
 	LCBooleanClause *clause = [[LCBooleanClause alloc] initWithQuery: query occur: occur];
 	[self addClause: clause];
-	DESTROY(clause);
+	clause=nil;;
 }
 
 - (void) addClause: (LCBooleanClause *) clause
@@ -108,7 +106,7 @@ static int maxClauseCount = 1024;
 
 - (id <LCWeight>) createWeight: (LCSearcher *) searcher
 {
-	return AUTORELEASE([[LCBooleanWeight alloc] initWithSearcher: searcher minimumNumberShouldMatch: minNrShouldMatch query: self]);
+	return [[LCBooleanWeight alloc] initWithSearcher: searcher minimumNumberShouldMatch: minNrShouldMatch query: self];
 }
 
 - (LCQuery *) rewrite: (LCIndexReader *) reader
@@ -135,7 +133,7 @@ static int maxClauseCount = 1024;
 			if (clone == nil)
 				clone = [self copy];
 			LCBooleanClause *clause = [[LCBooleanClause alloc] initWithQuery: query occur: [c occur]];
-			[clone replaceClauseAtIndex: i withClause: AUTORELEASE(clause)];
+			[clone replaceClauseAtIndex: i withClause: clause];
 		}
 	}
 	if (clone != nil) {
@@ -157,7 +155,7 @@ static int maxClauseCount = 1024;
 - (id) copyWithZone: (NSZone *) zone
 {
 	LCBooleanQuery *clone = [super copyWithZone: zone];
-	[clone setClauses: AUTORELEASE([[self clauses] copy])];
+	[clone setClauses: [[self clauses] copy]];
 	return clone;
 }
 
@@ -206,7 +204,7 @@ static int maxClauseCount = 1024;
 		[s appendFormat: @"%@", LCStringFromBoost([self boost])];
 	}
 	
-	return AUTORELEASE(s);
+	return s;
 }
 
 - (BOOL) isEqual: (id) o
@@ -267,8 +265,8 @@ static int maxClauseCount = 1024;
                   query: (LCBooleanQuery *) q
 {
 	self = [super init];
-	ASSIGN(query, q);
-	ASSIGN(similarity, [query similarity: searcher]);
+	query = q;
+	similarity = [query similarity: searcher];
 	minNrShouldMatch = min;
 	weights = [[NSMutableArray alloc] init];
 	NSArray *clauses = [query clauses];
@@ -283,10 +281,9 @@ static int maxClauseCount = 1024;
 
 - (void) dealloc
 {
-	DESTROY(weights);
-	DESTROY(query);
-	DESTROY(similarity);
-	[super dealloc];
+	weights=nil;;
+	query=nil;;
+	similarity=nil;;
 }
 
 - (LCQuery *) query
@@ -332,7 +329,6 @@ static int maxClauseCount = 1024;
 {
 	/* LuceneKit: this is actually BooleanScorer2 in lucene */
 	LCBooleanScorer *result = [[LCBooleanScorer alloc] initWithSimilarity: similarity minimumNumberShouldMatch: minNrShouldMatch];
-        AUTORELEASE(result);
 	NSArray *clauses = [query clauses];
 	int i;
 	for (i = 0; i < [weights count]; i++)
@@ -351,7 +347,7 @@ static int maxClauseCount = 1024;
 - (LCExplanation *) explain: (LCIndexReader *) reader
 				   document: (int) doc
 {
-        LCExplanation *sumExpl = AUTORELEASE([[LCExplanation alloc] init]);
+        LCExplanation *sumExpl = [[LCExplanation alloc] init];
 	[sumExpl setRepresentation: @"sum of:"];
 	int coord = 0;
 	int maxCoord = 0;
@@ -370,10 +366,10 @@ static int maxClauseCount = 1024;
 				sum += [e value];
 				coord++;
 			} else {
-				return AUTORELEASE([[LCExplanation alloc] initWithValue: 0.0f representation: @"match prohibited"]);
+				return [[LCExplanation alloc] initWithValue: 0.0f representation: @"match prohibited"];
 			}
 		} else if ([c isRequired]) {
-			return AUTORELEASE([[LCExplanation alloc] initWithValue: 0.0f representation: @"match required"]);
+			return [[LCExplanation alloc] initWithValue: 0.0f representation: @"match required"];
 		}
 	}
 	[sumExpl setValue: sum];
@@ -390,9 +386,9 @@ static int maxClauseCount = 1024;
 		[result addDetail: sumExpl];
 		LCExplanation *e = [[LCExplanation alloc] initWithValue: coordFactor representation: [NSString stringWithFormat: @"coord(%d/%d)", coord, maxCoord]];
 		[result addDetail: e];
-		DESTROY(e);
+		e=nil;;
 		[result setValue: sum * coordFactor];
-		return AUTORELEASE(result);
+		return result;
 	}
 }
 @end

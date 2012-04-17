@@ -1,7 +1,7 @@
-#include "LCBitVector.h"
-#include "LCRAMDirectory.h"
-#include <UnitKit/UnitKit.h>
-#include "GNUstep.h"
+#import  "LCBitVector.h"
+#import  "LCRAMDirectory.h"
+#import  <UnitKit/UnitKit.h>
+
 
 @interface TestBitVector: NSObject <UKTest>
 @end
@@ -98,12 +98,12 @@
 		[vector writeToDirectory: d name: @"TESTBV"];
 		
 		compare = [[LCBitVector alloc] initWithDirectory: d
-												 name: @"TESTBV"];
+                                                    name: @"TESTBV"];
 		// compare bit vectors with bits set incrementally
 		UKTrue([self doCompare: vector: compare]);
-		RELEASE(compare);
+		[compare release];
     }
-	RELEASE(d);
+	[d release];
 }
 
 - (void) testAll

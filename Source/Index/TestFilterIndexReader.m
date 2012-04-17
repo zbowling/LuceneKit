@@ -1,6 +1,6 @@
-#include "LCFilterIndexReader.h"
-#include "LCTerm.h"
-#include "GNUstep.h"
+#import  "LCFilterIndexReader.h"
+#import  "LCTerm.h"
+
 
 /** Filter that only permits terms containing 'e'.*/
 @interface TestTermEnum: LCFilterTermEnumerator
@@ -54,13 +54,13 @@
 }
 @end
 
-#include "LCRAMDirectory.h"
-#include "LCIndexWriter.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "LCDocument.h"
-#include "LCField.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
+#import  "LCRAMDirectory.h"
+#import  "LCIndexWriter.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
 
 @interface TestFilterIndexReader: NSObject <UKTest>
 @end
@@ -83,9 +83,9 @@
 											 store: LCStore_YES
 											 index: LCIndex_Tokenized];
 	[d1 addField: field];
-	DESTROY(field);
+	[field release];field=nil;;
 	[writer addDocument: d1];
-	DESTROY(d1);
+	[d1 release];d1=nil;;
 	
 	LCDocument *d2 = [[LCDocument alloc] init];
 	field = [[LCField alloc] initWithName: @"default"
@@ -93,9 +93,9 @@
 									store: LCStore_YES
 									index: LCIndex_Tokenized];
 	[d2 addField: field];
-	DESTROY(field);
+	[field release];field=nil;;
 	[writer addDocument: d2];
-	DESTROY(d2);
+	[d2 release];d2=nil;;
 	
 	LCDocument *d3 = [[LCDocument alloc] init];
 	field = [[LCField alloc] initWithName: @"default"
@@ -103,11 +103,11 @@
 									store: LCStore_YES
 									index: LCIndex_Tokenized];
 	[d3 addField: field];
-	DESTROY(field);
+	[field release];field=nil;;
 	[writer addDocument: d3];
-	DESTROY(d3);
+	[d3 release];d3=nil;;
 	[writer close];
-	DESTROY(writer);
+	[writer release];writer=nil;;
 	
 	LCIndexReader *r = [LCIndexReader openDirectory: directory];
 	LCIndexReader *reader = [[TestReader alloc] initWithIndexReader: r];
@@ -125,9 +125,9 @@
 		UKIntsEqual(([positions document] % 2), 1);
 	}
 	
-	DESTROY(term);
+	[term release];term=nil;;
 	[reader close];
-	DESTROY(reader);
+	[reader release];reader=nil;;
 }
 
 @end

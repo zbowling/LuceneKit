@@ -1,10 +1,10 @@
-#include "LCFuzzyQuery.h"
-#include "LCTermQuery.h"
-#include "LCBooleanQuery.h"
-#include "LCFuzzyTermEnum.h"
-#include "LCSmallFloat.h"
-#include "NSString+Additions.h"
-#include "GNUstep.h"
+#import  "LCFuzzyQuery.h"
+#import  "LCTermQuery.h"
+#import  "LCBooleanQuery.h"
+#import  "LCFuzzyTermEnum.h"
+#import  "LCSmallFloat.h"
+#import  "NSString+Additions.h"
+
 
 @interface LCScoreTerm: NSObject <LCComparable>
 {
@@ -99,46 +99,46 @@
 
 - (LCFilteredTermEnumerator *) enumerator: (LCIndexReader *) reader
 {
-	return AUTORELEASE([[LCFuzzyTermEnumerator alloc] initWithReader: reader term: [self term] similarity: minimumSimilarity prefixLength: prefixLength]);
+	return [[LCFuzzyTermEnumerator alloc] initWithReader: reader term: [self term] similarity: minimumSimilarity prefixLength: prefixLength];
 }
 
 - (LCQuery *) rewrite: (LCIndexReader *) reader
 {
 	LCBooleanQuery *query = [[LCBooleanQuery alloc] initWithCoordination: YES];
-	CREATE_AUTORELEASE_POOL(pool);
-	LCFilteredTermEnumerator *enumerator = [self enumerator: reader];
-	int maxClauseCount = [LCBooleanQuery maxClauseCount];
-	LCScoreTermQueue *stQueue = [(LCScoreTermQueue *)[LCScoreTermQueue alloc] initWithSize: maxClauseCount];
-	
-	do {
-		float minScore = 0.0f;
-		float score = 0.0f;
-		LCTerm *t = [enumerator term];
-		if (t != nil) {
-			score = [enumerator difference];
-			// terms come in alphabetical order, therefore if queue is full and score
-			// not bigger than minScore, we can skip
-			if (([stQueue size] < maxClauseCount) || (score > minScore)) {
-				LCScoreTerm *sterm = [[LCScoreTerm alloc] initWithTerm: t score: score];
-				[stQueue insert: sterm];
-				minScore = [(LCScoreTerm *)[stQueue top] score]; // maintain minScore
-				DESTROY(sterm);
+	@autoreleasepool {
+		LCFilteredTermEnumerator *enumerator = [self enumerator: reader];
+		int maxClauseCount = [LCBooleanQuery maxClauseCount];
+		LCScoreTermQueue *stQueue = [(LCScoreTermQueue *)[LCScoreTermQueue alloc] initWithSize: maxClauseCount];
+		
+		do {
+			float minScore = 0.0f;
+			float score = 0.0f;
+			LCTerm *t = [enumerator term];
+			if (t != nil) {
+				score = [enumerator difference];
+				// terms come in alphabetical order, therefore if queue is full and score
+				// not bigger than minScore, we can skip
+				if (([stQueue size] < maxClauseCount) || (score > minScore)) {
+					LCScoreTerm *sterm = [[LCScoreTerm alloc] initWithTerm: t score: score];
+					[stQueue insert: sterm];
+					minScore = [(LCScoreTerm *)[stQueue top] score]; // maintain minScore
+					sterm=nil;;
+				}
 			}
+		} while ([enumerator hasNextTerm]);
+		[enumerator close];
+		
+		int i, size = [stQueue size];
+		for (i = 0; i < size; i++) {
+			LCScoreTerm *st = (LCScoreTerm *) [stQueue pop];
+			LCTermQuery *tq = [[LCTermQuery alloc] initWithTerm: [st term]]; // found a match
+			[tq setBoost: [self boost] * [st score]]; // set the boost
+			[query addQuery: tq occur: LCOccur_SHOULD]; // add to query
+			tq=nil;;
 		}
-	} while ([enumerator hasNextTerm]);
-	[enumerator close];
-	
-	int i, size = [stQueue size];
-	for (i = 0; i < size; i++) {
-		LCScoreTerm *st = (LCScoreTerm *) [stQueue pop];
-		LCTermQuery *tq = [[LCTermQuery alloc] initWithTerm: [st term]]; // found a match
-		[tq setBoost: [self boost] * [st score]]; // set the boost
-		[query addQuery: tq occur: LCOccur_SHOULD]; // add to query
-		DESTROY(tq);
+        stQueue=nil;;
 	}
-        DESTROY(stQueue);
-	DESTROY(pool);
-	return AUTORELEASE(query);
+	return query;
 }
 
     
@@ -150,7 +150,7 @@
 		[ms appendFormat: @"%@:", [t field]];
 	}
 	[ms appendFormat: @"%@~%f%@", [t text], minimumSimilarity, LCStringFromBoost([self boost])];
-	return AUTORELEASE(ms);
+	return ms;
 }
 
 - (BOOL) isEqual: (id) o
@@ -180,15 +180,14 @@
 - (id) initWithTerm: (LCTerm *) t score: (float) s
 {
 	self = [self init];
-	ASSIGN(term, t);
+	term = t;
 	score = s;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(term);
-	[super dealloc];
+	term=nil;;
 }
 
 - (float) score { return score; }

@@ -1,6 +1,6 @@
-#include "LCSegmentMergeQueue.h"
-#include "LCSegmentMergeInfo.h"
-#include "LCTerm.h"
+#import  "LCSegmentMergeQueue.h"
+#import  "LCSegmentMergeInfo.h"
+#import  "LCTerm.h"
 
 @implementation LCSegmentMergeQueue
 

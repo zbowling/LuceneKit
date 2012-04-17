@@ -1,5 +1,5 @@
-#include "LCSegmentTermVector.h"
-#include "GNUstep.h"
+#import  "LCSegmentTermVector.h"
+
 
 @implementation LCSegmentTermVector
 
@@ -8,7 +8,7 @@
 	       termFreqs: (NSArray *) f
 {
 	self = [self init];
-	ASSIGN(field, s);
+	field = s;
 	terms = [[NSMutableArray alloc] initWithArray: t];
 	termFreqs = [[NSMutableArray alloc] initWithArray: f];
 	return self;
@@ -16,10 +16,9 @@
 
 - (void) dealloc
 {
-	DESTROY(terms);
-	DESTROY(termFreqs);
-	DESTROY(field);
-	[super dealloc];
+	terms=nil;;
+	termFreqs=nil;;
+	field=nil;;
 }
 
 /**
@@ -46,7 +45,7 @@
     }
 	[sb appendString: @"}"];
     
-	return AUTORELEASE(sb);
+	return sb;
 }
 
 - (int) size
@@ -88,7 +87,7 @@
 		object = [termNumbers objectAtIndex: (start + i)];
 		[a addIndex: [self indexOfTerm: object]];
     }
-	return AUTORELEASE(a);
+	return a;
 }
 
 @end

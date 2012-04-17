@@ -1,19 +1,19 @@
-#include "LCIndexSearcher.h"
-#include "LCFieldSortedHitQueue.h"
-#include "LCHitQueue.h"
-#include "LCFilter.h"
-#include "LCScoreDoc.h"
-#include "LCTopFieldDocs.h"
-#include "LCQuery.h"
-#include "LCSort.h"
-#include "LCBitVector.h"
-#include "LCIndexReader.h"
-#include "LCTerm.h"
-#include "LCDocument.h"
-#include "LCTopDocCollector.h"
-#include "LCTopFieldDocCollector.h"
-#include "GNUstep.h"
-#include "float.h"
+#import  "LCIndexSearcher.h"
+#import  "LCFieldSortedHitQueue.h"
+#import  "LCHitQueue.h"
+#import  "LCFilter.h"
+#import  "LCScoreDoc.h"
+#import  "LCTopFieldDocs.h"
+#import  "LCQuery.h"
+#import  "LCSort.h"
+#import  "LCBitVector.h"
+#import  "LCIndexReader.h"
+#import  "LCTerm.h"
+#import  "LCDocument.h"
+#import  "LCTopDocCollector.h"
+#import  "LCTopFieldDocCollector.h"
+
+#import  "float.h"
 
 /** Implements search over a single IndexReader.
 *
@@ -39,7 +39,7 @@
 {
 	self = [self init];
 	bits = [filter bits: reader];
-	ASSIGN(collector, hc);
+	collector = hc;
 	return self;
 }
 
@@ -53,8 +53,7 @@
 
 - (void) dealloc
 {
-	DESTROY(collector);
-	[super dealloc];
+	collector=nil;;
 }
 @end
 
@@ -86,15 +85,14 @@
 - (id) initWithReader: (LCIndexReader *) indexReader close: (BOOL) close
 {
 	self = [self init];
-	ASSIGN(reader, indexReader);
+	reader = indexReader;
 	closeReader = close;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(reader);
-  [super dealloc];
+  reader=nil;;
 }
 
 /** Return the {@link IndexReader} this searches. */
@@ -142,7 +140,7 @@
 	
 	LCTopDocCollector *collector = [[LCTopDocCollector alloc] initWithMaximalHits: nDocs];
 	[self search: weight filter: filter hitCollector: collector];
-	AUTORELEASE(collector);
+
 	return [collector topDocs];
 }
 
@@ -153,7 +151,6 @@
 {
 	LCTopFieldDocCollector *collector = [[LCTopFieldDocCollector alloc] initWithReader: reader sort: sort maximalHits: nDocs];
 	[self search: weight filter: filter hitCollector: collector];
-	AUTORELEASE(collector);
 	return (LCTopFieldDocs *)[collector topDocs];
 }
 
@@ -165,7 +162,6 @@
 	if (filter != nil) {
 		collector = [[LCHitCollector3 alloc] initWithReader: reader 
 													 filter: filter hitCollector: results];
-		AUTORELEASE(collector);
 	}
 	LCScorer *scorer = [weight scorer: reader];
 	if (scorer == nil) return;

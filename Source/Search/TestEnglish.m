@@ -1,5 +1,5 @@
-#include "TestEnglish.h"
-#include "GNUstep.h"
+#import  "TestEnglish.h"
+
 
 @implementation TestEnglish
 
@@ -14,7 +14,7 @@
 {
 	int i = j;
 	NSMutableString *result = [[NSMutableString alloc] init];
-	AUTORELEASE(result);
+	[result autorelease];
 	
     if (i == 0) {
 		return @"zero";
@@ -82,7 +82,7 @@
 		case 1 : [result appendString: @"one "]; break;
 		case 0 : [result appendString: @""]; break;
     }
-	return AUTORELEASE([result copy]);
+	return [[result copy] autorelease];
 }
 
 @end

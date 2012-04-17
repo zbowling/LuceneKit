@@ -1,13 +1,13 @@
-#include "LCHits.h"
-#include "LCSearcher.h"
-#include "LCFilter.h"
-#include "LCSort.h"
-#include "LCQuery.h"
-#include "LCTopDocs.h"
-#include "LCScoreDoc.h"
-#include "LCHitIterator.h"
-#include "LCDocument.h"
-#include "GNUstep.h"
+#import  "LCHits.h"
+#import  "LCSearcher.h"
+#import  "LCFilter.h"
+#import  "LCSort.h"
+#import  "LCQuery.h"
+#import  "LCTopDocs.h"
+#import  "LCScoreDoc.h"
+#import  "LCHitIterator.h"
+#import  "LCDocument.h"
+
 
 @interface LCHits (LCPrivate)
 - (void) moreDocuments: (int) min;
@@ -30,11 +30,11 @@
 
 - (void) dealloc
 {
-	DESTROY(hitDocs);
-	DESTROY(weight);
-	DESTROY(searcher);
-	DESTROY(filter);
-	DESTROY(sort);
+	hitDocs=nil;;
+	weight=nil;;
+	searcher=nil;;
+	filter=nil;;
+	sort=nil;;
         //Clean retain/release prev/next
         if (first)
           {
@@ -48,9 +48,8 @@
                 hitDoc=nextHitDoc;
               }
           }
-	DESTROY(first);
-	DESTROY(last);
-	[super dealloc];
+	first=nil;;
+	last=nil;;
 }
 
 - (id) initWithSearcher: (LCSearcher *) s
@@ -58,9 +57,9 @@
 				 filter: (LCFilter *) f
 {
 	self = [self init];
-	ASSIGN(weight, [q weight: s]);
-	ASSIGN(searcher, s);
-	ASSIGN(filter, f);
+	weight = [q weight: s];
+	searcher = s;
+	filter = f;
 	[self moreDocuments: 50]; // retrieve 100 initially
 	return self;
 }
@@ -71,49 +70,48 @@
 				   sort: (LCSort *) o
 {
 	self = [self init];
-	ASSIGN(weight, [q weight: s]);
-	ASSIGN(searcher, s);
-	ASSIGN(filter, f);
-	ASSIGN(sort, o);
+	weight = [q weight: s];
+	searcher = s;
+	filter = f;
+	sort = o;
 	[self moreDocuments: 50]; // retrieve 100 initially
 	return self;
 }
 
 - (void) moreDocuments: (int)  min
 {
-	CREATE_AUTORELEASE_POOL(pool);
-	if ([hitDocs count] > min) {
-		min = [hitDocs count];
+	@autoreleasepool {
+		if ([hitDocs count] > min) {
+			min = [hitDocs count];
+		}
+		
+		int n = min * 2; // double # retrieved
+		LCTopDocs *topDocs;
+		if (sort) {
+			topDocs = (LCTopDocs *)[searcher search: weight filter: filter maximum: n sort: sort];
+		}
+		else {
+			topDocs = [searcher search: weight filter: filter maximum: n];
+		}
+		
+		length = [topDocs totalHits];
+		NSArray * scoreDocs = [topDocs scoreDocuments];
+		
+		float scoreNorm = 1.0f;
+		if (length > 0 && [topDocs maxScore] > 1.0f)
+		{
+			scoreNorm = 1.0f / [topDocs maxScore];
+		}
+		
+		int end = ([scoreDocs count] < length) ? [scoreDocs count] : length;
+		int i;
+		for (i = [hitDocs count]; i < end; i++)
+		{
+			LCHitDocument *newDoc = [[LCHitDocument alloc] initWithScore: ([[scoreDocs objectAtIndex: i] score] * scoreNorm) 
+															  identifier: [(LCScoreDoc *)[scoreDocs objectAtIndex: i] document]];
+			[hitDocs addObject: newDoc];
+		}
 	}
-	
-	int n = min * 2; // double # retrieved
-	LCTopDocs *topDocs;
-	if (sort) {
-		topDocs = (LCTopDocs *)[searcher search: weight filter: filter maximum: n sort: sort];
-	}
-	else {
-		topDocs = [searcher search: weight filter: filter maximum: n];
-	}
-	
-	length = [topDocs totalHits];
-	NSArray * scoreDocs = [topDocs scoreDocuments];
-	
-	float scoreNorm = 1.0f;
-	if (length > 0 && [topDocs maxScore] > 1.0f)
-	{
-		scoreNorm = 1.0f / [topDocs maxScore];
-	}
-	
-	int end = ([scoreDocs count] < length) ? [scoreDocs count] : length;
-	int i;
-	for (i = [hitDocs count]; i < end; i++)
-	{
-		LCHitDocument *newDoc = [[LCHitDocument alloc] initWithScore: ([[scoreDocs objectAtIndex: i] score] * scoreNorm) 
-														  identifier: [(LCScoreDoc *)[scoreDocs objectAtIndex: i] document]];
-		[hitDocs addObject: newDoc];
-		RELEASE(newDoc);
-	}
-	DESTROY(pool);
 }
 
 - (NSUInteger) count 
@@ -124,12 +122,10 @@
 - (LCDocument *) document: (int) n
 {
 	LCHitDocument *hitDoc = [self hitDocument: n];
-	RETAIN(hitDoc);
 	
 	// Update LRU cache of documents
 	[self remove: hitDoc];               // remove from list, if there
 	[self addToFront: hitDoc];           // add to front of list
-	RELEASE(hitDoc);
 	
 	if (numDocs > maxDocs) {      // if cache is full
 		LCHitDocument *oldLast = last;
@@ -155,7 +151,7 @@
 
 - (LCHitIterator *) iterator
 {
-	return AUTORELEASE([[LCHitIterator alloc] initWithHits: self]);
+	return [[LCHitIterator alloc] initWithHits: self];
 }
 
 - (LCHitDocument *) hitDocument: (int) n
@@ -175,13 +171,13 @@
 - (void) addToFront: (LCHitDocument *) hitDoc
 {
 	if (first == nil) {
-		ASSIGN(last, hitDoc);
+		last = hitDoc;
 	} else {
 		[first setPrev: hitDoc];
 	}
 	
 	[hitDoc setNext: first];
-	ASSIGN(first, hitDoc);
+	first = hitDoc;
 	[hitDoc setPrev: nil];
 	
 	numDocs++;
@@ -194,13 +190,13 @@
 	}
 	
 	if ([hitDoc next] == nil) {
-		ASSIGN(last, [hitDoc prev]);
+		last = [hitDoc prev];
 	} else {
 		[[hitDoc next] setPrev: [hitDoc prev]];
 	}
 	
 	if ([hitDoc prev] == nil) {
-		ASSIGN(first, [hitDoc next]);
+		first = [hitDoc next];
 	} else {
 		[[hitDoc prev] setNext: [hitDoc next]];
 	}
@@ -221,37 +217,39 @@
 
 - (void) dealloc
 {
-	DESTROY(prev);
-	DESTROY(next);
-	DESTROY(doc);
-	[super dealloc];
+    prev=nil;
+    next=nil;
+    doc=nil;
 }
 
 - (LCHitDocument *) prev { return prev; };
 - (void) setPrev: (LCHitDocument *) d
 {
-	if (d == nil)
-		DESTROY(prev);
+	if (d == nil) {
+		prev=nil;;
+    }
 	else
-		ASSIGN(prev, d);
+		prev = d;
 }
 - (LCHitDocument *) next { return next; };
 - (void) setNext: (LCHitDocument *) d
 {
-	if (d == nil)
-		DESTROY(next);
+	if (d == nil) {
+        next=nil;
+    }
 	else
-		ASSIGN(next, d);
+		next = d;
 }
 - (float) score { return score; };
 - (int) identifier { return identifier; };
 - (LCDocument *) document { return doc; };
 - (void) setDocument: (LCDocument *) d
 {
-	if (d == nil)
-		DESTROY(doc);
+	if (d == nil) {
+        doc=nil;;
+    }
 	else
-		ASSIGN(doc, d);
+		doc = d;
 }
 
 @end

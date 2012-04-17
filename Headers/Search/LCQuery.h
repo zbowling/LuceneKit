@@ -1,11 +1,11 @@
 #ifndef __LUCENE_SEARCH_QUERY__
 #define __LUCENE_SEARCH_QUERY__
 
-#include <Foundation/Foundation.h>
-#include "LCWeight.h"
-#include "LCSearcher.h"
-#include "LCSimilarity.h"
-#include "LCIndexReader.h"
+#import  <Foundation/Foundation.h>
+#import  "LCWeight.h"
+#import  "LCSearcher.h"
+#import  "LCSimilarity.h"
+#import  "LCIndexReader.h"
 
 @interface LCQuery: NSObject <NSCopying> // Seriable
 {

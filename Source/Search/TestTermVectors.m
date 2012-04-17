@@ -1,15 +1,15 @@
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
-#include "LCSimpleAnalyzer.h"
-#include "LCDocument.h"
-#include "LCRAMDirectory.h"
-#include "LCIndexSearcher.h"
-#include "LCIndexWriter.h"
-#include "LCIndexReader.h"
-#include "LCTermPositionVector.h"
-#include "LCTermQuery.h"
-#include "LCHits.h"
-#include "TestEnglish.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  "LCSimpleAnalyzer.h"
+#import  "LCDocument.h"
+#import  "LCRAMDirectory.h"
+#import  "LCIndexSearcher.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCTermPositionVector.h"
+#import  "LCTermQuery.h"
+#import  "LCHits.h"
+#import  "TestEnglish.h"
 
 @interface TestTermVectors: NSObject <UKTest>
 {

@@ -1,6 +1,6 @@
-#include "LCFilterIndexReader.h"
-#include "LCDocument.h"
-#include "GNUstep.h"
+#import  "LCFilterIndexReader.h"
+#import  "LCDocument.h"
+
 
 @implementation LCFilterTermDocuments
 
@@ -10,14 +10,13 @@
 - (id) initWithTermDocuments: (id <LCTermDocuments>) docs
 {
 	self = [self init];
-	ASSIGN(input, docs);
+	input = docs;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(input);
-	[super dealloc];
+	input=nil;;
 }
 
 - (void) seekTerm: (LCTerm *) term
@@ -94,14 +93,13 @@
 - (id) initWithTermEnumerator: (LCTermEnumerator *) termEnum
 {
 	self = [self init];
-	ASSIGN(input, termEnum);
+	input = termEnum;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(input);
-	[super dealloc];
+	input=nil;;
 }
 
 - (BOOL) hasNextTerm
@@ -138,14 +136,13 @@
 - (id) initWithIndexReader: (LCIndexReader *) reader
 {
 	self = [self initWithDirectory: [reader directory]];
-	ASSIGN(input, reader);
+	input = reader;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(input);
-	[super dealloc];
+	input=nil;;
 }
 
 - (NSArray *) termFrequencyVectors: (int) docNumber

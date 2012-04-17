@@ -1,9 +1,9 @@
-#include "LCTermVectorsWriter.h"
-#include "LCIndexOutput.h"
-#include "LCTermPositionVector.h"
-#include "LCTermVectorOffsetInfo.h"
-#include "NSString+Additions.h"
-#include "GNUstep.h"
+#import  "LCTermVectorsWriter.h"
+#import  "LCIndexOutput.h"
+#import  "LCTermPositionVector.h"
+#import  "LCTermVectorOffsetInfo.h"
+#import  "NSString+Additions.h"
+
 
 /**
 * Writer works by opening a document and then opening the fields within the document and then
@@ -88,16 +88,16 @@
     // Open files for TermVector storage
     NSString *file;
     file = [segment stringByAppendingPathExtension: TVX_EXTENSION];
-    ASSIGN(tvx, [directory createOutput: file]);
+    tvx = [directory createOutput: file];
     [tvx writeInt: (long)TERM_VECTORS_WRITER_FORMAT_VERSION];
     file = [segment stringByAppendingPathExtension: TVD_EXTENSION];
-    ASSIGN(tvd, [directory createOutput: file]);
+    tvd = [directory createOutput: file];
     [tvd writeInt: (long)TERM_VECTORS_WRITER_FORMAT_VERSION];
     file = [segment stringByAppendingPathExtension: TVF_EXTENSION];
-    ASSIGN(tvf, [directory createOutput: file]);
+    tvf = [directory createOutput: file];
     [tvf writeInt: (long)TERM_VECTORS_WRITER_FORMAT_VERSION];
 	
-    ASSIGN(fieldInfos, fis);
+    fieldInfos = fis;
     fields = [[NSMutableArray alloc] init];
     terms = [[NSMutableArray alloc] init];
     currentDocPointer = -1;
@@ -106,14 +106,13 @@
 
 - (void) dealloc
 {
-	DESTROY(fieldInfos);
-	DESTROY(fields);
-	DESTROY(terms);
-	DESTROY(tvx);
-	DESTROY(tvd);
-	DESTROY(tvf);
-	DESTROY(currentField);
-	[super dealloc];
+	fieldInfos=nil;;
+	fields=nil;;
+	terms=nil;;
+	tvx=nil;;
+	tvd=nil;;
+	tvf=nil;;
+	currentField=nil;;
 }
 
 - (void) openDocument
@@ -159,9 +158,9 @@
 		NSLog(@"Cannot open field when no document is open.");
 	}
 	[self closeField];
-	ASSIGN(currentField, AUTORELEASE([[LCTVField alloc] initWithNumber: fieldNumber
+	currentField = [[LCTVField alloc] initWithNumber: fieldNumber
 									   storePosition: storePositionWithTermVector
-										 storeOffset: storeOffsetWithTermVector]));
+										 storeOffset: storeOffsetWithTermVector];
 }
 
 /** Finished processing current field. This should be followed by a call to
@@ -174,7 +173,7 @@
 		[self writeField];
 		[fields addObject: currentField];
 		[terms removeAllObjects];
-		DESTROY(currentField);
+		currentField=nil;;
     }
 }
 
@@ -224,7 +223,7 @@
     [term setPositions: positions];
     [term setOffsets: offsets];
     [terms addObject: term];
-    DESTROY(term);
+    term=nil;;
 }
 
 /**
@@ -470,17 +469,10 @@
 	return self;
 }
 
-- (void) dealloc
-{
-	RELEASE(positions);
-	RELEASE(offsets);
-	RELEASE(termText);
-	[super dealloc];
-}
 
 - (void) setTermText: (NSString *) text
 {
-	ASSIGN(termText, text);
+	termText = text;
 }
 
 - (void) setFreq: (long) f
@@ -491,13 +483,13 @@
 - (void) setPositions: (NSArray *) p
 {
 	// Keep a copy
-	ASSIGNCOPY(positions, p);
+	positions =[ p copy];
 }
 
 - (void) setOffsets: (NSArray *) o
 {
 	// Keep a copy
-	ASSIGNCOPY(offsets, o);
+	offsets =[ o copy];
 }
 
 - (NSString *) termText

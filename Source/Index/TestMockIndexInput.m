@@ -1,6 +1,6 @@
-#include "GNUstep.h"
-#include "LCIndexInput.h"
-#include <UnitKit/UnitKit.h>
+
+#import  "LCIndexInput.h"
+#import  <UnitKit/UnitKit.h>
 
 @interface TestMockIndexInput: LCIndexInput <UKTest>
 {
@@ -14,7 +14,7 @@
 - (id) initWithData: (NSData *) d
 {
 	self = [super init];
-	ASSIGN(data, d);
+	data = d;
 	pointer = 0;
 	return self;
 }

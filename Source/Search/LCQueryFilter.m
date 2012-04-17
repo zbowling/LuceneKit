@@ -1,9 +1,9 @@
-#include "LCQueryFilter.h"
-#include "LCHitCollector.h"
-#include "LCIndexSearcher.h"
-#include "LCBitVector.h"
-#include "LCQuery.h"
-#include "GNUstep.h"
+#import  "LCQueryFilter.h"
+#import  "LCHitCollector.h"
+#import  "LCIndexSearcher.h"
+#import  "LCBitVector.h"
+#import  "LCQuery.h"
+
 
 @interface LCQueryFilterHitCollector: LCHitCollector
 {
@@ -16,14 +16,13 @@
 - (id) initWithBits: (LCBitVector *) b
 {
 	self = [self init];
-	ASSIGN(bits, b);
+	bits = b;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(bits);
-  [super dealloc];
+  bits=nil;;
 }
 
 - (void) collect: (int) doc score: (float) score
@@ -37,14 +36,13 @@
 {
 	self = [self init];
 	cache = nil;
-	ASSIGN(query, q);
+	query = q;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(query);
-  [super dealloc];
+  query=nil;;
 }
 
 - (LCQuery *) query
@@ -56,7 +54,7 @@
 {
 	if (cache == nil)
 	{
-          cache = AUTORELEASE([[NSMutableDictionary alloc] init]);
+          cache = [[NSMutableDictionary alloc] init];
 	}
 	
 	LCBitVector *cached = [cache objectForKey: reader];
@@ -67,10 +65,8 @@
 	LCIndexSearcher *searcher = [[LCIndexSearcher alloc] initWithReader: reader];
 	[searcher search: query hitCollector: hc];
 	[cache setObject: bits forKey: reader];
-	RELEASE(searcher);
-	RELEASE(hc);
 	
-	return AUTORELEASE(bits);
+	return bits;
 }
 
 - (NSString *) description

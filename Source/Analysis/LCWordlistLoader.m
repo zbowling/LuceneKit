@@ -1,5 +1,5 @@
-#include "LCWordlistLoader.h"
-#include "GNUstep.h"
+#import  "LCWordlistLoader.h"
+
 
 /**
 * Loader for text files that represent a list of stopwords.
@@ -25,9 +25,9 @@
 + (NSSet*) getWordSet: (NSString *) path 
 {
 	NSMutableSet *result = [[NSMutableSet alloc] init];
-	AUTORELEASE(result);
-	
-	NSString *s = [NSString stringWithContentsOfFile: path];
+		
+    NSError *error = nil;
+	NSString *s = [NSString stringWithContentsOfFile: path encoding:NSUTF8StringEncoding error:&error];
 	//  NSString *word;
 	if (s == nil) return nil; 
 	NSArray *a = [s componentsSeparatedByString: @"\n"];
@@ -54,7 +54,7 @@
     {
 		[table setObject: word forKey: word];
     }
-	return AUTORELEASE(table);
+	return table;
 }
 
 @end

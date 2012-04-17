@@ -1,15 +1,15 @@
-#include "TestDocHelper.h"
-#include "TestSegmentReader.h"
-#include "LCSegmentReader.h"
-#include "LCSegmentInfo.h"
-#include "LCSegmentMerger.h"
-#include "LCTerm.h"
-#include "LCTermPositionVector.h"
-#include "LCDocument.h"
-#include "LCRAMDirectory.h"
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
+#import  "TestDocHelper.h"
+#import  "TestSegmentReader.h"
+#import  "LCSegmentReader.h"
+#import  "LCSegmentInfo.h"
+#import  "LCSegmentMerger.h"
+#import  "LCTerm.h"
+#import  "LCTermPositionVector.h"
+#import  "LCDocument.h"
+#import  "LCRAMDirectory.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
 
 @interface TestSegmentMerger: NSObject <UKTest>
 {

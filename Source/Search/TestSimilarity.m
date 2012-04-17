@@ -1,13 +1,13 @@
-#include <UnitKit/UnitKit.h>
-#include "LCSimilarity.h"
-#include "LCRAMDirectory.h"
-#include "LCIndexWriter.h"
-#include "LCSimpleAnalyzer.h"
-#include "LCDocument.h"
-#include "GNUstep.h"
-#include "LCIndexSearcher.h"
-#include "LCTermQuery.h"
-#include "LCBooleanQuery.h"
+#import  <UnitKit/UnitKit.h>
+#import  "LCSimilarity.h"
+#import  "LCRAMDirectory.h"
+#import  "LCIndexWriter.h"
+#import  "LCSimpleAnalyzer.h"
+#import  "LCDocument.h"
+
+#import  "LCIndexSearcher.h"
+#import  "LCTermQuery.h"
+#import  "LCBooleanQuery.h"
 
 @interface TestSimilarity: NSObject <UKTest>
 @end
@@ -37,13 +37,13 @@
 	LCDocument *d1 = [[LCDocument alloc] init];
 	LCField *field = [[LCField alloc] initWithName:@"field" string: @"a c" store:LCStore_YES index:LCIndex_Tokenized];
 	[d1 addField: field];
-	DESTROY(field);
+	[field release];field=nil;;
 	
 	NSLog(@"Write second document");
 	LCDocument *d2 = [[LCDocument alloc] init];
 	field = [[LCField alloc] initWithName:@"field" string: @"a b c" store:LCStore_YES index:LCIndex_Tokenized];
 	[d2 addField: field];
-	DESTROY(field);
+	[field release];field=nil;;
 	
 	[writer addDocument: d1];
 	[writer addDocument: d2];

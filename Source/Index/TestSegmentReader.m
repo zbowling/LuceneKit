@@ -1,15 +1,15 @@
-#include "TestSegmentReader.h"
-#include "LCSegmentInfo.h"
-#include "LCField.h"
-#include "LCTerm.h"
-#include "LCTermEnum.h"
-#include "LCSegmentTermEnum.h"
-#include "GNUstep.h"
-#include "LCSegmentReader.h"
-#include "LCDocument.h"
-#include "LCRAMDirectory.h"
-#include "TestDocHelper.h"
-#include "LCDefaultSimilarity.h"
+#import  "TestSegmentReader.h"
+#import  "LCSegmentInfo.h"
+#import  "LCField.h"
+#import  "LCTerm.h"
+#import  "LCTermEnum.h"
+#import  "LCSegmentTermEnum.h"
+
+#import  "LCSegmentReader.h"
+#import  "LCDocument.h"
+#import  "LCRAMDirectory.h"
+#import  "TestDocHelper.h"
+#import  "LCDefaultSimilarity.h"
 
 @implementation TestSegmentReader
 
@@ -22,7 +22,7 @@
 	[TestDocHelper writeDirectory: dir doc: testDoc];
 	//TODO: Setup the reader w/ multiple documents
 	LCSegmentInfo *info = [[LCSegmentInfo alloc] initWithName: @"test" numberOfDocuments: 1 directory: dir];
-	reader = RETAIN([LCSegmentReader segmentReaderWithInfo: info]);
+	reader = [[LCSegmentReader segmentReaderWithInfo: info] retain];
 	return self;
 }
 

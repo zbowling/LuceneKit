@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_DATE_FILTLER__
 #define __LUCENE_SEARCH_DATE_FILTLER__
 
-#include "LCFilter.h"
+#import  "LCFilter.h"
 
 @class LCBitVector;
 @class LCIndexReader;

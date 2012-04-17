@@ -28,8 +28,8 @@ Release 2 (the more old-fashioned, non-thread-safe version may be
 		   regarded as release 1.)
 */
 
-#include <stdlib.h>  /* for malloc, free */
-#include <string.h>  /* for memcmp, memmove */
+#import  <stdlib.h>  /* for malloc, free */
+#import  <string.h>  /* for memcmp, memmove */
 
 #if 0
 /* You will probably want to move the following declarations to a central
@@ -386,9 +386,9 @@ extern int stem(struct stemmer * z, char * b, int k)
 
 /*--------------------stemmer definition ends here------------------------*/
 #if 0
-#include <stdio.h>
-#include <stdlib.h>      /* for malloc, free */
-#include <ctype.h>       /* for isupper, islower, tolower */
+#import  <stdio.h>
+#import  <stdlib.h>      /* for malloc, free */
+#import  <ctype.h>       /* for isupper, islower, tolower */
 
 static char * s;         /* buffer for words tobe stemmed */
 

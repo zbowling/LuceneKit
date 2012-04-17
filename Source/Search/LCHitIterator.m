@@ -1,7 +1,7 @@
-#include "LCHitIterator.h"
-#include "LCHits.h"
-#include "LCHit.h"
-#include "GNUstep.h"
+#import  "LCHitIterator.h"
+#import  "LCHits.h"
+#import  "LCHit.h"
+
 
 @implementation LCHitIterator
 
@@ -15,14 +15,13 @@
 - (id) initWithHits: (LCHits *) h
 {
 	self = [self init];
-	ASSIGN(hits, h);
+	hits = h;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(hits);
-	[super dealloc];
+	hits=nil;;
 }
 
 - (BOOL) hasNext
@@ -43,7 +42,7 @@
 	LCHit *next = [[LCHit alloc] initWithHits: hits index: hitNumber];
 	hitNumber++;
 	
-	return AUTORELEASE(next);
+	return next;
 }
 
 - (int) count

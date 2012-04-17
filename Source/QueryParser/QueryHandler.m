@@ -20,14 +20,13 @@
  **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "CodeParser.h"
-#include "QueryHandler.h"
-#include "GNUstep.h"
-#include "LCMetadataAttribute.h"
-#include "LCTermQuery.h"
-#include "LCPrefixQuery.h"
-#include "LCWildcardQuery.h"
-#include <Foundation/Foundation.h>
+#import  "CodeParser.h"
+#import  "QueryHandler.h"
+#import  "LCMetadataAttribute.h"
+#import  "LCTermQuery.h"
+#import  "LCPrefixQuery.h"
+#import  "LCWildcardQuery.h"
+#import  <Foundation/Foundation.h>
 
 @implementation QueryHandler
 
@@ -37,7 +36,7 @@
 	if (currentQuery)
     {
 		[self query: currentQuery];
-		DESTROY(currentQuery);
+		currentQuery=nil;;
     }
 	[queryString setString: @""];
 }
@@ -73,8 +72,8 @@
 			[_query addQuery: [handler query] occur: occur];
 			[queryString setString: @""];
 			currentType = ReadyType;
-                        DESTROY(handler);
-                        DESTROY(parser);
+                        handler=nil;;
+                        parser=nil;;
         }
 		else
         {
@@ -130,7 +129,7 @@
 		if ([token hasSuffix: @":"])
         {
 			/* field */
-			ASSIGNCOPY(field, [token substringToIndex: [token length]-1]);
+			field =[ [token substringToIndex: [token length]-1] copy];
         }
 		else if (inRange)
         {
@@ -164,9 +163,9 @@
 				term = [[LCTerm alloc] initWithField: f text: token];
 				q = [[LCTermQuery alloc] initWithTerm: term];
             }
-			ASSIGN(currentQuery, q);
-			DESTROY(term);
-			DESTROY(q);
+			currentQuery = q;
+			term=nil;;
+			q=nil;;
 			
 			[self flushQuery];
 			
@@ -202,21 +201,20 @@
 	currentType = ReadyType;
 	occur = LCOccur_SHOULD;
 	inRange = NO;
-	ASSIGN(defaultField, [NSString stringWithString: LCTextContentAttribute]);
+	defaultField = [NSString stringWithString: LCTextContentAttribute];
 	
-	ASSIGN(wildcardCharacterSet, [NSCharacterSet characterSetWithCharactersInString: @"*?"]);
+	wildcardCharacterSet = [NSCharacterSet characterSetWithCharactersInString: @"*?"];
 	
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(queryString);
-	DESTROY(_currentToken);
-        DESTROY(_query);
-        DESTROY(defaultField);
-        DESTROY(wildcardCharacterSet);
-	[super dealloc];
+	queryString=nil;;
+	_currentToken=nil;;
+        _query=nil;;
+        defaultField=nil;;
+        wildcardCharacterSet=nil;;
 }
 
 - (void) query: (LCQuery *) q
@@ -226,7 +224,7 @@
 
 - (void) setDefaultField: (NSString *) f
 {
-	ASSIGN(defaultField, f);
+	defaultField = f;
 }
 
 - (NSString *) defaultField

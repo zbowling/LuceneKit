@@ -1,7 +1,7 @@
-#include "LCTermScorer.h"
-#include "LCTermQuery.h"
-#include "GNUstep.h"
-#include <limits.h>
+#import  "LCTermScorer.h"
+#import  "LCTermQuery.h"
+
+#import  <limits.h>
 
 static int SCORE_CACHE_SIZE = 32;
 
@@ -22,9 +22,9 @@ static int SCORE_CACHE_SIZE = 32;
 		   similarity: (LCSimilarity *) s norms: (NSData *) n
 {
 	self = [self initWithSimilarity: s];
-	ASSIGN(weight, w);
-	ASSIGN(termDocs, td);
-	ASSIGN(norms, n);
+	weight = w;
+	termDocs = td;
+	norms = n;
 	weightValue = [weight value];
 	
 	int i;
@@ -38,13 +38,12 @@ static int SCORE_CACHE_SIZE = 32;
 
 - (void) dealloc
 {
-	DESTROY(weight);
-	DESTROY(termDocs);
-	DESTROY(norms);
-	DESTROY(docs);
-	DESTROY(freqs);
-	DESTROY(scoreCache);
-	[super dealloc];
+	weight=nil;;
+	termDocs=nil;;
+	norms=nil;;
+	docs=nil;;
+	freqs=nil;;
+	scoreCache=nil;;
 }
 
 - (void) score: (LCHitCollector *) hc
@@ -160,7 +159,7 @@ static int SCORE_CACHE_SIZE = 32;
 	[termDocs close];
 	[tfExplanation setValue: [[self similarity] termFrequencyWithInt: tf]];
 	[tfExplanation setRepresentation: [NSString stringWithFormat: @"tf(termFreq(%@)=%d)", [query term], tf]];
-	return AUTORELEASE(tfExplanation);
+	return tfExplanation;
 }
 
 - (NSString *) description

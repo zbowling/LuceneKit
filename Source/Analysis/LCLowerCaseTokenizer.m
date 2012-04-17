@@ -1,4 +1,4 @@
-#include "LCLowerCaseTokenizer.h"
+#import  "LCLowerCaseTokenizer.h"
 
 /**
 * LowerCaseTokenizer performs the function of LetterTokenizer
@@ -14,10 +14,7 @@
 
 - (char) normalize: (char) c
 {
-	if ((c <= 'Z') && (c >= 'A'))
-		return (c-'A'+'a');
-	else
-		return c;
+    return tolower(c);
 }
 
 @end

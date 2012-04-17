@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_QUERY_FILTER__
 #define __LUCENE_SEARCH_QUERY_FILTER__
 
-#include "LCFilter.h"
+#import  "LCFilter.h"
 
 @class LCQuery;
 

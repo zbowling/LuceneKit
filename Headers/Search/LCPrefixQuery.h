@@ -1,4 +1,4 @@
-#include "LCQuery.h"
+#import  "LCQuery.h"
 
 @interface LCPrefixQuery: LCQuery
 {

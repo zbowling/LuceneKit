@@ -1,6 +1,6 @@
-#include "LCTokenizer.h"
-#include "LCReader.h"
-#include "GNUstep.h"
+#import  "LCTokenizer.h"
+#import  "LCReader.h"
+
 
 @implementation LCTokenizer
 
@@ -13,14 +13,8 @@ This is an abstract class.
 - (id) initWithReader: (id <LCReader>) i
 {
 	self = [super init];
-	ASSIGN(input, i);
+	input = i;
 	return self;
-}
-
-- (void) dealloc
-{
-	DESTROY(input);
-	[super dealloc];
 }
 
 - (void) close

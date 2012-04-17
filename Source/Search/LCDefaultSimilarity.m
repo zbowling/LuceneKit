@@ -1,5 +1,5 @@
-#include "LCDefaultSimilarity.h"
-#include <math.h>
+#import  "LCDefaultSimilarity.h"
+#import  <math.h>
 
 /** Expert: Default scoring implementation. */
 @implementation LCDefaultSimilarity

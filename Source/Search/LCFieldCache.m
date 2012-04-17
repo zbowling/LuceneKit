@@ -1,6 +1,6 @@
-#include "LCFieldCache.h"
-#include "LCFieldCacheImpl.h"
-#include "GNUstep.h"
+#import  "LCFieldCache.h"
+#import  "LCFieldCacheImpl.h"
+
 
 /**
 * Expert: Maintains caches of term values.
@@ -16,8 +16,8 @@
 - (id) initWithOrder: (NSDictionary *) values lookup: (NSArray *) l
 {
 	self = [super init];
-	ASSIGNCOPY(order, values);
-	ASSIGNCOPY(lookup, l);
+	order =[ values copy];
+	lookup =[ l copy];
 	return self;
 }
 
@@ -33,9 +33,8 @@
 
 - (void) dealloc
 {
-	DESTROY(order);
-	DESTROY(lookup);
-	[super dealloc];
+	order=nil;;
+	lookup=nil;;
 }
 
 @end
@@ -57,7 +56,7 @@ static LCFieldCache *defaultImpl = nil;
 {
 	if (defaultImpl == nil)
 	{
-		ASSIGN(defaultImpl, AUTORELEASE([[LCFieldCacheImpl alloc] init]));
+		defaultImpl = [[LCFieldCacheImpl alloc] init];
 	}
 	return defaultImpl;
 }

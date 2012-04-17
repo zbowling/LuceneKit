@@ -1,5 +1,5 @@
-#include "LCPriorityQueue.h"
-#include "GNUstep.h"
+#import  "LCPriorityQueue.h"
+
 
 @interface LCPriorityQueue (LCPrivate)
 - (void) upHeap;
@@ -10,17 +10,14 @@
 
 - (id) initWithSize: (int) m
 {
-	self = [self init];
-	heap = [[NSMutableArray alloc] init];
-	maxSize = m;
+	self = [super init];
+    if (self) {
+        heap = [[NSMutableArray alloc] init];
+        maxSize = m;
+    }
 	return self;
 }
 
-- (void) dealloc
-{
-	DESTROY(heap);
-	[super dealloc];
-}
 
 - (void) put: (id) element
 {
@@ -43,7 +40,7 @@
 }
 
 /**
-* Adds element to the PriorityQueue in log(size) time if either
+ * Adds element to the PriorityQueue in log(size) time if either
  * the PriorityQueue is not full, or not lessThan(element, top()).
  * @param element
  * @return true if element is added, false otherwise.
@@ -77,17 +74,16 @@
 }
 
 /** Removes and returns the least element of the PriorityQueue in log(size)
-time. */
+ time. */
 - (id) pop
 {
 	if ([heap count] > 0) 
     {
 		NSObject *result = [heap objectAtIndex: 0]; // save first value
-		RETAIN(result);
 		[heap replaceObjectAtIndex: 0 withObject: [heap lastObject]];  // move last to first
 		[heap removeLastObject]; // permit GC of objects
 		[self downHeap]; // adjust heap
-		return AUTORELEASE(result);
+		return result;
     }
 	else
     {
@@ -96,12 +92,12 @@ time. */
 }
 
 /** Should be called when the Object at top changes values.  Still log(n)
-* worst case, but it's at least twice as fast to <pre>
-*  { pq.top().change(); pq.adjustTop(); }
-* </pre> instead of <pre>
-*  { o = pq.pop(); o.change(); pq.push(o); }
-* </pre>
-*/
+ * worst case, but it's at least twice as fast to <pre>
+ *  { pq.top().change(); pq.adjustTop(); }
+ * </pre> instead of <pre>
+ *  { o = pq.pop(); o.change(); pq.push(o); }
+ * </pre>
+ */
 - (void) adjustTop
 {
 	[self downHeap];
@@ -124,7 +120,6 @@ time. */
 	if ([heap count] == 0) return;
 	int i = [heap count]-1;
 	id node = [heap objectAtIndex: i];  // save bottom node
-	RETAIN(node);
 	int j = i >> 1;
 	while (j >= 0 && [self lessThan: node : [heap objectAtIndex: j]]) 
     {
@@ -136,7 +131,7 @@ time. */
 			break;
     }
 	[heap replaceObjectAtIndex: i withObject: node]; // install saved node
-	DESTROY(node);
+	node=nil;;
 }
 
 - (void) downHeap
@@ -144,12 +139,11 @@ time. */
 	if ([heap count] == 0) return;
 	int i = 0;
 	id node = [heap objectAtIndex: i];	  // save top node
-	RETAIN(node);
 	int j = i << 1;				  // find smaller child
 	int k = j + 1;
 	if (k < [heap count] && [self lessThan: [heap objectAtIndex: k]: [heap objectAtIndex: j]]) {
 		j = k;
-		}
+    }
 	while (j < [heap count] && [self lessThan: [heap objectAtIndex: j] : node]) {
 		// shift up child
 		[heap replaceObjectAtIndex: i withObject: [heap objectAtIndex: j]];
@@ -158,11 +152,11 @@ time. */
 		k = j + 1;
 		if (k < [heap count] && [self lessThan: [heap objectAtIndex: k] : [heap objectAtIndex: j]]) {
 			j = k;
-			}
-		}
+        }
+    }
 	[heap replaceObjectAtIndex: i withObject: node]; // install saved node
-	DESTROY(node);
-		}
+	node=nil;;
+}
 
 @end
 

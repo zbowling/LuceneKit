@@ -1,7 +1,7 @@
-#include "LCQueryTermVector.h"
-#include "LCAnalyzer.h"
-#include "LCStringReader.h"
-#include "GNUstep.h"
+#import  "LCQueryTermVector.h"
+#import  "LCAnalyzer.h"
+#import  "LCStringReader.h"
+
 
 @interface LCQueryTermVector (LCPrivate)
 - (void) processTerms: (NSArray *) queryTerms;
@@ -11,16 +11,15 @@
 - (id) init
 {
 	self = [super init];
-	ASSIGN(terms, AUTORELEASE([[NSMutableArray alloc] init]));
-	ASSIGN(termFreqs, AUTORELEASE([[NSMutableArray alloc] init]));
+	terms = [[NSMutableArray alloc] init];
+	termFreqs = [[NSMutableArray alloc] init];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(terms);
-	DESTROY(termFreqs);
-	[super dealloc];
+	terms=nil;;
+	termFreqs=nil;;
 }
 
 - (NSString *) field { return nil; }
@@ -38,12 +37,12 @@
 	self = [self init];
 	if (analyzer != nil)
 	{
-          LCStringReader *sr = AUTORELEASE([[LCStringReader alloc] initWithString: queryString]);
+          LCStringReader *sr = [[LCStringReader alloc] initWithString: queryString];
 		LCTokenStream *stream = [analyzer tokenStreamWithField: @"" reader: sr];
 		if (stream != nil)
 		{
 			LCToken *next = nil;
-			NSMutableArray *ts = AUTORELEASE([[NSMutableArray alloc] init]);
+			NSMutableArray *ts = [[NSMutableArray alloc] init];
 			while ((next = [stream nextToken]))
 			{
 				[ts addObject: [next termText]];
@@ -79,10 +78,10 @@
 				[tmpFreqs replaceObjectAtIndex: position withObject: [NSNumber numberWithInt: integer]];
 			}
 		}
-		ASSIGNCOPY(terms, tmpList);
-		ASSIGNCOPY(termFreqs, tmpFreqs);
-                DESTROY(tmpList);
-                DESTROY(tmpFreqs);
+		terms =[ tmpList copy];
+		termFreqs =[ tmpFreqs copy];
+                tmpList=nil;;
+                tmpFreqs=nil;;
 	}
 }
 
@@ -97,7 +96,7 @@
 		[sb appendFormat: @"%@/%@", [terms objectAtIndex: i], [termFreqs objectAtIndex: i]];
 	}
 	[sb appendString: @"}"];
-	return AUTORELEASE(sb);
+	return sb;
 }
 
 - (int) size
@@ -130,7 +129,7 @@
 	{
 		[res addIndex: [self indexOfTerm: [ts objectAtIndex: i]]];
 	}
-	return AUTORELEASE(res); 
+	return res; 
 }
 
 @end

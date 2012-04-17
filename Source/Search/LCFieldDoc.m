@@ -1,5 +1,5 @@
-#include "LCFieldDoc.h"
-#include "GNUstep.h"
+#import  "LCFieldDoc.h"
+
 
 @implementation LCFieldDoc
 
@@ -13,8 +13,7 @@
 
 - (void) dealloc
 {
-	DESTROY(fields);
-	[super dealloc];
+	fields=nil;;
 }
 
 - (NSArray *) fields
@@ -24,7 +23,7 @@
 
 - (void) setFields: (NSArray *) f
 {
-	ASSIGNCOPY(fields, f);
+	fields =[ f copy];
 }
 
 @end

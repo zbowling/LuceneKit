@@ -1,12 +1,12 @@
-#include "LCRangeQuery.h"
-#include "LCBooleanQuery.h"
-#include "LCTermQuery.h"
-#include "LCTerm.h"
-#include "LCTermEnum.h"
-#include "LCIndexReader.h"
-#include "NSString+Additions.h"
-#include "LCSmallFloat.h"
-#include "GNUstep.h"
+#import  "LCRangeQuery.h"
+#import  "LCBooleanQuery.h"
+#import  "LCTermQuery.h"
+#import  "LCTerm.h"
+#import  "LCTermEnum.h"
+#import  "LCIndexReader.h"
+#import  "NSString+Additions.h"
+#import  "LCSmallFloat.h"
+
 
 @implementation LCRangeQuery
 - (id) initWithLowerTerm: (LCTerm *) lower upperTerm: (LCTerm *) upper
@@ -47,9 +47,8 @@
 
 - (void) dealloc
 {
-  DESTROY(lowerTerm);
-  DESTROY(upperTerm);
-  [super dealloc];
+  lowerTerm=nil;;
+  upperTerm=nil;;
 }
 
 - (LCQuery *) rewrite: (LCIndexReader *) reader
@@ -80,7 +79,7 @@
         LCTermQuery *tq = [[LCTermQuery alloc] initWithTerm: term]; // found a match
         [tq setBoost: [self boost]]; // set the boost
         [query addQuery: tq occur: LCOccur_SHOULD]; // add to query
-        DESTROY(tq);
+        tq=nil;;
       }
     }
     else
@@ -92,7 +91,7 @@
 
   [enumerator close];
 
-  return AUTORELEASE(query);
+  return query;
 }
 
 - (NSString *) field
@@ -128,7 +127,7 @@
   [ms appendString: (upperTerm) ? (NSString*)[upperTerm text] : (NSString*)@"null"];
   [ms appendString: (inclusive ? @"]" : @"}")];
   [ms appendString: LCStringFromBoost([self boost])];
-  return AUTORELEASE(ms);
+  return ms;
 }
 
 - (BOOL) isEqual: (id) o

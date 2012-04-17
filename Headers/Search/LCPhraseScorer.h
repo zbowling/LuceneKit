@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_PHRASE_SCORER__
 #define __LUCENE_SEARCH_PHRASE_SCORER__
 
-#include "LCScorer.h"
-#include "LCWeight.h"
+#import  "LCScorer.h"
+#import  "LCWeight.h"
 
 @class LCPhraseQueue;
 @class LCPhrasePositions;

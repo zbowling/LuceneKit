@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_CACHING_WRAPPER_FILTER__
 #define __LUCENE_SEARCH_CACHING_WRAPPER_FILTER__
 
-#include "LCFilter.h"
+#import  "LCFilter.h"
 
 @class LCBitVector;
 @class LCIndexReader;

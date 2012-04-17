@@ -1,15 +1,15 @@
-#include "TestDocHelper.h"
-#include "TestSegmentReader.h"
-#include "LCDocument.h"
-#include "LCRAMDirectory.h"
-#include "LCSegmentInfos.h"
-#include "LCSegmentInfo.h"
-#include "LCSegmentReader.h"
-#include "LCMultiReader.h"
-#include "LCTermFreqVector.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCDirectory.h"
+#import  "TestDocHelper.h"
+#import  "TestSegmentReader.h"
+#import  "LCDocument.h"
+#import  "LCRAMDirectory.h"
+#import  "LCSegmentInfos.h"
+#import  "LCSegmentInfo.h"
+#import  "LCSegmentReader.h"
+#import  "LCMultiReader.h"
+#import  "LCTermFreqVector.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCDirectory.h"
 
 @interface TestMultiReader: NSObject <UKTest>
 {

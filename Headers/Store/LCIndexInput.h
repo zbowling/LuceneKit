@@ -1,7 +1,7 @@
 #ifndef __LUCENE_STORE_INDEX_INPUT__
 #define __LUCENE_STORE_INDEX_INPUT__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 /** Read a file content */
 @interface LCIndexInput: NSObject <NSCopying>

@@ -1,14 +1,14 @@
-#include "LCRAMDirectory.h"
-#include "LCFieldInfos.h"
-#include "LCTermVectorsWriter.h"
-#include "LCTermVectorsReader.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "LCIndexWriter.h"
-#include "LCField.h"
-#include "LCDocument.h"
-#include "GNUstep.h"
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
+#import  "LCRAMDirectory.h"
+#import  "LCFieldInfos.h"
+#import  "LCTermVectorsWriter.h"
+#import  "LCTermVectorsReader.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCIndexWriter.h"
+#import  "LCField.h"
+#import  "LCDocument.h"
+
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
 
 @interface TestTermVectorsWriter: NSObject <UKTest>
 {
@@ -47,7 +47,7 @@
 		for (j = 0; j < 5; j++)
 			[a addObject: [NSNumber numberWithInt: j*10]];
 		[positions addObject: a];
-		RELEASE(a);
+		[a release];
 	}
 	
 	return self;

@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_SORT__
 #define __LUCENE_SEARCH_SORT__
 
-#include <Foundation/Foundation.h>
-#include "LCSortField.h"
+#import  <Foundation/Foundation.h>
+#import  "LCSortField.h"
 
 @interface LCSort: NSObject // Serializable
 {

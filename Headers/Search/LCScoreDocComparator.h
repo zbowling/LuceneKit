@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_SCORE_DOC_COMPARATOR__
 #define __LUCENE_SEARCH_SCORE_DOC_COMPARATOR__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @class LCScoreDoc;
 

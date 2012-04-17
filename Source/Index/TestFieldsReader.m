@@ -1,14 +1,14 @@
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCRAMDirectory.h"
-#include "LCDocument.h"
-#include "LCField.h"
-#include "TestDocHelper.h"
-#include "LCFieldInfos.h"
-#include "LCFieldsReader.h"
-#include "LCDocumentWriter.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "LCSimilarity.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCRAMDirectory.h"
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  "TestDocHelper.h"
+#import  "LCFieldInfos.h"
+#import  "LCFieldsReader.h"
+#import  "LCDocumentWriter.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCSimilarity.h"
 
 @interface TestFieldsReader: NSObject <UKTest> 
 {

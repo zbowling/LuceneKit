@@ -1,7 +1,7 @@
-#include "LCStopAnalyzer.h"
-#include "LCStopFilter.h"
-#include "LCLowerCaseTokenizer.h"
-#include "GNUstep.h"
+#import  "LCStopAnalyzer.h"
+#import  "LCStopFilter.h"
+#import  "LCLowerCaseTokenizer.h"
+
 
 /** Filters LetterTokenizer with LowerCaseFilter and StopFilter. */
 @implementation LCStopAnalyzer
@@ -50,9 +50,8 @@ public StopAnalyzer(Reader stopwords) {
 
 - (void) dealloc
 {
-	DESTROY(ENGLISH_STOP_WORDS);
-	DESTROY(stopWords);
-	[super dealloc];
+	ENGLISH_STOP_WORDS=nil;;
+	stopWords=nil;;
 }
 
 /** Filters LowerCaseTokenizer with StopFilter. */
@@ -62,8 +61,8 @@ public StopAnalyzer(Reader stopwords) {
 	LCLowerCaseTokenizer *tokenizer = [[LCLowerCaseTokenizer alloc] initWithReader: reader];
 	LCStopFilter *filter = [[LCStopFilter alloc] initWithTokenStream: tokenizer
 													  stopWordsInSet: stopWords];
-	DESTROY(tokenizer);
-	return AUTORELEASE(filter);
+	tokenizer=nil;;
+	return filter;
 }
 
 @end

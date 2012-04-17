@@ -1,4 +1,4 @@
-#include "LCLowerCaseFilter.h"
+#import  "LCLowerCaseFilter.h"
 
 /**
 * Normalizes token text to lower case.

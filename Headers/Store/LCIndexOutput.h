@@ -1,7 +1,7 @@
 #ifndef __LUCENE_STORE_INDEX_OUTPUT__
 #define __LUCENE_STORE_INDEX_OUTPUT__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 /** Write to a file */
 @interface LCIndexOutput: NSObject

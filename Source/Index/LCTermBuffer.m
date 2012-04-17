@@ -1,5 +1,5 @@
-#include "LCTermBuffer.h"
-#include "GNUstep.h"
+#import  "LCTermBuffer.h"
+
 
 @implementation LCTermBuffer
 
@@ -15,7 +15,7 @@
 	[input readChars: txt start: start length: length];
 	[self setField: [fieldInfos fieldName: [input readVInt]]];
 	[self setText: txt];
-	DESTROY(txt);
+	txt=nil;;
 }
 
 - (id) copyWithZone: (NSZone *) zone

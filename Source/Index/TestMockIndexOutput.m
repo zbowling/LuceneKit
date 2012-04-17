@@ -1,6 +1,6 @@
-#include "GNUstep.h"
-#include "LCIndexOutput.h"
-#include <UnitKit/UnitKit.h>
+
+#import  "LCIndexOutput.h"
+#import  <UnitKit/UnitKit.h>
 
 @interface TestMockIndexOutput: LCIndexOutput <UKTest>
 {

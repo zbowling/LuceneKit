@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_TEST_DOC_HELPER__
 #define __LUCENE_INDEX_TEST_DOC_HELPER__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
 
 @class LCField;
 @class LCDocument;

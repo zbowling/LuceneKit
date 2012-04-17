@@ -1,10 +1,10 @@
 #ifndef __LUCENE_INDEX_FILTER_INDEX_READER__
 #define __LUCENE_INDEX_FILTER_INDEX_READER__
 
-#include "LCIndexReader.h"
-#include "LCTermDocs.h"
-#include "LCTermPositions.h"
-#include "LCTermEnum.h"
+#import  "LCIndexReader.h"
+#import  "LCTermDocs.h"
+#import  "LCTermPositions.h"
+#import  "LCTermEnum.h"
 
 @interface LCFilterTermDocuments: NSObject <LCTermDocuments>
 {

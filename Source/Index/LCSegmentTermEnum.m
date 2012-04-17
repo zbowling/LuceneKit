@@ -1,7 +1,7 @@
-#include "LCSegmentTermEnum.h"
-#include "LCTermInfosWriter.h"
-#include "GNUstep.h"
-#include <limits.h>
+#import  "LCSegmentTermEnum.h"
+#import  "LCTermInfosWriter.h"
+
+#import  <limits.h>
 
 @implementation LCSegmentTermEnumerator
 
@@ -9,9 +9,9 @@
 {
 	self = [super init];
 	position = -1;
-	[self setTermBuffer: AUTORELEASE([[LCTermBuffer alloc] init])];
-	[self setPrevBuffer: AUTORELEASE([[LCTermBuffer alloc] init])];
-	ASSIGN(termInfo, AUTORELEASE([[LCTermInfo alloc] init]));
+	[self setTermBuffer: [[LCTermBuffer alloc] init]];
+	[self setPrevBuffer: [[LCTermBuffer alloc] init]];
+	termInfo = [[LCTermInfo alloc] init];
 	indexPointer = 0;
 	return self;
 }
@@ -67,13 +67,12 @@
 
 - (void) dealloc
 {
-	DESTROY(termInfo);
-	DESTROY(input);
-	DESTROY(fieldInfos);
-	DESTROY(termBuffer);
-	DESTROY(prevBuffer);
-	DESTROY(scratch);
-	[super dealloc];
+	termInfo=nil;;
+	input=nil;;
+	fieldInfos=nil;;
+	termBuffer=nil;;
+	prevBuffer=nil;;
+	scratch=nil;;
 }
 
 - (void) seek: (long) pointer position: (int) p
@@ -130,7 +129,7 @@
 - (void) scanTo: (LCTerm *) term
 {
 	if (scratch == nil)
-		ASSIGN(scratch, AUTORELEASE([[LCTermBuffer alloc] init]));
+		scratch = [[LCTermBuffer alloc] init];
 	[scratch setTerm: term];
 	while (([scratch compare: termBuffer] == NSOrderedDescending) && [self hasNextTerm]) {}
 }
@@ -139,20 +138,20 @@
 Initially invalid, valid after next() called for the first time.*/
 - (LCTerm *) term
 {
-    return AUTORELEASE([termBuffer copy]);
+    return [termBuffer copy];
 }
 
 /** Returns the previous Term enumerated. Initially null.*/
 - (LCTerm *) prev
 {
-    return AUTORELEASE([prevBuffer copy]);
+    return [prevBuffer copy];
 }
 
 /** Returns the current TermInfo in the enumeration.
 Initially invalid, valid after next() called for the first time.*/
 - (LCTermInfo *) termInfo
 {
-	return AUTORELEASE([[LCTermInfo alloc] initWithTermInfo: termInfo]);
+	return [[LCTermInfo alloc] initWithTermInfo: termInfo];
 }
 
 /** Sets the argument to the current TermInfo in the enumeration.
@@ -191,22 +190,22 @@ Initially invalid, valid after next() called for the first time.*/
 
 - (void) setIndexInput: (LCIndexInput *) i
 {
-	ASSIGN(input, i);
+	input = i;
 }
 
 - (void) setTermBuffer: (LCTermBuffer *) tb
 {
-	ASSIGN(termBuffer, tb);
+	termBuffer = tb;
 }
 
 - (void) setPrevBuffer: (LCTermBuffer *) pb
 {
-	ASSIGN(prevBuffer, pb);
+	prevBuffer = pb;
 }
 
 - (void) setScratch: (LCTermBuffer *) s
 {
-	ASSIGN(scratch, s);
+	scratch = s;
 }
 
 - (void) setSize: (long long) s
@@ -251,7 +250,7 @@ Initially invalid, valid after next() called for the first time.*/
 
 - (void) setFieldInfos: (LCFieldInfos *) fi
 {
-	ASSIGN(fieldInfos, fi);
+	fieldInfos = fi;
 }
 
 - (LCFieldInfos *) fieldInfos
@@ -288,13 +287,13 @@ Initially invalid, valid after next() called for the first time.*/
 {
 	LCSegmentTermEnumerator *clone = [[LCSegmentTermEnumerator allocWithZone: zone] init];
 	
-	[clone setIndexInput: AUTORELEASE([input copy])];
+	[clone setIndexInput: [input copy]];
 	[clone setFieldInfos: fieldInfos];
 	[clone setSize: size];
 	[clone setPosition: position];
-	[clone setTermInfo: AUTORELEASE([termInfo copy])];
-	[clone setTermBuffer: AUTORELEASE([termBuffer copy])];
-	[clone setPrevBuffer: AUTORELEASE([prevBuffer copy])];
+	[clone setTermInfo: [termInfo copy]];
+	[clone setTermBuffer: [termBuffer copy]];
+	[clone setPrevBuffer: [prevBuffer copy]];
 	[clone setScratch: nil];
 	[clone setFormat: format];
 	[clone setIndexed: isIndex];

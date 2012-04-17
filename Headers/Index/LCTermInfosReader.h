@@ -1,10 +1,10 @@
 #ifndef __LUCENE_INDEX_TERM_INFOS_READER__
 #define __LUCENE_INDEX_TERM_INFOS_READER__
 
-#include <Foundation/Foundation.h>
-#include "LCFieldInfos.h"
-#include "LCSegmentTermEnum.h"
-#include "LCTerm.h"
+#import  <Foundation/Foundation.h>
+#import  "LCFieldInfos.h"
+#import  "LCSegmentTermEnum.h"
+#import  "LCTerm.h"
 
 @interface LCTermInfosReader: NSObject
 {

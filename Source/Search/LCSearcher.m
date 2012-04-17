@@ -1,12 +1,12 @@
-#include "LCSearcher.h"
-#include "LCSimilarity.h"
-#include "LCHits.h"
-#include "LCQuery.h"
-#include "LCSort.h"
-#include "LCFilter.h"
-#include "LCHitCollector.h"
-#include "GNUstep.h"
-#include "LCWeight.h"
+#import  "LCSearcher.h"
+#import  "LCSimilarity.h"
+#import  "LCHits.h"
+#import  "LCQuery.h"
+#import  "LCSort.h"
+#import  "LCFilter.h"
+#import  "LCHitCollector.h"
+
+#import  "LCWeight.h"
 
 /** An abstract base class for search implementations.
 * Implements some common utility methods.
@@ -16,14 +16,13 @@
 - (id) init
 {
 	self = [super init];
-	ASSIGN(similarity, [LCSimilarity defaultSimilarity]);
+	similarity = [LCSimilarity defaultSimilarity];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(similarity);
-	[super dealloc];
+	similarity=nil;;
 }
 
 - (LCHits *) search: (LCQuery *) query
@@ -34,18 +33,18 @@
 - (LCHits *) search: (LCQuery *) query
 			 filter: (LCFilter *) filter
 {
-	return AUTORELEASE([[LCHits alloc] initWithSearcher: self query: query filter: filter]);
+	return [[LCHits alloc] initWithSearcher: self query: query filter: filter];
 }
 
 - (LCHits *) search: (LCQuery *) query sort: (LCSort *) sort
 {
-	return AUTORELEASE([[LCHits alloc] initWithSearcher: self query: query filter: nil sort: sort]);
+	return [[LCHits alloc] initWithSearcher: self query: query filter: nil sort: sort];
 }
 
 - (LCHits *) search: (LCQuery *) query 
              filter: (LCFilter *) filter sort: (LCSort *) sort
 {
-	return AUTORELEASE([[LCHits alloc] initWithSearcher: self query: query filter: filter sort: sort]);
+	return [[LCHits alloc] initWithSearcher: self query: query filter: filter sort: sort];
 }
 
 /** Expert: Low-level search implementation with arbitrary sorting.  Finds
@@ -124,7 +123,7 @@
 */
 - (void) setSimilarity: (LCSimilarity *) s
 {
-	ASSIGN(similarity, s);
+	similarity = s;
 }
 
 /** Expert: Return the Similarity implementation used by this Searcher.
@@ -157,7 +156,7 @@
 	{
 		[result addObject: [NSNumber numberWithInt: [self documentFrequencyWithTerm: [terms objectAtIndex: i]]]];
 	}
-	return AUTORELEASE(result); 
+	return result; 
 }
 
 - (id <LCWeight>) createWeight: (LCQuery *) query

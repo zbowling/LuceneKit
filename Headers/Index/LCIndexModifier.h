@@ -1,9 +1,9 @@
 #ifndef __LuceneKit_Index_Modifier__
 #define __LuceneKit_Index_Modifier__
 
-#include <Foundation/Foundation.h>
-#include "LCIndexReader.h"
-#include "LCIndexWriter.h"
+#import  <Foundation/Foundation.h>
+#import  "LCIndexReader.h"
+#import  "LCIndexWriter.h"
 
 @interface LCIndexModifier: NSObject
 {

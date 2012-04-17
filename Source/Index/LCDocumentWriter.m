@@ -1,14 +1,14 @@
-#include "LCDocumentWriter.h"
-#include "LCTermVectorOffsetInfo.h"
-#include "LCTerm.h"
-#include "LCTermBuffer.h"
-#include "LCTermInfo.h"
-#include "LCTermInfosWriter.h"
-#include "LCTermVectorsWriter.h"
-#include "LCFieldInfos.h"
-#include "LCFieldsWriter.h"
-#include "LCStringReader.h"
-#include "GNUstep.h"
+#import  "LCDocumentWriter.h"
+#import  "LCTermVectorOffsetInfo.h"
+#import  "LCTerm.h"
+#import  "LCTermBuffer.h"
+#import  "LCTermInfo.h"
+#import  "LCTermInfosWriter.h"
+#import  "LCTermVectorsWriter.h"
+#import  "LCFieldInfos.h"
+#import  "LCFieldsWriter.h"
+#import  "LCStringReader.h"
+
 
 @interface LCPosting: NSObject // info about a Term in a doc
 {       
@@ -35,7 +35,7 @@
 			 offset: (LCTermVectorOffsetInfo *) offset
 {
 	self = [self init];
-	ASSIGN(term, t);
+	term = t;
 	freq = 1;
 	positions = [[NSMutableArray alloc] initWithObjects: [NSNumber numberWithLong: position], nil];
 	if(offset != nil){
@@ -46,14 +46,6 @@
 		offsets = nil;
 	}
 	return self;
-}
-
-- (void) dealloc
-{
-	DESTROY(term);
-	DESTROY(positions);
-	DESTROY(offsets);
-	[super dealloc];
 }
 
 - (NSComparisonResult) compare: (id) other
@@ -102,9 +94,9 @@
 		  maxFieldLength: (int) max
 {
 	self = [self init];
-	ASSIGN(directory, dir);
-	ASSIGN(analyzer, ana);
-	ASSIGN(similarity, sim);
+	directory = dir;
+	analyzer = ana;
+	similarity = sim;
 	maxFieldLength = max;
 	return self;
 }
@@ -114,9 +106,9 @@
 			 indexWriter: (LCIndexWriter *) iw
 {
 	self = [self init];
-	ASSIGN(directory, dir);
-	ASSIGN(analyzer, ana);
-	ASSIGN(similarity, [iw similarity]);
+	directory = dir;
+	analyzer = ana;
+	similarity = [iw similarity];
 	maxFieldLength = [iw maxFieldLength];
 	termIndexInterval = [iw termIndexInterval];
 	return self;
@@ -124,59 +116,58 @@
 
 - (void) dealloc
 {
-	DESTROY(analyzer);
-	DESTROY(directory);
-	DESTROY(similarity);
-	[super dealloc];
+	analyzer=nil;;
+	directory=nil;;
+	similarity=nil;;
 }
 
 - (void) addDocument: (NSString *) segment
 			document: (LCDocument *) doc
 {
-	CREATE_AUTORELEASE_POOL(x);
-	// write field names
+    @autoreleasepool {
+        // write field names
         NSAssert(!fieldInfos,@"Already fieldInfos");
-	fieldInfos = [[LCFieldInfos alloc] init];
-	[fieldInfos addDocument: doc];
-	[fieldInfos write: directory name: [segment stringByAppendingPathExtension: @"fnm"]];
-	
-    // write field values
-	LCFieldsWriter *fieldsWriter = [[LCFieldsWriter alloc] initWithDirectory: directory segment: segment fieldInfos: fieldInfos];
-	[fieldsWriter addDocument: doc];
-	[fieldsWriter close];
-	DESTROY(fieldsWriter);
-	
-    // invert doc into postingTable
+        fieldInfos = [[LCFieldInfos alloc] init];
+        [fieldInfos addDocument: doc];
+        [fieldInfos write: directory name: [segment stringByAppendingPathExtension: @"fnm"]];
+        
+        // write field values
+        LCFieldsWriter *fieldsWriter = [[LCFieldsWriter alloc] initWithDirectory: directory segment: segment fieldInfos: fieldInfos];
+        [fieldsWriter addDocument: doc];
+        [fieldsWriter close];
+        fieldsWriter=nil;;
+        
+        // invert doc into postingTable
         NSAssert(!postingTable,@"Already postingTable");
-	postingTable = [[NSMutableDictionary alloc] init];
-	fieldLengths = calloc([fieldInfos size], sizeof(long long));
-	fieldPositions = calloc([fieldInfos size], sizeof(long long));
-	fieldOffsets = calloc([fieldInfos size], sizeof(long long));
-	fieldBoosts = calloc([fieldInfos size], sizeof(float));
-
-	int i, count = [fieldInfos size];
-	for(i = 0; i < count; i++)
-	{
-		fieldBoosts[i] = [doc boost];
-	}
-	
-	[self invertDocument: doc];
-    // sort postingTable into an array
-	NSArray *postings = [self sortPostingTable];
-
-    // write postings
-    [self writePostings: postings segment: segment];
-	
-    // write norms of indexed fields
-    [self writeNorms: segment];
-
-    free(fieldLengths);
-    free(fieldPositions);
-    free(fieldOffsets);
-    free(fieldBoosts);
-    DESTROY(postingTable);
-    DESTROY(fieldInfos);
-	DESTROY(x);
+        postingTable = [[NSMutableDictionary alloc] init];
+        fieldLengths = calloc([fieldInfos size], sizeof(long long));
+        fieldPositions = calloc([fieldInfos size], sizeof(long long));
+        fieldOffsets = calloc([fieldInfos size], sizeof(long long));
+        fieldBoosts = calloc([fieldInfos size], sizeof(float));
+        
+        int i, count = [fieldInfos size];
+        for(i = 0; i < count; i++)
+        {
+            fieldBoosts[i] = [doc boost];
+        }
+        
+        [self invertDocument: doc];
+        // sort postingTable into an array
+        NSArray *postings = [self sortPostingTable];
+        
+        // write postings
+        [self writePostings: postings segment: segment];
+        
+        // write norms of indexed fields
+        [self writeNorms: segment];
+        
+        free(fieldLengths);
+        free(fieldPositions);
+        free(fieldOffsets);
+        free(fieldBoosts);
+        postingTable=nil;;
+        fieldInfos=nil;;
+    }
 }
 
 // Tokenizes the fields of a document into Postings.
@@ -205,7 +196,7 @@
 							  text: stringValue
 						  position: position++
 							offset: tvoi];
-					DESTROY(tvoi);
+					tvoi=nil;;
 				}
 				else
 					[self addField: fieldName
@@ -220,9 +211,9 @@
 			{
 				id <LCReader> reader = nil;  // find or make Reader
 				if ([field reader] != nil)
-					ASSIGN(reader, [field reader]);
+					reader = [field reader];
 				else if ([field string] != nil)
-					ASSIGN(reader, AUTORELEASE([[LCStringReader alloc] initWithString: [field string]]));
+					reader = [[LCStringReader alloc] initWithString: [field string]];
 				else
 				{
 					NSLog(@"field must have either String or Reader value");
@@ -232,7 +223,7 @@
 				// Tokenize field and add to postingTable
 				LCTokenStream *stream = [analyzer tokenStreamWithField: fieldName
 																reader: reader];
-				DESTROY(reader);
+				reader=nil;;
 				LCToken *t, *lastToken = nil;
 				
 				for (t = [stream nextToken]; t != nil; t = [stream nextToken]) {
@@ -245,7 +236,7 @@
 								  text: [t termText]
 							  position: position++
 								offset: tvoi];
-						DESTROY(tvoi);
+						tvoi=nil;;
 					}
 					else
 						[self addField: fieldName
@@ -307,13 +298,13 @@
 		[ti setFreq: (freq + 1)];			  // update frequency
     } else {					  // word not seen before
 		LCTerm *term = [[LCTerm alloc] initWithField: field text: text];
-		[postingTable setObject: AUTORELEASE([[LCPosting alloc] initWithTerm: term
+		[postingTable setObject: [[LCPosting alloc] initWithTerm: term
 														position: position
-                                                                        offset: offset])
+                                                                        offset: offset]
 						 forKey: term];
-		DESTROY(term);
+		term=nil;;
     }
-	DESTROY(termBuffer);
+	termBuffer=nil;;
 }
 
 - (NSArray *) sortPostingTable
@@ -330,7 +321,7 @@
     // sort the array
     [array sortUsingSelector: @selector(compare:)];
 	
-    return AUTORELEASE(array);
+    return array;
 }
 
 - (void) writePostings: (NSArray *) postings 
@@ -349,9 +340,8 @@
 											   segment: segment
 											fieldInfos: fieldInfos
 											  interval: termIndexInterval];
-	AUTORELEASE(tis);
+    
 	LCTermInfo *ti = [[LCTermInfo alloc] init];
-	AUTORELEASE(ti);
 	NSString *currentField = nil;
 	
 	int i;
@@ -394,7 +384,6 @@
 			if ([fi isTermVectorStored]) {
 				if (termVectorWriter == nil) {
 					termVectorWriter = [[LCTermVectorsWriter alloc] initWithDirectory: directory segment: segment fieldInfos: fieldInfos];
-					AUTORELEASE(termVectorWriter);
 					[termVectorWriter openDocument];
 				}
 				[termVectorWriter openField: currentField];

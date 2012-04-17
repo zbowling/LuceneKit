@@ -1,9 +1,9 @@
-#include "LCSortComparator.h"
-#include "LCScoreDocComparator.h"
-#include "LCScoreDoc.h"
-#include "LCSortField.h"
-#include "LCFieldCache.h"
-#include "GNUstep.h"
+#import  "LCSortComparator.h"
+#import  "LCScoreDocComparator.h"
+#import  "LCScoreDoc.h"
+#import  "LCSortField.h"
+#import  "LCFieldCache.h"
+
 
 @interface LCCacheScoreDocComparator: NSObject <LCScoreDocComparator>
 {
@@ -16,13 +16,12 @@
 
 - (void) dealloc
 {
-  DESTROY(cache);
-  [super dealloc];
+  cache=nil;;
 }
 
 - (void) setCache: (NSDictionary *) c
 {
-	ASSIGN(cache, c);
+	cache = c;
 }
 
 - (NSComparisonResult) compare: (LCScoreDoc *) i to: (LCScoreDoc *) j
@@ -52,7 +51,7 @@
 	LCCacheScoreDocComparator *comparator;
 	comparator = [[LCCacheScoreDocComparator alloc] init];
 	[comparator setCache: cachedValues];
-	return AUTORELEASE(comparator);
+	return comparator;
 }
 
 - (id) comparable: (NSString *) termtext

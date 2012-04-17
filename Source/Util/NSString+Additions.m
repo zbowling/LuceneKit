@@ -1,4 +1,4 @@
-#include "NSString+Additions.h"
+#import  "NSString+Additions.h"
 
 @implementation NSString (LuceneKit_Util)
 - (int) positionOfDifference: (NSString *) other

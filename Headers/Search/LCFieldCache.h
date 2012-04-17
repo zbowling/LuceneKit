@@ -1,9 +1,9 @@
 #ifndef __LUCENE_SEARCH_FIELD_CACHE__
 #define __LUCENE_SEARCH_FIELD_CACHE__
 
-#include <Foundation/Foundation.h>
-#include "LCSortComparator.h"
-#include "LCIndexReader.h"
+#import  <Foundation/Foundation.h>
+#import  "LCSortComparator.h"
+#import  "LCIndexReader.h"
 
 @interface LCIntParser: NSObject
 - (int) parseInt: (NSString *) value;

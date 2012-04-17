@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_TOP_DOCS__
 #define __LUCENE_SEARCH_TOP_DOCS__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @interface LCTopDocs: NSObject
 {

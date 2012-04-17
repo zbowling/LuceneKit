@@ -1,5 +1,5 @@
-#include "LCTokenFilter.h"
-#include "GNUstep.h"
+#import  "LCTokenFilter.h"
+
 
 @implementation LCTokenFilter
 
@@ -12,14 +12,13 @@ This is an abstract class.
 - (id) initWithTokenStream: (LCTokenStream *) i
 {
 	self = [self init];
-	ASSIGN(input, i);
+	input = i;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(input);
-	[super dealloc];
+	input=nil;;
 }
 
 - (void) close

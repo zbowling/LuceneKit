@@ -1,12 +1,12 @@
-#include "LCToken.h"
-#include "GNUstep.h"
+#import  "LCToken.h"
+
 
 @implementation LCToken
 
 - (id) init
 {
 	self = [super init];
-	ASSIGN(type, [NSString stringWithCString: "word"]);
+	type = @"word";
 	positionIncrement = 1;
 	return self;
 }
@@ -17,7 +17,7 @@ The type defaults to "word." */
               start: (int) start end: (int) end;
 {
 	self = [self init];
-	ASSIGN(termText, AUTORELEASE([text copy]));
+	termText = [text copy];
 	startOffset = start;
 	endOffset = end;
 	return self;
@@ -29,18 +29,17 @@ The type defaults to "word." */
                type: (NSString *) t
 {
 	self = [self init];
-	ASSIGN(termText, AUTORELEASE([text copy]));
+	termText = [text copy];
 	startOffset = start;
 	endOffset = end;
-	ASSIGN(type, t);
+	type = t;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(termText);
-	DESTROY(type);
-	[super dealloc];
+	termText=nil;;
+	type=nil;;
 }
 
 /** Set the position increment.  This determines the position of this token
@@ -70,9 +69,7 @@ The type defaults to "word." */
 */
 - (void) setPositionIncrement: (int) pos
 {
-	if (positionIncrement < 0)
-		[NSException raise: @"IllegalArgumentException"
-					format: @"Increment must be zero or greater: %d", pos];
+	NSAssert(pos >= 0,@"Increment must be zero or greater: %d", pos);
 	
 	positionIncrement = pos;
 }
@@ -93,7 +90,7 @@ The type defaults to "word." */
 
 - (void) setTermText: (NSString *) text
 {
-	ASSIGNCOPY(termText, text);
+	termText =[ text copy];
 }
 
 /** Returns this Token's starting offset, the position of the first character

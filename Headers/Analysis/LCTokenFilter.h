@@ -1,8 +1,8 @@
 #ifndef __LUCENE_ANALYSIS_TOKEN_FILTER__
 #define __LUCENE_ANALYSIS_TOKEN_FILTER__
 
-#include <Foundation/Foundation.h>
-#include "LCTokenStream.h"
+#import  <Foundation/Foundation.h>
+#import  "LCTokenStream.h"
 
 /* A filter for token stream */
 @interface LCTokenFilter: LCTokenStream

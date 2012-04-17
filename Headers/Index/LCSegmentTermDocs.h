@@ -1,10 +1,10 @@
 #ifndef __LUCENE_INDEX_SEGMENT_TERM_DOCS__
 #define __LUCENE_INDEX_SEGMENT_TERM_DOCS__
 
-#include <Foundation/Foundation.h>
-#include "LCTermDocs.h"
-#include "LCSegmentReader.h"
-#include "LCTermInfo.h"
+#import  <Foundation/Foundation.h>
+#import  "LCTermDocs.h"
+#import  "LCSegmentReader.h"
+#import  "LCTermInfo.h"
 
 @class LCIndexInput;
 @class LCBitVector;

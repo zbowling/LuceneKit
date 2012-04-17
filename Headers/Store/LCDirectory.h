@@ -1,9 +1,9 @@
 #ifndef __LUCENE_STORE_DIRECTORY__
 #define __LUCENE_STORE_DIRECTORY__
 
-#include <Foundation/Foundation.h>
-#include "LCIndexInput.h"
-#include "LCIndexOutput.h"
+#import  <Foundation/Foundation.h>
+#import  "LCIndexInput.h"
+#import  "LCIndexOutput.h"
 
 /** A Directory is a flat list of files.  Files may be written once, when they
 * are created.  Once a file is created it may only be opened for read, or

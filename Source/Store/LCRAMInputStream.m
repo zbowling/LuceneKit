@@ -1,5 +1,5 @@
-#include "LCRAMInputStream.h"
-#include "GNUstep.h"
+#import  "LCRAMInputStream.h"
+
 
 /**
 * A memory-resident {@link IndexInput} implementation.
@@ -12,15 +12,14 @@
 - (id) initWithFile: (LCRAMFile *) f
 {
 	self = [self init];
-	ASSIGN(file, f);
+	file = f;
 	pointer = 0;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(file);
-	[super dealloc];
+	file=nil;;
 }
 
 - (char) readByte

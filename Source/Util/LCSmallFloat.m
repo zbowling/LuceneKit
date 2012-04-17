@@ -1,4 +1,4 @@
-#include "LCSmallFloat.h"
+#import  "LCSmallFloat.h"
 
 /** Floating point numbers smaller than 32 bits. */
 

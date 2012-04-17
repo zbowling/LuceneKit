@@ -5,14 +5,14 @@
 #ifndef __LUCENE_KIT_UMBRELLA_HEADER__
 #define __LUCENE_KIT_UMBRELLA_HEADER__
 
-#include "Java.h"
-#include "Util.h"
-#include "Store.h"
-#include "Document.h"
-#include "Analysis.h"
-#include "Index.h"
-#include "Search.h"
-#include "QueryParser.h"
-#include "LCMetadataAttribute.h"
+#import  "Java.h"
+#import  "Util.h"
+#import  "Store.h"
+#import  "Document.h"
+#import  "Analysis.h"
+#import  "Index.h"
+#import  "Search.h"
+#import  "QueryParser.h"
+#import  "LCMetadataAttribute.h"
 
 #endif /* __LUCENE_KIT_UMBRELLA_HEADER__ */			   

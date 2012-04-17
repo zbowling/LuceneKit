@@ -1,19 +1,18 @@
-#include "LCSimilarityDelegator.h"
-#include "GNUstep.h"
+#import  "LCSimilarityDelegator.h"
+
 
 @implementation LCSimilarityDelegator
 
 - (id) initWithSimilarity: (LCSimilarity *) s
 {
 	self = [self init];
-	ASSIGN(delegee, s);
+	delegee = s;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(delegee);
-  [super dealloc];
+  delegee=nil;;
 }
 
 - (float) lengthNorm: (NSString *) fieldName numberOfTerms: (int) numTerms

@@ -1,11 +1,11 @@
 #ifndef __LUCENE_INDEX_FIELD_INFOS__
 #define __LUCENE_INDEX_FIELD_INFOS__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
-#include "LCDocument.h"
-#include "LCFieldInfo.h"
-#include "LCIndexInput.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
+#import  "LCDocument.h"
+#import  "LCFieldInfo.h"
+#import  "LCIndexInput.h"
 
 @interface LCFieldInfos: NSObject
 {

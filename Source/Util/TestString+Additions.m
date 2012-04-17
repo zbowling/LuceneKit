@@ -1,5 +1,5 @@
-#include "NSString+Additions.h"
-#include <UnitKit/UnitKit.h>
+#import  "NSString+Additions.h"
+#import  <UnitKit/UnitKit.h>
 
 @interface NSStringAdditions: NSObject <UKTest>
 @end

@@ -1,5 +1,5 @@
-#include "LCNonMatchingScorer.h"
-#include "GNUstep.h"
+#import  "LCNonMatchingScorer.h"
+
 
 @implementation LCNonMatchingScorer
 - (int) document 
@@ -29,6 +29,6 @@
 {
 	LCExplanation *e = [[LCExplanation alloc] init];
 	[e setRepresentation: @"No document matches."];
-	return AUTORELEASE(e);
+	return e;
 }
 @end

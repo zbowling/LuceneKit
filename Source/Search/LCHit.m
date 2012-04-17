@@ -1,7 +1,7 @@
-#include "LCHit.h"
-#include "LCHits.h"
-#include "LCDocument.h"
-#include "GNUstep.h"
+#import  "LCHit.h"
+#import  "LCHits.h"
+#import  "LCDocument.h"
+
 
 @interface LCHit (LCPrivate)
 - (void) fetchTheHit;
@@ -21,15 +21,14 @@
 - (id) initWithHits: (LCHits *) h index: (int) index
 {
 	self = [self init];
-	ASSIGN(hits, h);
+	hits = h;
 	hitNumber = index;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(hits);
-	[super dealloc];
+	hits=nil;;
 }
 
 - (LCDocument *) document
@@ -73,7 +72,7 @@
 	} else {
 		[buffer appendString: @"unresolved>"];
 	}
-	return AUTORELEASE(buffer);
+	return buffer;
 }
 
 @end

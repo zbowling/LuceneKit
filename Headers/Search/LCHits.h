@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_HITS__
 #define __LUCENE_SEARCH_HITS__
 
-#include <Foundation/Foundation.h>
-#include "LCWeight.h"
+#import  <Foundation/Foundation.h>
+#import  "LCWeight.h"
 
 @class LCDocument;
 @class LCSearcher;

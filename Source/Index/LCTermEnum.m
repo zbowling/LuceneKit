@@ -1,5 +1,5 @@
-#include "LCTermEnum.h"
-#include "LCTerm.h"
+#import  "LCTermEnum.h"
+#import  "LCTerm.h"
 
 /** Abstract class for enumerating terms.
 

@@ -1,12 +1,12 @@
 #ifndef __LUCENE_INDEX_DOCUMENT_WRITER__
 #define __LUCENE_INDEX_DOCUMENT_WRITER__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
-#include "LCAnalyzer.h"
-#include "LCSimilarity.h"
-#include "LCDocument.h"
-#include "LCIndexWriter.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
+#import  "LCAnalyzer.h"
+#import  "LCSimilarity.h"
+#import  "LCDocument.h"
+#import  "LCIndexWriter.h"
 
 @class LCFieldInfos;
 

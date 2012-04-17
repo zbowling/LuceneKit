@@ -1,13 +1,13 @@
-#include "LCFieldSortedHitQueue.h"
-#include "LCFieldCacheImpl.h"
-#include "LCScoreDoc.h"
-#include "LCScoreDocComparator.h"
-#include "GNUstep.h"
+#import  "LCFieldSortedHitQueue.h"
+#import  "LCFieldCacheImpl.h"
+#import  "LCScoreDoc.h"
+#import  "LCScoreDocComparator.h"
+
 
 // FIXME: Would be better to use HAVE_FLOAT_H inspired macro (but that implies
 // to add a config file).
 //#ifdef __APPLE__
-#include <float.h>
+#import  <float.h>
 //#endif
 
 @implementation LCFieldSortedHitQueue
@@ -46,10 +46,10 @@
 		NSString *fieldname = [field field];
 		[comparators addObject: [cache cachedComparator: reader field: fieldname type: [field type] locale: [field locale] factory: [field factory]]];
 		if ([[comparators objectAtIndex: i] sortType] == LCSortField_STRING) {
-		  [fields addObject: AUTORELEASE([[LCSortField alloc] initWithField: fieldname locale: [field locale] reverse: [field reverse]])];
+		  [fields addObject: [[LCSortField alloc] initWithField: fieldname locale: [field locale] reverse: [field reverse]]];
 		} else {
-		  [fields addObject: AUTORELEASE([[LCSortField alloc] initWithField: fieldname 
-                                                                      type: [[comparators objectAtIndex: i] sortType] reverse: [field reverse]])];
+		  [fields addObject: [[LCSortField alloc] initWithField: fieldname 
+                                                                      type: [[comparators objectAtIndex: i] sortType] reverse: [field reverse]]];
 		}
 	}
 	maxscore = FLT_MIN;
@@ -58,9 +58,8 @@
 
 - (void) dealloc
 {
-	DESTROY(comparators);
-	DESTROY(fields);
-	[super dealloc];
+	comparators=nil;;
+	fields=nil;;
 }
 
 /* LuceneKit: use old style -lessThan method */
@@ -137,7 +136,7 @@
 	}
 	[doc setFields: f ];
 	//if (maxscore > 1.0f) [doc setScore: ([doc score] / maxscore)];   // normalize scores
-	DESTROY(f);
+	f=nil;;
 	return doc;
 }
 
@@ -184,8 +183,7 @@ static LCComparatorCache *sharedInstance;
 
 - (void) dealloc
 {
-	DESTROY(comparators);
-	[super dealloc];
+	comparators=nil;;
 }
 
 /** Returns a comparator if it is in the cache. */
@@ -196,11 +194,11 @@ static LCComparatorCache *sharedInstance;
 	LCEntry *entry;
 	if (factory != nil)
 	{
-          entry = AUTORELEASE([[LCEntry alloc] initWithField: field custom: factory]);
+          entry = [[LCEntry alloc] initWithField: field custom: factory];
 	}
 	else
 	{
-          entry = AUTORELEASE([[LCEntry alloc] initWithField: field type: type locale: locale]);
+          entry = [[LCEntry alloc] initWithField: field type: type locale: locale];
 	}
 	
 	NSDictionary *readerCache = [comparators objectForKey: reader];
@@ -226,11 +224,10 @@ static LCComparatorCache *sharedInstance;
 	if (readerCache == nil) 
 	{
 		readerCache = [[NSMutableDictionary alloc] init];
-		AUTORELEASE(readerCache);
 	}
 	[readerCache setObject: value forKey: entry];
 	[comparators setObject: readerCache forKey: reader];
-	DESTROY(entry);
+	entry=nil;;
 	return readerCache;
 }
 
@@ -241,9 +238,9 @@ static LCComparatorCache *sharedInstance;
 			 factory: (id<LCSortComparatorSource>) factory
 {
 	if (type == LCSortField_DOC) 
-		return AUTORELEASE([[LCIndexOrderScoreDocComparator alloc] init]);
+		return [[LCIndexOrderScoreDocComparator alloc] init];
 	if (type == LCSortField_SCORE) 
-		return AUTORELEASE([[LCRelevanceScoreDocComparator alloc] init]);
+		return [[LCRelevanceScoreDocComparator alloc] init];
 	id <LCScoreDocComparator> comparator = [self lookup: reader field: fieldname type: type locale: locale factory: factory];
     if (comparator == nil) {
 		switch (type) {
@@ -287,7 +284,7 @@ static LCComparatorCache *sharedInstance;
 {
 	NSDictionary *fieldOrder = [[LCFieldCache defaultCache] ints: reader field: fieldname];
 	id object = [[LCIntsScoreDocComparator alloc] initWithValues: fieldOrder];
-	return AUTORELEASE(object);
+	return object;
 	
 }
 
@@ -296,7 +293,7 @@ static LCComparatorCache *sharedInstance;
 {
 	NSDictionary *fieldOrder = [[LCFieldCache defaultCache] floats: reader field: fieldname];
 	id object = [[LCFloatsScoreDocComparator alloc] initWithValues: fieldOrder];
-	return AUTORELEASE(object);
+	return object;
 	
 }
 - (id <LCScoreDocComparator>) comparatorString: (LCIndexReader *) reader
@@ -304,7 +301,7 @@ static LCComparatorCache *sharedInstance;
 {
 	LCStringIndex *fieldOrder = [[LCFieldCache defaultCache] stringIndex: reader field: fieldname];
 	id object = [[LCStringsScoreDocComparator alloc] initWithStringIndex: fieldOrder];
-	return AUTORELEASE(object);
+	return object;
 }
 
 #if 0
@@ -343,14 +340,13 @@ static LCComparatorCache *sharedInstance;
 - (id) initWithValues: (NSDictionary *) values
 {
 	self = [super init];
-	ASSIGN(fieldOrder, values);
+	fieldOrder = values;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(fieldOrder);
-	[super dealloc];
+	fieldOrder=nil;;
 }
 
 - (NSComparisonResult) compare: (LCScoreDoc *) i to: (LCScoreDoc*) j
@@ -405,14 +401,13 @@ static LCComparatorCache *sharedInstance;
 - (id) initWithValues: (NSDictionary *) values
 {
 	self = [super init];
-	ASSIGN(fieldOrder, values);
+	fieldOrder = values;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(fieldOrder);
-	[super dealloc];
+	fieldOrder=nil;;
 }
 
 - (NSComparisonResult) compare: (LCScoreDoc *) i to: (LCScoreDoc*) j
@@ -466,14 +461,13 @@ static LCComparatorCache *sharedInstance;
 - (id) initWithStringIndex: (LCStringIndex *) i 
 {
 	self = [super init];
-	ASSIGN(index, i);
+	index = i;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(index);
-	[super dealloc];
+	index=nil;;
 }
 
 - (NSComparisonResult) compare: (LCScoreDoc *) i to: (LCScoreDoc*) j

@@ -1,5 +1,5 @@
-#include "LCExplanation.h"
-#include "GNUstep.h"
+#import  "LCExplanation.h"
+
 
 /** Expert: Describes the score computation for document and query. */
 @interface LCExplanation (LCPrivate)
@@ -18,9 +18,8 @@
 
 - (void) dealloc
 {
-	DESTROY(representation);
-	DESTROY(details);
-	[super dealloc];
+	representation=nil;;
+	details=nil;;
 }
 
 /** The value assigned to this explanation node. */
@@ -34,14 +33,14 @@
 
 - (void) setRepresentation: (NSString *) d
 {
-	ASSIGN(representation, d);
+	representation = d;
 }
 
 /** The sub-nodes of this explanation node. */
 - (NSArray *) details
 {
 	if (details == nil) return nil;
-	return AUTORELEASE([details copy]);
+	return [details copy];
 	//  return (Explanation[])details.toArray(new Explanation[0]);
 }
 
@@ -49,7 +48,7 @@
 - (void) addDetail: (LCExplanation *) detail
 {
 	if (details == nil)
-		ASSIGN(details, AUTORELEASE([[NSMutableArray alloc] init]));
+		details = [[NSMutableArray alloc] init];
 	[details addObject: detail];
 }
 
@@ -75,7 +74,7 @@
 		}
     }
 	
-	return AUTORELEASE(s);
+	return s;
 }
 
 /** Render an explanation as HTML. */
@@ -94,7 +93,7 @@
 	}
 	
 	[s appendString: @"</ul>\n"];
-	return AUTORELEASE(s);
+	return s;
 }
 
 @end

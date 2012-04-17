@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_COMPOUND_FILE_READER__
 #define __LUCENE_INDEX_COMPOUND_FILE_READER__
 
-#include "LCDirectory.h"
-#include <Foundation/Foundation.h>
+#import  "LCDirectory.h"
+#import  <Foundation/Foundation.h>
 
 @interface LCCompoundFileReader: NSObject <LCDirectory>
 {

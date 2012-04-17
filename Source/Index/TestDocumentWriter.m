@@ -1,13 +1,13 @@
-#include "LCDocumentWriter.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
-#include "LCRAMDirectory.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "LCSegmentReader.h"
-#include "LCSegmentInfo.h"
-#include "TestDocHelper.h"
-#include "LCField.h"
-#include "LCWhitespaceTokenizer.h"
+#import  "LCDocumentWriter.h"
+
+#import  <UnitKit/UnitKit.h>
+#import  "LCRAMDirectory.h"
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCSegmentReader.h"
+#import  "LCSegmentInfo.h"
+#import  "TestDocHelper.h"
+#import  "LCField.h"
+#import  "LCWhitespaceTokenizer.h"
 
 @interface TestDocumentWriter: NSObject <UKTest>
 @end
@@ -52,17 +52,17 @@
 	UKNotNil(fields);
 	UKIntsEqual(1, [fields count]);
 	UKStringsEqual([TestDocHelper KEYWORD_TEXT], [[fields objectAtIndex: 0] string]);
-
+    
 	fields = [doc fields: [TestDocHelper NO_NORMS_KEY]];
 	UKNotNil(fields);
 	UKIntsEqual(1, [fields count]);
 	UKStringsEqual([TestDocHelper NO_NORMS_TEXT], [[fields objectAtIndex: 0] string]);
-
+    
 	fields = [doc fields: [TestDocHelper TEXT_FIELD_3_KEY]];
 	UKNotNil(fields);
 	UKIntsEqual(1, [fields count]);
 	UKStringsEqual([TestDocHelper FIELD_3_TEXT], [[fields objectAtIndex: 0] string]);
-
+    
 	// test that the norm file is not present if omitNorms is true
 	int i;
 	for(i = 0; i < [[reader fieldInfos] size]; i++) {
@@ -73,8 +73,8 @@
 			UKTrue([fi omitNorms] == !fileExist);
 		}
 	}
-			
-
+    
+    
 }
 
 - (void) testPositionIncrementGap
@@ -86,19 +86,19 @@
 																  analyzer: analyzer similarity: similarity maxFieldLength: 50];
 	LCDocument *doc = [[LCDocument alloc] init];
 	LCField *field = [[LCField alloc] initWithName: @"repeated"
-					string: @"repeated one"
-					store: LCStore_YES
-					index: LCIndex_Tokenized];
+                                            string: @"repeated one"
+                                             store: LCStore_YES
+                                             index: LCIndex_Tokenized];
 	[doc addField: field];
 	field = [[LCField alloc] initWithName: @"repeated"
-					string: @"repeated two"
-					store: LCStore_YES
-					index: LCIndex_Tokenized];
+                                   string: @"repeated two"
+                                    store: LCStore_YES
+                                    index: LCIndex_Tokenized];
 	[doc addField: field];
-
+    
 	NSString *segName = @"test";
 	[writer addDocument: segName document: doc];
-
+    
 	LCSegmentReader *reader = [LCSegmentReader segmentReaderWithInfo: [[LCSegmentInfo alloc] initWithName: segName numberOfDocuments: 1 directory: dir]];
 	LCTerm *t = [[LCTerm alloc] initWithField: @"repeated" text: @"repeated"];
 	id <LCTermPositions> termPositions = [reader termPositionsWithTerm: t];
@@ -108,17 +108,6 @@
  	UKIntsEqual(0, [termPositions nextPosition]);
  	UKIntsEqual(502, [termPositions nextPosition]);
 }
-#if 0
-  	     SegmentReader reader = SegmentReader.get(new SegmentInfo(segName, 1, dir));
-  	 
-  	     TermPositions termPositions = reader.termPositions(new Term("repeated", "repeated"));
-  	     assertTrue(termPositions.next());
-  	     int freq = termPositions.freq();
-  	     assertEquals(2, freq);
-  	     assertEquals(0, termPositions.nextPosition());
-  	     assertEquals(502, termPositions.nextPosition());
-   } 	   }
-#endif
 
 @end
 
@@ -126,7 +115,7 @@
 - (LCTokenStream *) tokenStreamWithField: (NSString *) name
                                   reader: (id <LCReader>) reader
 {
-	return AUTORELEASE([[LCWhitespaceTokenizer alloc] initWithReader: reader]);
+	return [[[LCWhitespaceTokenizer alloc] initWithReader: reader] autorelease];
 }
 
 - (int) positionIncrementGap: (NSString *) fieldName

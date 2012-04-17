@@ -1,10 +1,10 @@
 #ifndef __LUCENE_ANALYSIS_SIMPLE_ANALYZER__
 #define __LUCENE_ANALYSIS_SIMPLE_ANALYZER__
 
-#include "LCAnalyzer.h"
+#import  "LCAnalyzer.h"
 
 #ifdef HAVE_UKTEST
-#include <UnitKit/UnitKit.h>
+#import  <UnitKit/UnitKit.h>
 @interface LCSimpleAnalyzer: LCAnalyzer <UKTest>
 #else
 @interface LCSimpleAnalyzer: LCAnalyzer

@@ -1,8 +1,8 @@
 #ifndef __LUCENE_STORE_RAM_INPUT_STREAM__
 #define __LUCENE_STORE_RAM_INPUT_STREAM__
 
-#include "LCIndexInput.h"
-#include "LCRAMFile.h"
+#import  "LCIndexInput.h"
+#import  "LCRAMFile.h"
 
 @interface LCRAMInputStream: LCIndexInput
 {

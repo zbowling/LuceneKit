@@ -20,8 +20,8 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "CodeParser.h"
-#include "GNUstep.h"
+#import  "CodeParser.h"
+
 
 typedef enum _CodeType {
   StringCodeType, /* 41-5A, 61-7A, 5F */
@@ -38,8 +38,8 @@ typedef enum _CodeType {
 {
   self = [self init];
 
-  ASSIGN(_handler, handler);
-  ASSIGN(_string, text);
+  _handler = handler;
+  _string = text;
 
   _length = [_string length];
   _uchar = malloc(sizeof(unichar)*_length);
@@ -165,9 +165,6 @@ CodeType codeType(unichar *ch)
 - (void) dealloc
 {
   free(_uchar);
-  RELEASE(_handler);
-  RELEASE(_string);
-  [super dealloc];
 }
 
 @end

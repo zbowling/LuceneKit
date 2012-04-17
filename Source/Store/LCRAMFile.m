@@ -1,5 +1,5 @@
-#include "LCRAMFile.h"
-#include "GNUstep.h"
+#import  "LCRAMFile.h"
+
 
 @implementation LCRAMFile
 
@@ -11,11 +11,6 @@
 	return self;
 }
 
-- (void) dealloc
-{
-	RELEASE(buffers);
-	[super dealloc];
-}
 
 - (NSData *) buffers
 {

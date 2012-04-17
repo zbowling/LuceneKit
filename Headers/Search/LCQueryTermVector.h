@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_QUERY_TERM_VECTOR__
 #define __LUCENE_SEARCH_QUERY_TERM_VECTOR__
 
-#include "LCTermFreqVector.h"
+#import  "LCTermFreqVector.h"
 
 @class LCAnalyzer;
 

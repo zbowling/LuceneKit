@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCHER_PHRASE_QUERY__
 #define __LUCENE_SEARCHER_PHRASE_QUERY__
 
-#include "LCWeight.h"
+#import  "LCWeight.h"
 
 @class LCIndexReader;
 

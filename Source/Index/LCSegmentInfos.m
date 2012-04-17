@@ -1,5 +1,5 @@
-#include "LCSegmentInfos.h"
-#include "GNUstep.h"
+#import  "LCSegmentInfos.h"
+
 
 /** The file format version, a negative number. */
 /* Works since counter, the old 1st entry, is always >= 0 */
@@ -22,8 +22,7 @@
 
 - (void) dealloc
 {
-	DESTROY(segments);
-	[super dealloc];
+	segments=nil;;
 }
 
 - (LCSegmentInfo *) segmentInfoAtIndex: (int) i
@@ -57,7 +56,7 @@
 											  numberOfDocuments: [input readInt]
 													  directory: directory];
 		[segments addObject: si];
-		DESTROY(si);
+		si=nil;;
 	}
 	
 	if(format >= 0){    // in old format the version number may be at the end of the file
@@ -124,7 +123,7 @@
     LCSegmentInfos *sis = [[LCSegmentInfos alloc] init];
     [sis readFromDirectory: directory];
     ver = [sis version];
-    DESTROY(sis);
+    sis=nil;;
     return ver;
 }
 

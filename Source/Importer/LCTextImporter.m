@@ -1,6 +1,6 @@
-#include "LCTextImporter.h"
-#include "LCDateTools.h"
-#include "LCMetadataAttribute.h"
+#import  "LCTextImporter.h"
+#import  "LCDateTools.h"
+#import  "LCMetadataAttribute.h"
 
 @implementation LCTextImporter
 - (BOOL) metadataForFile: (NSString *) path type: (NSString *) type 
@@ -8,10 +8,11 @@
 {
 	if ([[self types] containsObject: type] == NO) return NO;
 	[attributes setObject: path forKey: LCPathAttribute];
-	[attributes setObject: [NSString stringWithContentsOfFile: path]
+    NSError *error;
+	[attributes setObject: [NSString stringWithContentsOfFile: path encoding:NSUTF8StringEncoding error:&error]
 				   forKey: LCTextContentAttribute];
 	NSFileManager *manager = [NSFileManager defaultManager];
-	NSDictionary *attribs = [manager fileAttributesAtPath: path traverseLink: YES];
+	NSDictionary *attribs = [manager attributesOfItemAtPath:[path stringByResolvingSymlinksInPath] error:&error];
 	NSDate *modificationDate = [attribs objectForKey: NSFileModificationDate];
 	if ([modificationDate isEqualToDate: [attributes objectForKey: LCContentModificationDateAttribute]] == NO)
 	{

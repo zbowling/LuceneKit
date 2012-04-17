@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_PHRASE_PREFIX_QUERY__
 #define __LUCENE_SEARCH_PHRASE_PREFIX_QUERY__
 
-#include "LCWeight.h"
+#import  "LCWeight.h"
 
 @class LCIndexReader;
 

@@ -1,14 +1,14 @@
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
-#include "LCWhitespaceAnalyzer.h"
-#include "LCDocument.h"
-#include "LCIndexWriter.h"
-#include "LCTerm.h"
-#include "LCRAMDirectory.h"
-#include "LCTermQuery.h"
-#include "LCBooleanQuery.h"
-#include "LCHits.h"
-#include "LCIndexSearcher.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  "LCWhitespaceAnalyzer.h"
+#import  "LCDocument.h"
+#import  "LCIndexWriter.h"
+#import  "LCTerm.h"
+#import  "LCRAMDirectory.h"
+#import  "LCTermQuery.h"
+#import  "LCBooleanQuery.h"
+#import  "LCHits.h"
+#import  "LCIndexSearcher.h"
 
 @interface TestBooleanScorer: NSObject <UKTest>
 @end

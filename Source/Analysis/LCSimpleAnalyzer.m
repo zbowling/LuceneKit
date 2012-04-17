@@ -1,6 +1,6 @@
-#include "LCSimpleAnalyzer.h"
-#include "LCLowerCaseTokenizer.h"
-#include "GNUstep.h"
+#import  "LCSimpleAnalyzer.h"
+#import  "LCLowerCaseTokenizer.h"
+
 
 @implementation LCSimpleAnalyzer
 
@@ -9,7 +9,7 @@
 								  reader: (id <LCReader>) reader
 {
 	LCLowerCaseTokenizer *tokenizer = [[LCLowerCaseTokenizer alloc] initWithReader: reader];
-	return AUTORELEASE(tokenizer); 
+	return tokenizer; 
 }
 
 @end

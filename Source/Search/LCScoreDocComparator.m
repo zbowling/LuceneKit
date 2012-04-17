@@ -1,6 +1,6 @@
-#include "LCScoreDocComparator.h"
-#include "LCScoreDoc.h"
-#include "LCSortField.h"
+#import  "LCScoreDocComparator.h"
+#import  "LCScoreDoc.h"
+#import  "LCSortField.h"
 
 /** Special comparator for sorting hits according to computed relevance (document score). */
 @implementation LCRelevanceScoreDocComparator

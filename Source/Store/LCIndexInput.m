@@ -1,5 +1,5 @@
-#include "LCIndexInput.h"
-#include "GNUstep.h"
+#import  "LCIndexInput.h"
+
 
 /** Abstract base class for input from a file in a {@link Directory}.  A
 * random-access input stream.  Used for all Lucene index input operations.
@@ -88,7 +88,7 @@
 	//if (chars == nil || length > sizeof(chars))
 	NSMutableString *s = [[NSMutableString alloc] init];
 	[self readChars: s start: 0 length: length];
-	return AUTORELEASE(s);
+	return s;
 	
 }
 

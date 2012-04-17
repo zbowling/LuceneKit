@@ -1,8 +1,8 @@
 #ifndef __LUCENE_STORE_FSDIRECTORY__
 #define __LUCENE_STORE_FSDIRECTORY__
 
-#include <Foundation/Foundation.h>
-#include "LCDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  "LCDirectory.h"
 
 @interface LCFSDirectory: NSObject <LCDirectory>
 {

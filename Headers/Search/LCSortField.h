@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_SORT_FIELD__
 #define __LUCENE_SEARCH_SORT_FIELD__
 
-#include <Foundation/Foundation.h>
-#include "LCSortComparatorSource.h"
+#import  <Foundation/Foundation.h>
+#import  "LCSortComparatorSource.h"
 
 typedef enum _LCSortFieldType {
 	/** Sort by document score (relevancy).  Sort values are Float and higher

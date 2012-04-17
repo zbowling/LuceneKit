@@ -1,7 +1,7 @@
 #ifndef __LUCENE_DOCUMENT_DATE_TOOLS__
 #define __LUCENE_DOCUMENT_DATE_TOOLS__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 /** Define the resolution of data to be stored */
 typedef enum _LCResolution {

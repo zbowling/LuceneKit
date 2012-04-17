@@ -1,5 +1,5 @@
-#include "LCFSIndexOutput.h"
-#include "GNUstep.h"
+#import  "LCFSIndexOutput.h"
+
 
 @implementation LCFSIndexOutput
 
@@ -13,7 +13,7 @@
 - (id) initWithFile: (NSString *) absolutePath
 {
 	self = [self init];
-	ASSIGNCOPY(path, absolutePath);
+	path =[ absolutePath copy];
 	
 	// Create a file if it is not exist
 	BOOL isDir;
@@ -35,7 +35,7 @@
 		}
 	}
 	
-	ASSIGN(handle, [NSFileHandle fileHandleForUpdatingAtPath: path]);
+	handle = [NSFileHandle fileHandleForUpdatingAtPath: path];
 	if (handle == nil) 
 	{
 		NSLog(@"File %@ doesn't exist", path);
@@ -90,17 +90,15 @@
 {
 	[handle synchronizeFile];
 	NSFileManager *manager = [NSFileManager defaultManager];
-	NSDictionary *d = [manager fileAttributesAtPath: path 
-					   traverseLink: YES];
+	NSDictionary *d = [manager attributesOfItemAtPath:[path stringByResolvingSymlinksInPath] error:NULL];
 	return [[d objectForKey: NSFileSize] unsignedLongLongValue];
 }
 
 - (void) dealloc
 {
 	[self close];
-	DESTROY(handle);
-	DESTROY(path);
-	[super dealloc];
+	handle=nil;;
+	path=nil;;
 }
 
 @end

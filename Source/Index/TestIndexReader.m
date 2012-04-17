@@ -1,14 +1,14 @@
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCRAMDirectory.h"
-#include "LCFSDirectory.h"
-#include "LCIndexWriter.h"
-#include "LCIndexReader.h"
-#include "LCTerm.h"
-#include "LCDocument.h"
-#include "LCField.h"
-#include "LCWhitespaceAnalyzer.h"
-#include "GNUstep.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCRAMDirectory.h"
+#import  "LCFSDirectory.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCTerm.h"
+#import  "LCDocument.h"
+#import  "LCField.h"
+#import  "LCWhitespaceAnalyzer.h"
+
 
 @interface TestIndexReader: NSObject <UKTest>
 @end
@@ -45,27 +45,27 @@
 											 store: LCStore_YES
 											 index: LCIndex_Untokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"text"
 								   string: @"test1"
 									store: LCStore_YES
 									index: LCIndex_Tokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"unindexed"
 								   string: @"test1"
 									store: LCStore_YES
 									index: LCIndex_NO];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"unstored"
 								   string: @"test1"
 									store: LCStore_NO
 									index: LCIndex_Tokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	[writer addDocument: doc];
-	RELEASE(doc);
+	[doc release];
 }
 
 - (void) _addDocWithDiffFields: (LCIndexWriter *) writer
@@ -76,27 +76,27 @@
 											 store: LCStore_YES
 											 index: LCIndex_Untokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"text2"
 								   string: @"test1"
 									store: LCStore_YES
 									index: LCIndex_Tokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"unindexed2"
 								   string: @"test1"
 									store: LCStore_YES
 									index: LCIndex_NO];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"unstored2"
 								   string: @"test1"
 									store: LCStore_NO
 									index: LCIndex_Tokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	[writer addDocument: doc];
-	RELEASE(doc);
+	[doc release];
 }
 
 - (void) _addDocWithTVFields: (LCIndexWriter *) writer
@@ -108,37 +108,37 @@
 											 index: LCIndex_Tokenized
 										termVector: LCTermVector_NO];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"termvector"
 								   string: @"termvector"
 									store: LCStore_YES
 									index: LCIndex_Tokenized
 							   termVector: LCTermVector_YES];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"tvoffset"
 								   string: @"tvoffset"
 									store: LCStore_YES
 									index: LCIndex_Tokenized
 							   termVector: LCTermVector_WithOffsets];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"tvposition"
 								   string: @"tvposition"
 									store: LCStore_YES
 									index: LCIndex_Tokenized
 							   termVector: LCTermVector_WithPositions];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	field = [[LCField alloc] initWithName: @"tvpositionoffset"
 								   string: @"tvpositionoffset"
 									store: LCStore_YES
 									index: LCIndex_Tokenized
 							   termVector: LCTermVector_WithPositionsAndOffsets];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	[writer addDocument: doc];
-	RELEASE(doc);
+	[doc release];
 }
 
 - (void) _addDoc: (LCIndexWriter *) writer value: (NSString *) value
@@ -149,9 +149,9 @@
 											 store: LCStore_NO
 											 index: LCIndex_Tokenized];
 	[doc addField: field];
-	RELEASE(field);
+	[field release];
 	[writer addDocument: doc];
-	RELEASE(doc);
+	[doc release];
 }
 /**
 * Tests the IndexReader.getFieldNames implementation
@@ -200,7 +200,7 @@
 	[writer close];
 	[d close];
 	
-	DESTROY(writer);
+	[writer release];writer=nil;;
 	// verify fields again
 	reader = [LCIndexReader openDirectory: d];
 	fieldNames = [reader fieldNames: LCFieldOption_ALL];
@@ -257,7 +257,7 @@
 	UKIntsEqual(1, [fieldNames count]); 
 	UKTrue([fieldNames containsObject: @"tvpositionoffset"]);
 	
-	DESTROY(d);
+	[d release];d=nil;;
 }
 
 - (void) _assertTermDocsCount: (NSString *) msg

@@ -1,7 +1,7 @@
 #ifndef __LUCENE_JAVA_STRING_READER__
 #define __LUCENE_JAVA_STRING_READER__
 
-#include "LCReader.h"
+#import  "LCReader.h"
 
 @interface LCStringReader: NSObject <LCReader>
 {

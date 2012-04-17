@@ -1,9 +1,9 @@
-#include "LCMultiTermQuery.h"
-#include "LCBooleanQuery.h"
-#include "LCTermQuery.h"
-#include "LCFilteredTermEnum.h"
-#include "LCSmallFloat.h"
-#include "GNUstep.h"
+#import  "LCMultiTermQuery.h"
+#import  "LCBooleanQuery.h"
+#import  "LCTermQuery.h"
+#import  "LCFilteredTermEnum.h"
+#import  "LCSmallFloat.h"
+
 
 /**
  * A {@link Query} that matches documents containing a subset of terms provided
@@ -24,14 +24,13 @@
 - (id) initWithTerm: (LCTerm *) t
 {
 	self = [self init];
-	ASSIGN(term, t);
+	term = t;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(term);
-	[super dealloc];
+	term=nil;;
 }
 
 - (LCTerm *) term { return term; }
@@ -42,21 +41,21 @@
 - (LCQuery *) rewrite: (LCIndexReader *) reader
 {
 	LCBooleanQuery *query = [[LCBooleanQuery alloc] initWithCoordination: YES];
-	CREATE_AUTORELEASE_POOL(pool);
-	LCFilteredTermEnumerator *enumerator = [self enumerator: reader];
-	do {
-		LCTerm *t = [enumerator term];
-		if (t != nil) 
-		{
-			LCTermQuery *tq = [[LCTermQuery alloc] initWithTerm: t]; // found a match
-			[tq setBoost: [self boost]*[enumerator difference]]; // set the boost
-			[query addQuery: tq occur: LCOccur_SHOULD]; // add to query];
-                        DESTROY(tq);
-		}
-	} while ([enumerator hasNextTerm]);
-	[enumerator close];
-	DESTROY(pool);
-	return AUTORELEASE(query);
+	@autoreleasepool {
+		LCFilteredTermEnumerator *enumerator = [self enumerator: reader];
+		do {
+			LCTerm *t = [enumerator term];
+			if (t != nil) 
+			{
+				LCTermQuery *tq = [[LCTermQuery alloc] initWithTerm: t]; // found a match
+				[tq setBoost: [self boost]*[enumerator difference]]; // set the boost
+				[query addQuery: tq occur: LCOccur_SHOULD]; // add to query];
+                        tq=nil;;
+			}
+		} while ([enumerator hasNextTerm]);
+		[enumerator close];
+	}
+	return query;
 }
 
 /** Prints a user-readable version of this query. */
@@ -72,7 +71,7 @@
 	{
 		[buffer appendFormat: @"^%f", [self boost]];
 	}
-	return AUTORELEASE(buffer);
+	return buffer;
 }
 
 - (BOOL) isEqual: (id) o

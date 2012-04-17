@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_SORT_COMPARATOR_SOURCE__
 #define __LUCENE_SEARCH_SORT_COMPARATOR_SOURCE__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @class LCIndexReader;
 

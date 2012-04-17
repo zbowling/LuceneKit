@@ -1,11 +1,11 @@
-#include "LCIndexWriter.h"
-#include "LCSegmentInfos.h"
-#include "LCSegmentReader.h"
-#include "LCSegmentMerger.h"
-#include "LCDocumentWriter.h"
-#include "LCRAMDirectory.h"
-#include "LCFSDirectory.h"
-#include "GNUstep.h"
+#import  "LCIndexWriter.h"
+#import  "LCSegmentInfos.h"
+#import  "LCSegmentReader.h"
+#import  "LCSegmentMerger.h"
+#import  "LCDocumentWriter.h"
+#import  "LCRAMDirectory.h"
+#import  "LCFSDirectory.h"
+
 
 /**
 An IndexWriter creates and maintains an index.
@@ -48,9 +48,9 @@ An IndexWriter creates and maintains an index.
 - (id) init
 {
 	self = [super init];
-	ASSIGN(similarity, [LCSimilarity defaultSimilarity]);
-	ASSIGN(segmentInfos, AUTORELEASE([[LCSegmentInfos alloc] init]));
-	ASSIGN(ramDirectory, AUTORELEASE([[LCRAMDirectory alloc] init]));
+	similarity = [LCSimilarity defaultSimilarity];
+	segmentInfos = [[LCSegmentInfos alloc] init];
+	ramDirectory = [[LCRAMDirectory alloc] init];
 	termIndexInterval = DEFAULT_TERM_INDEX_INTERVAL;
 	
 	useCompoundFile = YES;
@@ -86,7 +86,7 @@ An IndexWriter creates and maintains an index.
 */
 - (void) setSimilarity: (LCSimilarity *) sim
 {
-	ASSIGN(similarity,sim);
+	similarity =sim;
 }
 
 /** Expert: Return the Similarity implementation used by this IndexWriter.
@@ -178,8 +178,8 @@ An IndexWriter creates and maintains an index.
 {
 	self = [self init];
 	closeDir = close;
-	ASSIGN(directory, dir);
-	ASSIGN(analyzer, a);
+	directory = dir;
+	analyzer = a;
 	
 #if 0
 	Lock writeLock = directory.makeLock(IndexWriter.WRITE_LOCK_NAME);
@@ -215,13 +215,12 @@ An IndexWriter creates and maintains an index.
 		writeLock = null;
     }
 #endif
-	DESTROY(analyzer);
-	DESTROY(similarity);
-	DESTROY(segmentInfos);
-	DESTROY(ramDirectory);
-	DESTROY(directory);
-	DESTROY(segmentInfos);
-	[super dealloc];
+	analyzer=nil;;
+	similarity=nil;;
+	segmentInfos=nil;;
+	ramDirectory=nil;;
+	directory=nil;;
+	segmentInfos=nil;;
 }
 /** Determines the largest number of documents ever merged by addDocument().
 * Small values (e.g., less than 10,000) are best for interactive indexing,
@@ -386,14 +385,15 @@ An IndexWriter creates and maintains an index.
 			analyzer: (LCAnalyzer *) a
 {
 //NSLog(@"addDocument %@ analyzer %@", doc, a);
-	LCDocumentWriter *dw = [[LCDocumentWriter alloc] initWithDirectory: ramDirectory
-															  analyzer: a indexWriter: self];
+	LCDocumentWriter *dw = [[LCDocumentWriter alloc] initWithDirectory:ramDirectory
+															  analyzer:a 
+                                                           indexWriter:self];
     //[dw setInfoStream: infoStream];
 	NSString *segmentName = [self newSegmentName];
 	[dw addDocument: segmentName document: doc];
-	DESTROY(dw);
+	dw=nil;;
 	//    synchronized (this) {
-	[segmentInfos addSegmentInfo: AUTORELEASE([[LCSegmentInfo alloc] initWithName: segmentName numberOfDocuments: 1 directory: ramDirectory])];
+	[segmentInfos addSegmentInfo: [[LCSegmentInfo alloc] initWithName: segmentName numberOfDocuments: 1 directory: ramDirectory]];
 	[self maybeMergeSegments];
 	//    }
 }
@@ -413,19 +413,19 @@ An IndexWriter creates and maintains an index.
 for search. */
 - (void) optimize
 {
-	CREATE_AUTORELEASE_POOL(pool);
-	[self flushRamSegments];
-	while ([segmentInfos numberOfSegments] > 1 ||
-		   ([segmentInfos numberOfSegments] == 1 &&
-			([LCSegmentReader hasDeletions: [segmentInfos segmentInfoAtIndex: 0]] ||
-			 [[segmentInfos segmentInfoAtIndex: 0] directory] != directory ||
-			 (useCompoundFile &&
-			  (![LCSegmentReader usesCompoundFile: [segmentInfos segmentInfoAtIndex: 0]] ||
-			   [LCSegmentReader hasSeparateNorms: [segmentInfos segmentInfoAtIndex: 0]]))))) {
-		int minSegment = [segmentInfos numberOfSegments] - mergeFactor;
-		[self mergeSegments: ((minSegment < 0) ? 0 : minSegment)];
+	@autoreleasepool {
+		[self flushRamSegments];
+		while ([segmentInfos numberOfSegments] > 1 ||
+			   ([segmentInfos numberOfSegments] == 1 &&
+				([LCSegmentReader hasDeletions: [segmentInfos segmentInfoAtIndex: 0]] ||
+				 [[segmentInfos segmentInfoAtIndex: 0] directory] != directory ||
+				 (useCompoundFile &&
+				  (![LCSegmentReader usesCompoundFile: [segmentInfos segmentInfoAtIndex: 0]] ||
+				   [LCSegmentReader hasSeparateNorms: [segmentInfos segmentInfoAtIndex: 0]]))))) {
+			int minSegment = [segmentInfos numberOfSegments] - mergeFactor;
+			[self mergeSegments: ((minSegment < 0) ? 0 : minSegment)];
+		}
 	}
-	DESTROY(pool);
 }
 
 /** Merges all segments from an array of indexes into this index.
@@ -449,7 +449,7 @@ for search. */
 		for (j = 0; j < [sis numberOfSegments]; j++) {
 			[segmentInfos addSegmentInfo: [sis segmentInfoAtIndex: j]]; // add each info
 		}
-		DESTROY(sis);
+		sis=nil;;
 	}
 	
 	while ([segmentInfos numberOfSegments] > start + mergeFactor)
@@ -493,8 +493,8 @@ for search. */
 	
 	NSRange r = NSMakeRange(0, [segmentInfos numberOfSegments]);
 	[segmentInfos removeSegmentsInRange: r];  // pop old infos & add new
-	[segmentInfos addSegmentInfo: AUTORELEASE([[LCSegmentInfo alloc] initWithName: mergedName
-																numberOfDocuments: docCount directory: directory])];
+	[segmentInfos addSegmentInfo: [[LCSegmentInfo alloc] initWithName: mergedName
+																numberOfDocuments: docCount directory: directory]];
     
 	if(sReader != nil)
 		[sReader close];
@@ -532,8 +532,8 @@ for search. */
 		}
 #endif
 	}
-	DESTROY(segmentsToDelete);
-	DESTROY(merger);
+	segmentsToDelete=nil;;
+	merger=nil;;
 }
 
 /** Merges all RAM-resident segments. */
@@ -614,8 +614,8 @@ and pushes the merged index onto the top of the segmentInfos stack. */
 	NSRange r = NSMakeRange(minSegment+1, end-minSegment-1);
 	[segmentInfos removeSegmentsInRange: r]; // pop old infos & add new
 
-	[segmentInfos setSegmentInfo: AUTORELEASE([[LCSegmentInfo alloc] initWithName: mergedName
-																numberOfDocuments: mergedDocCount directory: directory])
+	[segmentInfos setSegmentInfo: [[LCSegmentInfo alloc] initWithName: mergedName
+																numberOfDocuments: mergedDocCount directory: directory]
 		      atIndex: minSegment];
     // close readers before we attempt to delete now-obsolete segments
 	[merger closeReaders];
@@ -652,10 +652,10 @@ and pushes the merged index onto the top of the segmentInfos stack. */
 			}.run();
 		}
 #endif
-		DESTROY(filesToDelete);
+		filesToDelete=nil;;
 	}
-	DESTROY(segmentsToDelete);
-	DESTROY(merger);
+	segmentsToDelete=nil;;
+	merger=nil;;
 }
 
 /*
@@ -685,7 +685,7 @@ and pushes the merged index onto the top of the segmentInfos stack. */
 	}
 	
 	[self writeDeleteableFiles: deletable]; // note files we can't delete
-	DESTROY(deletable);
+	deletable=nil;;
 }
 
 - (void) deleteFiles: (NSArray *) files
@@ -696,7 +696,7 @@ and pushes the merged index onto the top of the segmentInfos stack. */
 	[self deleteFiles: files
 			deletable: deletable];    // try to delete our files
 	[self writeDeleteableFiles: deletable];        // note files we can't delete
-	DESTROY(deletable);
+	deletable=nil;;
 }
 
 - (void) deleteFiles: (NSArray *) files directory: (id <LCDirectory>) dir
@@ -736,14 +736,14 @@ and pushes the merged index onto the top of the segmentInfos stack. */
 {
 	NSMutableArray *result = [[NSMutableArray alloc] init];
 	if (![directory fileExists: @"deletable"])
-		return AUTORELEASE(result);
+		return result;
 	
 	LCIndexInput *input = [directory openInput: @"deletable"];
 	int ii;
 	for (ii = [input readInt]; ii > 0; ii--)	  // read file names
 		[result addObject: [input readString]];
 	[input close];
-	return AUTORELEASE(result);
+	return result;
 }
 
 - (void) writeDeleteableFiles: (NSArray *) files

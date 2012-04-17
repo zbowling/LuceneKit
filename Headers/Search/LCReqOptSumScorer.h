@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_REQ_OPT_SUM_SCORER__
 #define __LUCENE_SEARCH_REQ_OPT_SUM_SCORER__
 
-#include "LCScorer.h"
+#import  "LCScorer.h"
 
 @interface LCReqOptSumScorer: LCScorer
 {

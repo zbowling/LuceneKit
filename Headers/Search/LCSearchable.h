@@ -1,8 +1,8 @@
 #ifndef __LUCENE_SEARCH_SEARCHABLE__
 #define __LUCENE_SEARCH_SEARCHABLE__
 
-#include <Foundation/Foundation.h>
-#include "LCWeight.h"
+#import  <Foundation/Foundation.h>
+#import  "LCWeight.h"
 
 @class LCQuery;
 @class LCFilter;

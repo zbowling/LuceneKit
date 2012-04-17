@@ -1,8 +1,8 @@
 #ifndef __LUCENE_DOCUMENT_FIELD__
 #define __LUCENE_DOCUMENT_FIELD__
 
-#include <Foundation/Foundation.h>
-#include "LCReader.h"
+#import  <Foundation/Foundation.h>
+#import  "LCReader.h"
 
 /** Specify whether to store a value in field.
  * LCStore_Compress: store a value in compressed form.

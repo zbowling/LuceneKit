@@ -1,8 +1,8 @@
 #ifndef __LUCENE_INDEX_SEGMENT_INFOS__
 #define __LUCENE_INDEX_SEGMENT_INFOS__
 
-#include <Foundation/Foundation.h>
-#include "LCSegmentInfo.h"
+#import  <Foundation/Foundation.h>
+#import  "LCSegmentInfo.h"
 
 @interface LCSegmentInfos: NSObject
 {

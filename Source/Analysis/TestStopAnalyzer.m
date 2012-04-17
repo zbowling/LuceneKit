@@ -1,7 +1,7 @@
-#include "LCStopAnalyzer.h"
-#include "GNUstep.h"
-#include <UnitKit/UnitKit.h>
-#include "TestAnalyzer.h"
+#import  "LCStopAnalyzer.h"
+
+#import  <UnitKit/UnitKit.h>
+#import  "TestAnalyzer.h"
 
 @interface TestStopAnalyzer: NSObject <UKTest>
 @end

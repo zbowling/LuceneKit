@@ -1,20 +1,20 @@
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
-#include "LCRAMDirectory.h"
-#include "LCSimpleAnalyzer.h"
-#include "LCDocument.h"
-#include "LCIndexWriter.h"
-#include "LCIndexSearcher.h"
-#include "LCQuery.h"
-#include "LCSort.h"
-#include "LCTerm.h"
-#include "LCTermQuery.h"
-#include "LCSort.h"
-#include "LCHits.h"
-#include "LCSortField.h"
-#include "LCFilter.h"
-#include "LCTopFieldDocs.h"
-#include "GNUstep.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  "LCRAMDirectory.h"
+#import  "LCSimpleAnalyzer.h"
+#import  "LCDocument.h"
+#import  "LCIndexWriter.h"
+#import  "LCIndexSearcher.h"
+#import  "LCQuery.h"
+#import  "LCSort.h"
+#import  "LCTerm.h"
+#import  "LCTermQuery.h"
+#import  "LCSort.h"
+#import  "LCHits.h"
+#import  "LCSortField.h"
+#import  "LCFilter.h"
+#import  "LCTopFieldDocs.h"
+
 
 @interface TestSortFilter: LCFilter
 {
@@ -137,22 +137,22 @@
 		[NSArray arrayWithObjects:	@"Y",	@"g",				@"1",	@"0.2",	[NSNull null],	[NSNull null], nil],
 		[NSArray arrayWithObjects:	@"Z",	@"f g",				[NSNull null],	[NSNull null],	[NSNull null],	[NSNull null], nil],
 		nil];
-	ASSIGN(full, [self getFullIndex]);
-	ASSIGN(searchX, [self getXIndex]);
-	ASSIGN(searchY, [self getYIndex]);
+	full = [self getFullIndex];
+	searchX = [self getXIndex];
+	searchY = [self getYIndex];
 	LCTerm *term = [[LCTerm alloc] initWithField: @"contents" text: @"x"];
-	ASSIGN(queryX, [[LCTermQuery alloc] initWithTerm: term]);
+	queryX = [[LCTermQuery alloc] initWithTerm: term];
 	term = [[LCTerm alloc] initWithField: @"contents" text: @"y"];
-	ASSIGN(queryY, [[LCTermQuery alloc] initWithTerm: term]);
+	queryY = [[LCTermQuery alloc] initWithTerm: term];
 	term = [[LCTerm alloc] initWithField: @"contents" text: @"a"];
-	ASSIGN(queryA, [[LCTermQuery alloc] initWithTerm: term]);
+	queryA = [[LCTermQuery alloc] initWithTerm: term];
 	term = [[LCTerm alloc] initWithField: @"contents" text: @"e"];
-	ASSIGN(queryE, [[LCTermQuery alloc] initWithTerm: term]);
+	queryE = [[LCTermQuery alloc] initWithTerm: term];
 	term = [[LCTerm alloc] initWithField: @"contents" text: @"f"];
-	ASSIGN(queryF, [[LCTermQuery alloc] initWithTerm: term]);
+	queryF = [[LCTermQuery alloc] initWithTerm: term];
 	term = [[LCTerm alloc] initWithField: @"contents" text: @"g"];
-	ASSIGN(queryG, [[LCTermQuery alloc] initWithTerm: term]);
-	ASSIGN(sort, [[LCSort alloc] init]);
+	queryG = [[LCTermQuery alloc] initWithTerm: term];
+	sort = [[LCSort alloc] init];
 	return self;
 }
 
@@ -691,7 +691,7 @@
 - (id) initWithTopDocs: (LCTopDocs *) topDocs
 {
 	self = [self init];
-	ASSIGN(td, topDocs);
+	td = topDocs;
 	return self;
 }
 
@@ -699,6 +699,6 @@
 {
 	LCBitVector *bv = [[LCBitVector alloc] initWithSize: [reader maximalDocument]];
 	[bv setBit: [[[td scoreDocuments] objectAtIndex: 0] document]];
-	return AUTORELEASE(bv);
+	return [bv autorelease];
 }
 @end

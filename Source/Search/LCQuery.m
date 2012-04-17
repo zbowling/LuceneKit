@@ -1,7 +1,7 @@
-#include "LCQuery.h"
-#include "LCBooleanClause.h"
-#include "LCBooleanQuery.h"
-#include "GNUstep.h"
+#import  "LCQuery.h"
+#import  "LCBooleanClause.h"
+#import  "LCBooleanQuery.h"
+
 
 @interface LCScoreTerm: NSObject <LCComparable>
 {
@@ -92,15 +92,14 @@
 /** Expert: Constructs an initializes a Weight for a top-level query. */
 - (id <LCWeight>) weight: (LCSearcher *) searcher
 {
-	CREATE_AUTORELEASE_POOL(pool);
-	LCQuery *query = [searcher rewrite: self];
-	id <LCWeight> weight = [query createWeight: searcher];
-	RETAIN(weight);
-	float sum = [weight sumOfSquaredWeights];
-	float norm = [[self similarity: searcher] queryNorm: sum];
-	[weight normalize: norm];
-	DESTROY(pool);
-	AUTORELEASE(weight);
+    id <LCWeight> weight;
+	@autoreleasepool {
+        LCQuery *query = [searcher rewrite: self];
+        weight = [query createWeight: searcher];
+        float sum = [weight sumOfSquaredWeights];
+        float norm = [[self similarity: searcher] queryNorm: sum];
+        [weight normalize: norm];
+    }	
 	return weight;
 }
 
@@ -118,8 +117,7 @@
 - (LCQuery *) combine: (NSArray *) queries
 {
   NSMutableArray *uniques = [[NSMutableArray alloc] init];
-  AUTORELEASE(uniques);
-  int i, count = [queries count];
+   int i, count = [queries count];
   for (i = 0; i < count; i++) {
     LCQuery *query = [queries objectAtIndex: i];
     NSArray *clauses = nil;
@@ -154,7 +152,7 @@
   {
     [result addQuery: q occur: LCOccur_SHOULD];
   }
-  return AUTORELEASE(result);
+  return result;
 }
 
 - (void) extractTerms: (NSMutableArray *) terms
@@ -187,8 +185,8 @@
 	{
 		[result addClause: clause];
 	}
-	DESTROY(allClauses);
-	return AUTORELEASE(result);
+	allClauses=nil;;
+	return result;
 }
 
 /** Expert: Returns the Similarity implementation to be used for this query.

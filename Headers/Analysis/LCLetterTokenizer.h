@@ -1,7 +1,7 @@
 #ifndef __LUCENE_ANALYSIS_LETTER_TOKENIZER__
 #define __LUCENE_ANALYSIS_LETTER_TOKENIZER__
 
-#include "LCCharTokenizer.h"
+#import  "LCCharTokenizer.h"
 
 @interface LCLetterTokenizer: LCCharTokenizer
 @end

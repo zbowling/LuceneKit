@@ -1,4 +1,4 @@
-#include "LCTermVectorOffsetInfo.h"
+#import  "LCTermVectorOffsetInfo.h"
 
 @implementation LCTermVectorOffsetInfo
 

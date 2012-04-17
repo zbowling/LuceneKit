@@ -1,5 +1,5 @@
-#include "LCSegmentTermPositionVector.h"
-#include "GNUstep.h"
+#import  "LCSegmentTermPositionVector.h"
+
 
 @implementation LCSegmentTermPositionVector
 - (id) initWithField: (NSString *) f
@@ -16,9 +16,8 @@
 
 - (void) dealloc
 {
-	DESTROY(positions);
-	DESTROY(offsets);
-	[super dealloc];
+	positions=nil;;
+	offsets=nil;;
 }
 
 /**
@@ -39,7 +38,7 @@
     {
 		[result setArray: [offsets objectAtIndex: index]];
     }
-	return AUTORELEASE(result);;
+	return result;;
 }
 
 /**
@@ -62,7 +61,7 @@
 		[result setArray: [positions objectAtIndex: index]];
     }
     
-	return AUTORELEASE(result);
+	return result;
 }
 
 @end

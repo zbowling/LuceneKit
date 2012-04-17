@@ -1,8 +1,8 @@
 #ifndef __LuceneKit_Text_Importer__
 #define __LuceneKit_Text_Importer__
 
-#include <Foundation/Foundation.h>
-#include "LCImporter.h"
+#import  <Foundation/Foundation.h>
+#import  "LCImporter.h"
 
 @interface LCTextImporter: NSObject <LCImporter>
 @end

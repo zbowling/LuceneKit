@@ -1,8 +1,8 @@
-#include "LCMultiReader.h"
-#include "LCSegmentMergeQueue.h"
-#include "LCSegmentMergeInfo.h"
-#include "LCSegmentReader.h"
-#include "GNUstep.h"
+#import  "LCMultiReader.h"
+#import  "LCSegmentMergeQueue.h"
+#import  "LCSegmentMergeInfo.h"
+#import  "LCSegmentReader.h"
+
 
 /** An IndexReader which reads multiple indexes, appending their content.
 *
@@ -36,7 +36,7 @@
 - (id) initWithReaders: (NSArray *) r
 {
 	self = [self init];
-	[super initWithDirectory: ([r count] == 0) ? nil : [(LCIndexReader *)[r objectAtIndex: 0] directory]];
+	self = [super initWithDirectory: ([r count] == 0) ? nil : [(LCIndexReader *)[r objectAtIndex: 0] directory]];
 	[self initialize: r];
 	return self;
 }
@@ -48,7 +48,7 @@
 	             readers: (NSArray *) sr
 {
 	self = [self init];
-	[super initWithDirectory: dir
+	self = [super initWithDirectory: dir
 				segmentInfos: sis
 			  closeDirectory: close];
 	[self initialize: sr];
@@ -57,16 +57,15 @@
 
 - (void) dealloc
 {
-	DESTROY(normsCache);
-	DESTROY(subReaders);
-	DESTROY(starts);
-	DESTROY(ones);
-	[super dealloc];
+	normsCache=nil;;
+	subReaders=nil;;
+	starts=nil;;
+	ones=nil;;
 }
 
 - (void) initialize: (NSArray *) sr
 {
-	ASSIGN(subReaders, sr);
+	subReaders = sr;
 	starts = [[NSMutableArray alloc] init]; // build starts array
 	int i;
 	for (i = 0; i < [subReaders count]; i++) {
@@ -185,7 +184,7 @@
 - (NSData *) fakeNorms
 {
 	if (ones == nil)
-		ASSIGN(ones, [LCSegmentReader createFakeNorms: [self maximalDocument]]);
+		ones = [LCSegmentReader createFakeNorms: [self maximalDocument]];
 	return ones;
 }
 
@@ -202,7 +201,7 @@
 	for (i = 0; i < [subReaders count]; i++)
 		[[subReaders objectAtIndex: i] setNorms: field bytes: bytes offset: [[starts objectAtIndex: i] intValue]];
 	[normsCache setObject: bytes forKey: field]; // update cache
-	return AUTORELEASE(bytes);
+	return bytes;
 }
 
 - (void) setNorms: (NSString *) field 
@@ -231,16 +230,16 @@
 
 - (LCTermEnumerator *) termEnumerator
 {
-	return AUTORELEASE([[LCMultiTermEnumerator alloc] initWithReaders: subReaders
+	return [[LCMultiTermEnumerator alloc] initWithReaders: subReaders
 														 starts: starts
-														   term: nil]);
+														   term: nil];
 }
 
 - (LCTermEnumerator *) termEnumeratorWithTerm: (LCTerm *) term
 {
-	return AUTORELEASE([[LCMultiTermEnumerator alloc] initWithReaders: subReaders
+	return [[LCMultiTermEnumerator alloc] initWithReaders: subReaders
 														 starts: starts
-														   term: term]);
+														   term: term];
 }
 
 - (long) documentFrequency: (LCTerm *) t
@@ -256,14 +255,14 @@
 
 - (id <LCTermDocuments>) termDocuments
 {
-	return AUTORELEASE([[LCMultiTermDocuments alloc] initWithReaders: subReaders
-														 starts: starts]);
+	return [[LCMultiTermDocuments alloc] initWithReaders: subReaders
+														 starts: starts];
 }
 
 - (id <LCTermPositions>) termPositions
 {
-	return AUTORELEASE([[LCMultiTermPositions alloc] initWithReaders: subReaders
-															  starts: starts]);
+	return [[LCMultiTermPositions alloc] initWithReaders: subReaders
+															  starts: starts];
 }
 
 - (void) doCommit
@@ -292,7 +291,6 @@
 		LCIndexReader *reader = [subReaders objectAtIndex: i];
 		[fieldSet addObjectsFromArray: [reader fieldNames: fieldOption]];
     }
-    AUTORELEASE(fieldSet);
     return [fieldSet allObjects];
 }
 
@@ -321,7 +319,6 @@
 			[queue put: smi];          // initialize queue
 		else
 			[smi close];
-		RELEASE(smi);
     }
 	
     if (t != nil && [queue size] > 0) {
@@ -332,9 +329,8 @@
 
 - (void) dealloc
 {
-	DESTROY(queue);
-	DESTROY(term);
-	[super dealloc];
+	queue=nil;;
+	term=nil;;
 }
 
 - (BOOL) hasNextTerm
@@ -396,20 +392,12 @@
                 starts: (NSArray *) s
 {
 	self = [self init];
-	ASSIGN(readers, r);
-	ASSIGN(starts, s);
+	readers = r;
+	starts = s;
 	readerTermDocs = [[NSMutableArray alloc] init];
 	return self;
 }
 
-- (void) dealloc
-{
-	RELEASE(readers);
-	RELEASE(starts);
-	RELEASE(readerTermDocs);
-	RELEASE(current);
-	[super dealloc];
-}
 
 - (long) document
 {
@@ -423,10 +411,10 @@
 
 - (void) seekTerm: (LCTerm *) t
 {
-	ASSIGN(term, t);
+	term = t;
 	base = 0;
 	pointer = 0;
-	DESTROY(current);
+	current=nil;;
 }
 
 - (void) seekTermEnumerator: (LCTermEnumerator *) termEnum
@@ -440,7 +428,7 @@
 		return YES;
     } else if (pointer < [readers count]) {
 		base = [[starts objectAtIndex: pointer] intValue];
-		ASSIGN(current, [self termDocuments: pointer++]);
+		current = [self termDocuments: pointer++];
 		return [self hasNextDocument];
     } else {
 		return NO;
@@ -454,14 +442,14 @@
 		while (current == nil) {
 			if (pointer < [readers count]) {      // try next segment
 				base = [[starts objectAtIndex: pointer] intValue];
-				ASSIGN(current, [self termDocuments: pointer++]);
+				current = [self termDocuments: pointer++];
 			} else {
 				return 0;
 			}
 		}
 		int end = [current readDocuments: docs frequency: freqs size: size];
 		if (end == 0) {          // none left in segment
-			DESTROY(current);
+			current=nil;;
 		} else {            // got some
 			int b = base;        // adjust doc numbers
 			int i;

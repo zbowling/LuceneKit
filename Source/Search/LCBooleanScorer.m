@@ -1,11 +1,11 @@
-#include "LCBooleanScorer.h"
-#include "LCDisjunctionSumScorer.h"
-#include "LCConjunctionScorer.h"
-#include "LCReqExclScorer.h"
-#include "LCReqOptSumScorer.h"
-#include "LCDefaultSimilarity.h"
-#include "LCNonMatchingScorer.h"
-#include "GNUstep.h"
+#import  "LCBooleanScorer.h"
+#import  "LCDisjunctionSumScorer.h"
+#import  "LCConjunctionScorer.h"
+#import  "LCReqExclScorer.h"
+#import  "LCReqOptSumScorer.h"
+#import  "LCDefaultSimilarity.h"
+#import  "LCNonMatchingScorer.h"
+
 
 /* LuceneKit: This is actually BooleanScorer2 in lucene */
 @interface LCCoordinator: NSObject
@@ -96,13 +96,12 @@
 
 - (void) dealloc
 {
-  DESTROY(requiredScorers);
-  DESTROY(optionalScorers);
-  DESTROY(prohibitedScorers);
+  requiredScorers=nil;;
+  optionalScorers=nil;;
+  prohibitedScorers=nil;;
 	
-  DESTROY(coordinator);
-  DESTROY(countingSumScorer);
-  [super dealloc];
+  coordinator=nil;;
+  countingSumScorer=nil;;
 }
 
 - (void) addScorer: (LCScorer *) scorer
@@ -128,22 +127,22 @@
 - (void) initCountingSumScorer
 {
 	[coordinator initiation];
-	ASSIGN(countingSumScorer, [self makeCountingSumScorer]);
+	countingSumScorer = [self makeCountingSumScorer];
 }
 
 - (LCScorer *) countingDisjunctionSumScorer: (NSArray *) scorers
 		minimumNumberShouldMatch: (int) min
 {
-	return AUTORELEASE([[LCBooleanDisjunctionSumScorer alloc] initWithSubScorers: scorers
+	return [[LCBooleanDisjunctionSumScorer alloc] initWithSubScorers: scorers
 															   minimumNrMatchers: min
-																	 coordinator: coordinator]);
+																	 coordinator: coordinator];
 }
 
 - (LCScorer *) countingConjunctionSumScorer: (NSArray *) scorers
 {
 	int requiredNrMatchers = [scorers count];
 	// LuceneKit: Why always use LCDefaultSimilarity ?
-	LCBooleanConjunctionScorer *cs = [[LCBooleanConjunctionScorer alloc] initWithSimilarity: AUTORELEASE([[LCDefaultSimilarity alloc] init])
+	LCBooleanConjunctionScorer *cs = [[LCBooleanConjunctionScorer alloc] initWithSimilarity: [[LCDefaultSimilarity alloc] init]
 																				coordinator: coordinator
 																		 requiredNrMatchers: requiredNrMatchers];
 	NSEnumerator *e = [scorers objectEnumerator];
@@ -152,7 +151,7 @@
 	{
 		[cs addScorer: scorer];
 	}
-	return AUTORELEASE(cs);
+	return cs;
 }
 
 - (LCScorer *) dualConjunctionSumScorer1: (LCScorer *) req1 scorer2: (LCScorer *) req2
@@ -165,7 +164,7 @@
   	     // is used as score.
 	[cs addScorer: req1];
 	[cs addScorer: req2];
-	return AUTORELEASE(cs);
+	return cs;
 }
 
 - (LCScorer *) makeCountingSumScorer
@@ -184,12 +183,12 @@
 	NSLog(@"prohibitedScorers %@", prohibitedScorers);
 #endif
 	if ([optionalScorers count] == 0) {
-		return AUTORELEASE([[LCNonMatchingScorer alloc] init]); // no clauses or only prohibited scorers
+		return [[LCNonMatchingScorer alloc] init]; // no clauses or only prohibited scorers
 	} else { // No required scorers. At least one optional scorer.
 		// minNrShouldMatch optional scorers are quired, but at least 1
 		int nrOptRequired = (minNrShouldMatch < 1) ? 1 : minNrShouldMatch;
 		if ([optionalScorers count] < nrOptRequired) {
-			return AUTORELEASE([[LCNonMatchingScorer alloc] init]); // fewer optional clauses tham minimum (at least 1) that should match
+			return [[LCNonMatchingScorer alloc] init]; // fewer optional clauses tham minimum (at least 1) that should match
 		} else { // optionalScorers.size() >= nrOptRequired, no required scorers
 			LCScorer *requiredCountingSumScorer;
 			if ([optionalScorers count] > nrOptRequired)
@@ -200,7 +199,7 @@
 			{
 				if ([optionalScorers count] == 1)
 				{
-					requiredCountingSumScorer = AUTORELEASE([[LCSingleMatchScorer alloc] initWithScorer: [optionalScorers objectAtIndex: 0] coordinator: coordinator]);
+					requiredCountingSumScorer = [[LCSingleMatchScorer alloc] initWithScorer: [optionalScorers objectAtIndex: 0] coordinator: coordinator];
 				}
 				else
 				{
@@ -219,11 +218,11 @@
 	NSLog(@"minNrShouldMatch %d", minNrShouldMatch);
 #endif
 	if ([optionalScorers count] < minNrShouldMatch) {
-		return AUTORELEASE([[LCNonMatchingScorer alloc] init]);
+		return [[LCNonMatchingScorer alloc] init];
 		// fewer optional clauses than minimum that should match
 	} else if ([optionalScorers count] == minNrShouldMatch) {
 		// all optional scorers also required.
-          NSMutableArray *allReq = AUTORELEASE([[NSMutableArray alloc] init]);
+          NSMutableArray *allReq = [[NSMutableArray alloc] init];
 		[allReq addObjectsFromArray: requiredScorers];
 		[allReq addObjectsFromArray: optionalScorers];
 		return [self addProhibitedScorers: [self countingConjunctionSumScorer: allReq]];
@@ -233,7 +232,6 @@
 		if ([requiredScorers count] == 1)
 		{
 			requiredCountingSumScorer = [[LCSingleMatchScorer alloc] initWithScorer: [requiredScorers objectAtIndex: 0] coordinator: coordinator];
-			AUTORELEASE(requiredCountingSumScorer);
 		}
 		else
 		{
@@ -247,7 +245,7 @@
 			LCScorer *opt;
 			if ([optionalScorers count] == 1)
 			{
-				opt = AUTORELEASE([[LCSingleMatchScorer alloc] initWithScorer: [optionalScorers objectAtIndex: 0] coordinator: coordinator]);
+				opt = [[LCSingleMatchScorer alloc] initWithScorer: [optionalScorers objectAtIndex: 0] coordinator: coordinator];
 			}
 			else
 			{
@@ -255,18 +253,17 @@
 				// required 1 in combined, optional scorer.
 			}
 			LCReqOptSumScorer *r = [[LCReqOptSumScorer alloc] initWithRequired: [self addProhibitedScorers: requiredCountingSumScorer] optional: opt];
-			return AUTORELEASE(r);
+			return r;
 		}
 	}
 }
 
 - (LCScorer *) addProhibitedScorers: (LCScorer *) requiredCountingSumScorer
 {
-	RETAIN(requiredCountingSumScorer);
 	//NSLog(@"AddProhibitedScorers %@", requiredCountingSumScorer);
 	if ([prohibitedScorers count] == 0)
 	{
-		return AUTORELEASE(requiredCountingSumScorer); // no prohibited
+		return requiredCountingSumScorer; // no prohibited
 	}
 	else
 	{
@@ -277,9 +274,9 @@
 		}
 		else
 		{
-			ex = AUTORELEASE([[LCDisjunctionSumScorer alloc] initWithSubScorers: prohibitedScorers]);
+			ex = [[LCDisjunctionSumScorer alloc] initWithSubScorers: prohibitedScorers];
 		}
-		return AUTORELEASE([[LCReqExclScorer alloc] initWithRequired: AUTORELEASE(requiredCountingSumScorer) excluded: ex]);
+		return [[LCReqExclScorer alloc] initWithRequired: requiredCountingSumScorer excluded: ex];
 	}
 }
 
@@ -345,7 +342,7 @@
        requiredNrMatchers: (int) required
 {
 	self = [super initWithSimilarity: s];
-	ASSIGN(coordinator, c);
+	coordinator = c;
 	requiredNrMatchers = required;
 	lastScoredDoc = -1;
 	return self;
@@ -353,8 +350,7 @@
 
 - (void) dealloc
 {
-  DESTROY(coordinator);
-  [super dealloc];
+  coordinator=nil;;
 }
 
 - (float) score
@@ -374,15 +370,14 @@
 {
 	self = [super initWithSubScorers: sub
 				   minimumNrMatchers: minimum];
-	ASSIGN(coordinator, c);
+	coordinator = c;
 	lastScoredDoc = -1;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(coordinator);
-  [super dealloc];
+  coordinator=nil;;
 }
 
 - (float) score
@@ -401,17 +396,16 @@
 - (id) initWithScorer: (LCScorer *) s coordinator: (LCCoordinator *) c
 {
 	self = [self initWithSimilarity: [s similarity]];
-	ASSIGN(scorer, s);
-	ASSIGN(coordinator, c);
+	scorer = s;
+	coordinator = c;
 	lastScoredDoc = -1;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(coordinator);
-  DESTROY(scorer);
-  [super dealloc];
+  coordinator=nil;;
+  scorer=nil;;
 }
 
 - (float) score
@@ -458,8 +452,7 @@
 - (void) dealloc
 {
   //Don't release scorer as we not retain it
-  DESTROY(coordFactors);
-  [super dealloc];
+  coordFactors=nil;;
 }
 
 - (void) initiation

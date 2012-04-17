@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_EXPLANATION__
 #define __LUCENE_SEARCH_EXPLANATION__
 
-#include <Foundation/Foundation.h> // Serializable
+#import  <Foundation/Foundation.h> // Serializable
 
 @interface LCExplanation: NSObject
 {

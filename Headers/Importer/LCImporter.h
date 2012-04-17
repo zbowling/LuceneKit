@@ -1,7 +1,7 @@
 #ifndef __LuceneKit_Importer__
 #define __LuceneKit_Importer__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 @protocol LCImporter <NSObject>
 /** Return the attributes of file.

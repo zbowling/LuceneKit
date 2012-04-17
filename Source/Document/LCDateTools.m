@@ -1,5 +1,5 @@
-#include "LCDateTools.h"
-#include "GNUstep.h"
+#import  "LCDateTools.h"
+
 
 /**
 * Provides support for converting dates to strings and vice-versa.
@@ -198,7 +198,7 @@
 										 second: [self secondOfMinute]
 									   timeZone: [self timeZone]];
 		case LCResolution_MILLISECOND:
-			return AUTORELEASE([self copy]);
+			return [self copy];
 			// don't cut off anything
 		default:
 			return nil; // Error;

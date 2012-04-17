@@ -1,15 +1,15 @@
-#include <Foundation/Foundation.h>
-#include <UnitKit/UnitKit.h>
-#include "LCSimpleAnalyzer.h"
-#include "LCDocument.h"
-#include "LCIndexWriter.h"
-#include "LCTerm.h"
-#include "LCBooleanClause.h"
-#include "LCBooleanQuery.h"
-#include "LCIndexSearcher.h"
-#include "LCTermQuery.h"
-#include "LCHits.h"
-#include "LCRAMDirectory.h"
+#import  <Foundation/Foundation.h>
+#import  <UnitKit/UnitKit.h>
+#import  "LCSimpleAnalyzer.h"
+#import  "LCDocument.h"
+#import  "LCIndexWriter.h"
+#import  "LCTerm.h"
+#import  "LCBooleanClause.h"
+#import  "LCBooleanQuery.h"
+#import  "LCIndexSearcher.h"
+#import  "LCTermQuery.h"
+#import  "LCHits.h"
+#import  "LCRAMDirectory.h"
 
 static NSString *FIELD_T = @"T";
 static NSString *FIELD_C = @"C";

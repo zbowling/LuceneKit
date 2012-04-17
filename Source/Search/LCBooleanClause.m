@@ -1,6 +1,6 @@
-#include "LCBooleanClause.h"
-#include "LCQuery.h"
-#include "GNUstep.h"
+#import  "LCBooleanClause.h"
+#import  "LCQuery.h"
+
 
 @interface LCBooleanClause (LCPrivate)
 - (void) setFields: (LCOccurType) o;
@@ -18,15 +18,14 @@
 			   occur: (LCOccurType) o
 {
 	self = [self init];
-	ASSIGN(query, q);
+	query = q;
 	occur = o;
 	return self;
 }
 
 - (void) dealloc
 {
-  DESTROY(query);
-  [super dealloc];
+  query=nil;;
 }
 
 - (LCOccurType) occur { return occur; }
@@ -51,7 +50,7 @@
 - (LCQuery *) query { return query; }
 - (void) setQuery: (LCQuery *) q
 {
-	ASSIGN(query, q);
+	query = q;
 }
 
 - (BOOL) isProhibited { return (LCOccur_MUST_NOT == occur); }

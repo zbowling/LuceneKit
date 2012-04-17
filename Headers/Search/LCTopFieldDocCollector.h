@@ -1,7 +1,7 @@
 #ifndef __LuceneKit_Search_TopFieldDocCollector__
 #define __LuceneKit_Search_TopFieldDocCollector__
 
-#include "LCTopDocCollector.h"
+#import  "LCTopDocCollector.h"
 
 @class LCIndexReader;
 @class LCSort;

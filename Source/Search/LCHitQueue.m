@@ -1,4 +1,4 @@
-#include "LCHitQueue.h"
+#import  "LCHitQueue.h"
 
 @implementation LCHitQueue
 /* LuceneKit: lessThan implemented in LCScoreDoc */

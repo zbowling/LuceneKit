@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -152,7 +152,6 @@
 		604A2FEE0998D5750082342D /* Java.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FEB0998D5750082342D /* Java.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		604A2FEF0998D5750082342D /* LCReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FEC0998D5750082342D /* LCReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		604A2FF00998D5750082342D /* LCStringReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FED0998D5750082342D /* LCStringReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		604A2FF60998D5B40082342D /* GNUstep.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FF50998D5B40082342D /* GNUstep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		604A300D0998D5E70082342D /* Analysis.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FFA0998D5E70082342D /* Analysis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		604A300E0998D5E70082342D /* LCAnalyzer.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FFB0998D5E70082342D /* LCAnalyzer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		604A300F0998D5E70082342D /* LCCharTokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 604A2FFC0998D5E70082342D /* LCCharTokenizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -340,7 +339,6 @@
 		60E79E361278B47800814548 /* PorterStemmer.c in Sources */ = {isa = PBXBuildFile; fileRef = 64C9246508B78CCA00ACE251 /* PorterStemmer.c */; };
 		60E79E381278B47800814548 /* QueryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 609A9FC908D3A1190008B25B /* QueryHandler.m */; };
 		60E79E391278B4AC00814548 /* TokenHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 609A9FCC08D3A1210008B25B /* TokenHandler.m */; };
-		60E79EF01278B57C00814548 /* UnitKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C922B908B78AF100ACE251 /* UnitKit.framework */; };
 		60E7A19E127B4DFD00814548 /* TestDocumentWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E7A19B127B4DFD00814548 /* TestDocumentWriter.m */; };
 		60E7A19F127B4DFD00814548 /* TestFieldInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E7A19C127B4DFD00814548 /* TestFieldInfos.m */; };
 		60E7A1A0127B4DFD00814548 /* TestIndexWriterMerging.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E7A19D127B4DFD00814548 /* TestIndexWriterMerging.m */; };
@@ -474,7 +472,7 @@
 		6047501408D19B5E000F2531 /* LCMetadataAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMetadataAttribute.h; sourceTree = "<group>"; };
 		604A2C820998C2980082342D /* LCTopDocCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCTopDocCollector.m; sourceTree = "<group>"; };
 		604A2C830998C2980082342D /* LCTopFieldDocCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCTopFieldDocCollector.m; sourceTree = "<group>"; };
-		604A2C880998C2B00082342D /* TestBooleanMinShouldMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestBooleanMinShouldMatch.m; sourceTree = "<group>"; };
+		604A2C880998C2B00082342D /* TestBooleanMinShouldMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestBooleanMinShouldMatch.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		604A2C8A0998C2E40082342D /* TestDateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDateTools.m; sourceTree = "<group>"; };
 		604A2C8B0998C2E40082342D /* TestDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDocument.m; sourceTree = "<group>"; };
 		604A2C8E0998C2F90082342D /* TestAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAnalyzer.h; sourceTree = "<group>"; };
@@ -616,7 +614,6 @@
 		604A2FEB0998D5750082342D /* Java.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Java.h; path = Java/Java.h; sourceTree = "<group>"; };
 		604A2FEC0998D5750082342D /* LCReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCReader.h; path = Java/LCReader.h; sourceTree = "<group>"; };
 		604A2FED0998D5750082342D /* LCStringReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCStringReader.h; path = Java/LCStringReader.h; sourceTree = "<group>"; };
-		604A2FF50998D5B40082342D /* GNUstep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNUstep.h; path = Headers/GNUstep/GNUstep.h; sourceTree = "<group>"; };
 		604A2FFA0998D5E70082342D /* Analysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Analysis.h; path = Analysis/Analysis.h; sourceTree = "<group>"; };
 		604A2FFB0998D5E70082342D /* LCAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAnalyzer.h; path = Analysis/LCAnalyzer.h; sourceTree = "<group>"; };
 		604A2FFC0998D5E70082342D /* LCCharTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCharTokenizer.h; path = Analysis/LCCharTokenizer.h; sourceTree = "<group>"; };
@@ -645,23 +642,21 @@
 		60692FC008BFDE76009D3B3F /* LuceneKitTest.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuceneKitTest.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		609A9FC908D3A1190008B25B /* QueryHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryHandler.m; sourceTree = "<group>"; };
 		609A9FCC08D3A1210008B25B /* TokenHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenHandler.m; sourceTree = "<group>"; };
-		609A9FCF08D3A1310008B25B /* CodeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeParser.m; sourceTree = "<group>"; };
+		609A9FCF08D3A1310008B25B /* CodeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CodeParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		609A9FD508D3A14E0008B25B /* QueryHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHandler.h; sourceTree = "<group>"; };
 		609A9FD608D3A14E0008B25B /* TokenHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenHandler.h; sourceTree = "<group>"; };
 		609A9FD708D3A14E0008B25B /* CodeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeHandler.h; sourceTree = "<group>"; };
 		609A9FD808D3A14E0008B25B /* CodeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeParser.h; sourceTree = "<group>"; };
-		609A9FE908D3A2810008B25B /* LCWildcardTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCWildcardTermEnum.m; sourceTree = "<group>"; };
+		609A9FE908D3A2810008B25B /* LCWildcardTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCWildcardTermEnum.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		609A9FEA08D3A2810008B25B /* LCWildcardQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCWildcardQuery.m; sourceTree = "<group>"; };
 		609A9FEB08D3A2810008B25B /* TestWildcard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestWildcard.m; sourceTree = "<group>"; };
-		609AA00508D3A4D60008B25B /* OgreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OgreKit.framework; path = /Library/Frameworks/OgreKit.framework; sourceTree = "<absolute>"; };
 		60E79CF61278B1BE00814548 /* LCMetadataAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMetadataAttribute.m; sourceTree = "<group>"; };
-		60E7A19B127B4DFD00814548 /* TestDocumentWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDocumentWriter.m; sourceTree = "<group>"; };
+		60E7A19B127B4DFD00814548 /* TestDocumentWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestDocumentWriter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		60E7A19C127B4DFD00814548 /* TestFieldInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestFieldInfos.m; sourceTree = "<group>"; };
 		60E7A19D127B4DFD00814548 /* TestIndexWriterMerging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestIndexWriterMerging.m; sourceTree = "<group>"; };
 		60E7A1A1127B4E7800814548 /* LCRangeQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCRangeQuery.m; sourceTree = "<group>"; };
-		60E7A1A4127B4E8600814548 /* TestRangeQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRangeQuery.m; sourceTree = "<group>"; };
+		60E7A1A4127B4E8600814548 /* TestRangeQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestRangeQuery.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		60E7A1A6127B4E9B00814548 /* LCRangeQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRangeQuery.h; path = Search/LCRangeQuery.h; sourceTree = "<group>"; };
-		64C922B908B78AF100ACE251 /* UnitKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnitKit.framework; path = /Library/Frameworks/UnitKit.framework; sourceTree = "<absolute>"; };
 		64C9245408B78CCA00ACE251 /* LCAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCAnalyzer.m; sourceTree = "<group>"; };
 		64C9245508B78CCA00ACE251 /* LCCharTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCCharTokenizer.m; sourceTree = "<group>"; };
 		64C9245608B78CCA00ACE251 /* LCLetterTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCLetterTokenizer.m; sourceTree = "<group>"; };
@@ -672,44 +667,44 @@
 		64C9245B08B78CCA00ACE251 /* LCSimpleAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSimpleAnalyzer.m; sourceTree = "<group>"; };
 		64C9245C08B78CCA00ACE251 /* LCStopAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCStopAnalyzer.m; sourceTree = "<group>"; };
 		64C9245D08B78CCA00ACE251 /* LCStopFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCStopFilter.m; sourceTree = "<group>"; };
-		64C9245E08B78CCA00ACE251 /* LCToken.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCToken.m; sourceTree = "<group>"; };
+		64C9245E08B78CCA00ACE251 /* LCToken.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCToken.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9245F08B78CCA00ACE251 /* LCTokenFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTokenFilter.m; sourceTree = "<group>"; };
 		64C9246008B78CCA00ACE251 /* LCTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTokenizer.m; sourceTree = "<group>"; };
 		64C9246108B78CCA00ACE251 /* LCTokenStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTokenStream.m; sourceTree = "<group>"; };
 		64C9246208B78CCA00ACE251 /* LCWhitespaceAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCWhitespaceAnalyzer.m; sourceTree = "<group>"; };
 		64C9246308B78CCA00ACE251 /* LCWhitespaceTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCWhitespaceTokenizer.m; sourceTree = "<group>"; };
-		64C9246408B78CCA00ACE251 /* LCWordlistLoader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCWordlistLoader.m; sourceTree = "<group>"; };
+		64C9246408B78CCA00ACE251 /* LCWordlistLoader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCWordlistLoader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9246508B78CCA00ACE251 /* PorterStemmer.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = PorterStemmer.c; sourceTree = "<group>"; };
 		64C9246908B78CCA00ACE251 /* LCDateTools.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCDateTools.m; sourceTree = "<group>"; };
 		64C9246A08B78CCA00ACE251 /* LCDocument.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCDocument.m; sourceTree = "<group>"; };
-		64C9246B08B78CCA00ACE251 /* LCField.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCField.m; sourceTree = "<group>"; };
+		64C9246B08B78CCA00ACE251 /* LCField.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCField.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9246D08B78CCA00ACE251 /* TestBinaryDocument.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestBinaryDocument.m; sourceTree = "<group>"; };
 		64C9247208B78CCA00ACE251 /* LCTextImporter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTextImporter.m; sourceTree = "<group>"; };
-		64C9247608B78CCA00ACE251 /* LCCompoundFileReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCCompoundFileReader.m; sourceTree = "<group>"; };
+		64C9247608B78CCA00ACE251 /* LCCompoundFileReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCCompoundFileReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9247708B78CCA00ACE251 /* LCCompoundFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCCompoundFileWriter.m; sourceTree = "<group>"; };
-		64C9247808B78CCA00ACE251 /* LCDocumentWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCDocumentWriter.m; sourceTree = "<group>"; };
-		64C9247908B78CCA00ACE251 /* LCFieldInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldInfo.m; sourceTree = "<group>"; };
+		64C9247808B78CCA00ACE251 /* LCDocumentWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCDocumentWriter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9247908B78CCA00ACE251 /* LCFieldInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFieldInfo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9247A08B78CCA00ACE251 /* LCFieldInfos.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldInfos.m; sourceTree = "<group>"; };
-		64C9247B08B78CCA00ACE251 /* LCFieldsReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldsReader.m; sourceTree = "<group>"; };
+		64C9247B08B78CCA00ACE251 /* LCFieldsReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFieldsReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9247C08B78CCA00ACE251 /* LCFieldsWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldsWriter.m; sourceTree = "<group>"; };
 		64C9247D08B78CCA00ACE251 /* LCFilterIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFilterIndexReader.m; sourceTree = "<group>"; };
-		64C9247E08B78CCA00ACE251 /* LCIndexModifier.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexModifier.m; sourceTree = "<group>"; };
-		64C9247F08B78CCA00ACE251 /* LCIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexReader.m; sourceTree = "<group>"; };
-		64C9248008B78CCA00ACE251 /* LCIndexWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexWriter.m; sourceTree = "<group>"; };
+		64C9247E08B78CCA00ACE251 /* LCIndexModifier.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCIndexModifier.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9247F08B78CCA00ACE251 /* LCIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCIndexReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9248008B78CCA00ACE251 /* LCIndexWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCIndexWriter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9248108B78CCA00ACE251 /* LCMultipleTermPositions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCMultipleTermPositions.m; sourceTree = "<group>"; };
-		64C9248208B78CCA00ACE251 /* LCMultiReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCMultiReader.m; sourceTree = "<group>"; };
+		64C9248208B78CCA00ACE251 /* LCMultiReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCMultiReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9248308B78CCA00ACE251 /* LCSegmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentInfo.m; sourceTree = "<group>"; };
 		64C9248408B78CCA00ACE251 /* LCSegmentInfos.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentInfos.m; sourceTree = "<group>"; };
 		64C9248508B78CCA00ACE251 /* LCSegmentMergeInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentMergeInfo.m; sourceTree = "<group>"; };
 		64C9248608B78CCA00ACE251 /* LCSegmentMergeQueue.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentMergeQueue.m; sourceTree = "<group>"; };
 		64C9248708B78CCA00ACE251 /* LCSegmentMerger.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentMerger.m; sourceTree = "<group>"; };
-		64C9248808B78CCA00ACE251 /* LCSegmentReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentReader.m; sourceTree = "<group>"; };
-		64C9248908B78CCA00ACE251 /* LCSegmentTermDocs.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentTermDocs.m; sourceTree = "<group>"; };
+		64C9248808B78CCA00ACE251 /* LCSegmentReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCSegmentReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9248908B78CCA00ACE251 /* LCSegmentTermDocs.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCSegmentTermDocs.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9248A08B78CCA00ACE251 /* LCSegmentTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentTermEnum.m; sourceTree = "<group>"; };
-		64C9248B08B78CCA00ACE251 /* LCSegmentTermPositions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentTermPositions.m; sourceTree = "<group>"; };
+		64C9248B08B78CCA00ACE251 /* LCSegmentTermPositions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCSegmentTermPositions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9248C08B78CCA00ACE251 /* LCSegmentTermPositionVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentTermPositionVector.m; sourceTree = "<group>"; };
 		64C9248D08B78CCA00ACE251 /* LCSegmentTermVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSegmentTermVector.m; sourceTree = "<group>"; };
-		64C9248E08B78CCA00ACE251 /* LCTerm.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTerm.m; sourceTree = "<group>"; };
+		64C9248E08B78CCA00ACE251 /* LCTerm.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCTerm.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9248F08B78CCA00ACE251 /* LCTermBuffer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermBuffer.m; sourceTree = "<group>"; };
 		64C9249008B78CCA00ACE251 /* LCTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermEnum.m; sourceTree = "<group>"; };
 		64C9249108B78CCA00ACE251 /* LCTermInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermInfo.m; sourceTree = "<group>"; };
@@ -717,55 +712,55 @@
 		64C9249308B78CCA00ACE251 /* LCTermInfosWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermInfosWriter.m; sourceTree = "<group>"; };
 		64C9249408B78CCA00ACE251 /* LCTermVectorOffsetInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermVectorOffsetInfo.m; sourceTree = "<group>"; };
 		64C9249508B78CCA00ACE251 /* LCTermVectorsReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermVectorsReader.m; sourceTree = "<group>"; };
-		64C9249608B78CCA00ACE251 /* LCTermVectorsWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermVectorsWriter.m; sourceTree = "<group>"; };
+		64C9249608B78CCA00ACE251 /* LCTermVectorsWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCTermVectorsWriter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9249708B78CCA00ACE251 /* TestCompoundFile.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestCompoundFile.m; sourceTree = "<group>"; };
 		64C9249808B78CCA00ACE251 /* TestDocHelper.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TestDocHelper.h; sourceTree = "<group>"; };
-		64C9249908B78CCA00ACE251 /* TestDocHelper.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestDocHelper.m; sourceTree = "<group>"; };
+		64C9249908B78CCA00ACE251 /* TestDocHelper.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestDocHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9249A08B78CCA00ACE251 /* TestFieldsReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestFieldsReader.m; sourceTree = "<group>"; };
 		64C9249B08B78CCA00ACE251 /* TestFilterIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestFilterIndexReader.m; sourceTree = "<group>"; };
 		64C9249C08B78CCA00ACE251 /* TestIndexModifier.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestIndexModifier.m; sourceTree = "<group>"; };
-		64C9249D08B78CCA00ACE251 /* TestIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestIndexReader.m; sourceTree = "<group>"; };
+		64C9249D08B78CCA00ACE251 /* TestIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestIndexReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9249E08B78CCA00ACE251 /* TestIndexWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestIndexWriter.m; sourceTree = "<group>"; };
 		64C9249F08B78CCA00ACE251 /* TestMockIndexInput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestMockIndexInput.m; sourceTree = "<group>"; };
 		64C924A008B78CCA00ACE251 /* TestMockIndexOutput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestMockIndexOutput.m; sourceTree = "<group>"; };
 		64C924A108B78CCA00ACE251 /* TestMultiReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestMultiReader.m; sourceTree = "<group>"; };
 		64C924A208B78CCA00ACE251 /* TestSegmentMerger.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSegmentMerger.m; sourceTree = "<group>"; };
-		64C924A308B78CCA00ACE251 /* TestSegmentReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSegmentReader.m; sourceTree = "<group>"; };
-		64C924A408B78CCA00ACE251 /* TestSegmentTermDocs.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSegmentTermDocs.m; sourceTree = "<group>"; };
+		64C924A308B78CCA00ACE251 /* TestSegmentReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestSegmentReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924A408B78CCA00ACE251 /* TestSegmentTermDocs.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestSegmentTermDocs.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924A508B78CCA00ACE251 /* TestSegmentTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSegmentTermEnum.m; sourceTree = "<group>"; };
 		64C924A608B78CCA00ACE251 /* TestTermInfos.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestTermInfos.m; sourceTree = "<group>"; };
 		64C924A708B78CCA00ACE251 /* TestTermVectorsReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestTermVectorsReader.m; sourceTree = "<group>"; };
-		64C924A808B78CCA00ACE251 /* TestTermVectorsWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestTermVectorsWriter.m; sourceTree = "<group>"; };
-		64C924AC08B78CCA00ACE251 /* LCStringReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCStringReader.m; sourceTree = "<group>"; };
-		64C924AD08B78CCA00ACE251 /* LCIndexManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexManager.m; sourceTree = "<group>"; };
+		64C924A808B78CCA00ACE251 /* TestTermVectorsWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestTermVectorsWriter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924AC08B78CCA00ACE251 /* LCStringReader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCStringReader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924AD08B78CCA00ACE251 /* LCIndexManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCIndexManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924B008B78CCA00ACE251 /* LCQueryParser.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCQueryParser.m; sourceTree = "<group>"; };
-		64C924B408B78CCA00ACE251 /* LCBooleanClause.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCBooleanClause.m; sourceTree = "<group>"; };
-		64C924B508B78CCA00ACE251 /* LCBooleanQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCBooleanQuery.m; sourceTree = "<group>"; };
-		64C924B608B78CCA00ACE251 /* LCBooleanScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCBooleanScorer.m; sourceTree = "<group>"; };
+		64C924B408B78CCA00ACE251 /* LCBooleanClause.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCBooleanClause.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924B508B78CCA00ACE251 /* LCBooleanQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCBooleanQuery.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924B608B78CCA00ACE251 /* LCBooleanScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCBooleanScorer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924B708B78CCA00ACE251 /* LCConjunctionScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCConjunctionScorer.m; sourceTree = "<group>"; };
 		64C924B808B78CCA00ACE251 /* LCDefaultSimilarity.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCDefaultSimilarity.m; sourceTree = "<group>"; };
 		64C924B908B78CCA00ACE251 /* LCDisjunctionSumScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCDisjunctionSumScorer.m; sourceTree = "<group>"; };
 		64C924BA08B78CCA00ACE251 /* LCExplanation.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCExplanation.m; sourceTree = "<group>"; };
-		64C924BB08B78CCA00ACE251 /* LCFieldCache.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldCache.m; sourceTree = "<group>"; };
-		64C924BC08B78CCA00ACE251 /* LCFieldCacheImpl.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldCacheImpl.m; sourceTree = "<group>"; };
-		64C924BD08B78CCA00ACE251 /* LCFieldDoc.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldDoc.m; sourceTree = "<group>"; };
-		64C924BE08B78CCA00ACE251 /* LCFieldSortedHitQueue.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFieldSortedHitQueue.m; sourceTree = "<group>"; };
+		64C924BB08B78CCA00ACE251 /* LCFieldCache.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFieldCache.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924BC08B78CCA00ACE251 /* LCFieldCacheImpl.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFieldCacheImpl.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924BD08B78CCA00ACE251 /* LCFieldDoc.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFieldDoc.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924BE08B78CCA00ACE251 /* LCFieldSortedHitQueue.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFieldSortedHitQueue.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924BF08B78CCA00ACE251 /* LCFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFilter.m; sourceTree = "<group>"; };
 		64C924C008B78CCA00ACE251 /* LCFilteredTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFilteredTermEnum.m; sourceTree = "<group>"; };
-		64C924C108B78CCA00ACE251 /* LCFuzzyQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFuzzyQuery.m; sourceTree = "<group>"; };
-		64C924C208B78CCA00ACE251 /* LCFuzzyTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFuzzyTermEnum.m; sourceTree = "<group>"; };
-		64C924C308B78CCA00ACE251 /* LCHit.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCHit.m; sourceTree = "<group>"; };
-		64C924C408B78CCA00ACE251 /* LCHitCollector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCHitCollector.m; sourceTree = "<group>"; };
-		64C924C508B78CCA00ACE251 /* LCHitIterator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCHitIterator.m; sourceTree = "<group>"; };
+		64C924C108B78CCA00ACE251 /* LCFuzzyQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFuzzyQuery.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924C208B78CCA00ACE251 /* LCFuzzyTermEnum.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFuzzyTermEnum.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924C308B78CCA00ACE251 /* LCHit.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCHit.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924C408B78CCA00ACE251 /* LCHitCollector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCHitCollector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924C508B78CCA00ACE251 /* LCHitIterator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCHitIterator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924C608B78CCA00ACE251 /* LCHitQueue.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCHitQueue.m; sourceTree = "<group>"; };
-		64C924C708B78CCA00ACE251 /* LCHits.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCHits.m; sourceTree = "<group>"; };
+		64C924C708B78CCA00ACE251 /* LCHits.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCHits.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924C808B78CCA00ACE251 /* LCIndexSearcher.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexSearcher.m; sourceTree = "<group>"; };
-		64C924C908B78CCA00ACE251 /* LCMultiTermQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCMultiTermQuery.m; sourceTree = "<group>"; };
+		64C924C908B78CCA00ACE251 /* LCMultiTermQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCMultiTermQuery.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924CA08B78CCA00ACE251 /* LCNonMatchingScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCNonMatchingScorer.m; sourceTree = "<group>"; };
-		64C924CB08B78CCA00ACE251 /* LCPrefixQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCPrefixQuery.m; sourceTree = "<group>"; };
-		64C924CC08B78CCA00ACE251 /* LCQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCQuery.m; sourceTree = "<group>"; };
+		64C924CB08B78CCA00ACE251 /* LCPrefixQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCPrefixQuery.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924CC08B78CCA00ACE251 /* LCQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCQuery.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924CD08B78CCA00ACE251 /* LCQueryFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCQueryFilter.m; sourceTree = "<group>"; };
-		64C924CE08B78CCA00ACE251 /* LCQueryTermVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCQueryTermVector.m; sourceTree = "<group>"; };
+		64C924CE08B78CCA00ACE251 /* LCQueryTermVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCQueryTermVector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924CF08B78CCA00ACE251 /* LCReqExclScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCReqExclScorer.m; sourceTree = "<group>"; };
 		64C924D008B78CCA00ACE251 /* LCReqOptSumScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCReqOptSumScorer.m; sourceTree = "<group>"; };
 		64C924D108B78CCA00ACE251 /* LCScoreDoc.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCScoreDoc.m; sourceTree = "<group>"; };
@@ -774,9 +769,9 @@
 		64C924D408B78CCA00ACE251 /* LCSearcher.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSearcher.m; sourceTree = "<group>"; };
 		64C924D508B78CCA00ACE251 /* LCSimilarity.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSimilarity.m; sourceTree = "<group>"; };
 		64C924D608B78CCA00ACE251 /* LCSimilarityDelegator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSimilarityDelegator.m; sourceTree = "<group>"; };
-		64C924D708B78CCA00ACE251 /* LCSort.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSort.m; sourceTree = "<group>"; };
-		64C924D808B78CCA00ACE251 /* LCSortComparator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSortComparator.m; sourceTree = "<group>"; };
-		64C924D908B78CCA00ACE251 /* LCSortField.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCSortField.m; sourceTree = "<group>"; };
+		64C924D708B78CCA00ACE251 /* LCSort.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCSort.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924D808B78CCA00ACE251 /* LCSortComparator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCSortComparator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924D908B78CCA00ACE251 /* LCSortField.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCSortField.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924DA08B78CCA00ACE251 /* LCTermQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermQuery.m; sourceTree = "<group>"; };
 		64C924DB08B78CCA00ACE251 /* LCTermScorer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTermScorer.m; sourceTree = "<group>"; };
 		64C924DC08B78CCA00ACE251 /* LCTopDocs.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCTopDocs.m; sourceTree = "<group>"; };
@@ -789,29 +784,29 @@
 		64C924E308B78CCA00ACE251 /* TestCheckHits.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestCheckHits.m; sourceTree = "<group>"; };
 		64C924E408B78CCA00ACE251 /* TestDocBoost.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestDocBoost.m; sourceTree = "<group>"; };
 		64C924E508B78CCA00ACE251 /* TestEnglish.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TestEnglish.h; sourceTree = "<group>"; };
-		64C924E608B78CCA00ACE251 /* TestEnglish.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestEnglish.m; sourceTree = "<group>"; };
+		64C924E608B78CCA00ACE251 /* TestEnglish.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestEnglish.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924E708B78CCA00ACE251 /* TestFuzzyQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestFuzzyQuery.m; sourceTree = "<group>"; };
 		64C924E808B78CCA00ACE251 /* TestNot.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestNot.m; sourceTree = "<group>"; };
 		64C924E908B78CCA00ACE251 /* TestPrefixQuery.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestPrefixQuery.m; sourceTree = "<group>"; };
 		64C924EA08B78CCA00ACE251 /* TestQueryTermVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestQueryTermVector.m; sourceTree = "<group>"; };
 		64C924EB08B78CCA00ACE251 /* TestSetNorm.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSetNorm.m; sourceTree = "<group>"; };
 		64C924EC08B78CCA00ACE251 /* TestSimilarity.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSimilarity.m; sourceTree = "<group>"; };
-		64C924ED08B78CCA00ACE251 /* TestSort.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestSort.m; sourceTree = "<group>"; };
+		64C924ED08B78CCA00ACE251 /* TestSort.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestSort.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924EE08B78CCA00ACE251 /* TestTermVectors.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestTermVectors.m; sourceTree = "<group>"; };
-		64C924F208B78CCA00ACE251 /* LCFSDirectory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFSDirectory.m; sourceTree = "<group>"; };
-		64C924F308B78CCA00ACE251 /* LCFSIndexInput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFSIndexInput.m; sourceTree = "<group>"; };
-		64C924F408B78CCA00ACE251 /* LCFSIndexOutput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCFSIndexOutput.m; sourceTree = "<group>"; };
-		64C924F508B78CCA00ACE251 /* LCIndexInput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexInput.m; sourceTree = "<group>"; };
+		64C924F208B78CCA00ACE251 /* LCFSDirectory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFSDirectory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924F308B78CCA00ACE251 /* LCFSIndexInput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFSIndexInput.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924F408B78CCA00ACE251 /* LCFSIndexOutput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCFSIndexOutput.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C924F508B78CCA00ACE251 /* LCIndexInput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCIndexInput.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C924F608B78CCA00ACE251 /* LCIndexOutput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCIndexOutput.m; sourceTree = "<group>"; };
 		64C924F708B78CCA00ACE251 /* LCMMapDirectory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCMMapDirectory.m; sourceTree = "<group>"; };
 		64C924F808B78CCA00ACE251 /* LCRAMDirectory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCRAMDirectory.m; sourceTree = "<group>"; };
 		64C924F908B78CCA00ACE251 /* LCRAMFile.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCRAMFile.m; sourceTree = "<group>"; };
 		64C924FA08B78CCA00ACE251 /* LCRAMInputStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCRAMInputStream.m; sourceTree = "<group>"; };
 		64C924FB08B78CCA00ACE251 /* LCRAMOutputStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCRAMOutputStream.m; sourceTree = "<group>"; };
-		64C924FC08B78CCA00ACE251 /* TestStore.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TestStore.m; sourceTree = "<group>"; };
-		64C9250008B78CCB00ACE251 /* LCBitVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCBitVector.m; sourceTree = "<group>"; };
-		64C9250108B78CCB00ACE251 /* LCPriorityQueue.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LCPriorityQueue.m; sourceTree = "<group>"; };
-		64C9250208B78CCB00ACE251 /* NSData+Additions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSData+Additions.m"; sourceTree = "<group>"; };
+		64C924FC08B78CCA00ACE251 /* TestStore.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9250008B78CCB00ACE251 /* LCBitVector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCBitVector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9250108B78CCB00ACE251 /* LCPriorityQueue.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LCPriorityQueue.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		64C9250208B78CCB00ACE251 /* NSData+Additions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSData+Additions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		64C9250308B78CCB00ACE251 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* LuceneKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LuceneKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -821,7 +816,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60E79EF01278B57C00814548 /* UnitKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,8 +854,6 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				609AA00508D3A4D60008B25B /* OgreKit.framework */,
-				64C922B908B78AF100ACE251 /* UnitKit.framework */,
 				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
 				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
 			);
@@ -882,7 +874,6 @@
 			children = (
 				64C9244F08B78CCA00ACE251 /* Source */,
 				64C9250408B78CCB00ACE251 /* Headers */,
-				604A2FF50998D5B40082342D /* GNUstep.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1421,7 +1412,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				604A2FF60998D5B40082342D /* GNUstep.h in Headers */,
 				6047503308D19B5F000F2531 /* LuceneKit.h in Headers */,
 				6047503708D19B5F000F2531 /* LCIndexManager.h in Headers */,
 				6047503C08D19B5F000F2531 /* LCMetadataAttribute.h in Headers */,
@@ -1624,8 +1614,11 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
 			buildConfigurationList = 64C91B4808B783B900ACE251 /* Build configuration list for PBXProject "LuceneKit" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -2017,6 +2010,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = NeXT_RUNTIME;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
@@ -2050,6 +2044,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = NeXT_RUNTIME;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
@@ -2081,6 +2076,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = NeXT_RUNTIME;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
@@ -2107,31 +2103,29 @@
 		64C91B4508B783B900ACE251 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-framework",
-					OgreKit,
-				);
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "-lz";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = LuceneKit;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = NO;
 			};
@@ -2140,30 +2134,28 @@
 		64C91B4608B783B900ACE251 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-framework",
-					OgreKit,
-				);
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "-lz";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = LuceneKit;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = NO;
 			};
@@ -2172,6 +2164,8 @@
 		64C91B4708B783B900ACE251 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -2179,20 +2173,17 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-framework",
-					OgreKit,
-				);
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "-lz";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = LuceneKit;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = NO;
 			};
@@ -2202,7 +2193,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_C_LANGUAGE_STANDARD = c99;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_PCREParser=1";
 			};
 			name = Debug;
 		};
@@ -2210,7 +2201,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_C_LANGUAGE_STANDARD = c99;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_PCREParser=1";
 			};
 			name = Release;
 		};
@@ -2218,7 +2209,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_C_LANGUAGE_STANDARD = c99;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_PCREParser=1";
 			};
 			name = Default;
 		};

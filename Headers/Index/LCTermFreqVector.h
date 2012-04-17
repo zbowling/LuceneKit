@@ -1,7 +1,7 @@
 #ifndef __LUCENE_INDEX_TERM_FREQ_VECTOR__
 #define __LUCENE_INDEX_TERM_FREQ_VECTOR__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 /** Provides access to stored term vector of 
 *  a document field.

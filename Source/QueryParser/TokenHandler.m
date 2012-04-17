@@ -20,9 +20,8 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "TokenHandler.h"
-#include "GNUstep.h"
-#include <Foundation/Foundation.h>
+#import  "TokenHandler.h"
+#import  <Foundation/Foundation.h>
 
 @implementation TokenHandler
 
@@ -181,8 +180,7 @@
 
 - (void) dealloc
 {
-  DESTROY(_token);
-  [super dealloc];
+  _token=nil;;
 }
 
 - (void) token: (NSString *) token

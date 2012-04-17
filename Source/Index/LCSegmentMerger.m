@@ -1,20 +1,20 @@
-#include "LCSegmentMerger.h"
-#include "LCSegmentMergeInfo.h"
-#include "LCSegmentMergeQueue.h"
-#include "LCFieldInfos.h"
-#include "LCFieldInfo.h"
-#include "LCFieldsWriter.h"
-#include "LCTermInfosWriter.h"
-#include "LCTermInfo.h"
-#include "LCTerm.h"
-#include "LCTermVectorsWriter.h"
-#include "LCIndexReader.h"
-#include "LCIndexWriter.h"
-#include "LCCompoundFileWriter.h"
-#include "LCField.h"
-#include "LCIndexOutput.h"
-#include "LCRAMOutputStream.h"
-#include "GNUstep.h"
+#import  "LCSegmentMerger.h"
+#import  "LCSegmentMergeInfo.h"
+#import  "LCSegmentMergeQueue.h"
+#import  "LCFieldInfos.h"
+#import  "LCFieldInfo.h"
+#import  "LCFieldsWriter.h"
+#import  "LCTermInfosWriter.h"
+#import  "LCTermInfo.h"
+#import  "LCTerm.h"
+#import  "LCTermVectorsWriter.h"
+#import  "LCIndexReader.h"
+#import  "LCIndexWriter.h"
+#import  "LCCompoundFileWriter.h"
+#import  "LCField.h"
+#import  "LCIndexOutput.h"
+#import  "LCRAMOutputStream.h"
+
 
 /**
 * The SegmentMerger class combines two or more Segments, represented by an IndexReader ({@link #add}),
@@ -69,20 +69,19 @@
 
 - (void) dealloc
 {
-	DESTROY(directory);
-	DESTROY(segment);
-	DESTROY(readers);
-	DESTROY(fieldInfos);
-	DESTROY(COMPOUND_EXTENSIONS);
-	DESTROY(VECTOR_EXTENSIONS);
+	directory=nil;;
+	segment=nil;;
+	readers=nil;;
+	fieldInfos=nil;;
+	COMPOUND_EXTENSIONS=nil;;
+	VECTOR_EXTENSIONS=nil;;
 
-	DESTROY(freqOutput);
-	DESTROY(proxOutput);
-	DESTROY(termInfosWriter);
-	DESTROY(queue);
-	DESTROY(skipBuffer);
+	freqOutput=nil;;
+	proxOutput=nil;;
+	termInfosWriter=nil;;
+	queue=nil;;
+	skipBuffer=nil;;
 
-	[super dealloc];
 }
 
 /** This ctor used only by test code.
@@ -93,8 +92,8 @@
 - (id) initWithDirectory: (id <LCDirectory>) dir name: (NSString *) name
 {
 	self = [self init];
-	ASSIGN(directory, dir);
-	ASSIGN(segment, name);
+	directory = dir;
+	segment = name;
 	return self;
 }
 
@@ -197,9 +196,9 @@
     
     // Perform the merge
     [cfsWriter close];
-    DESTROY(cfsWriter);
+    cfsWriter=nil;;
 	
-    return AUTORELEASE(files);
+    return files;
 }
 
 - (void) addIndexed: (LCIndexReader *) r
@@ -229,7 +228,7 @@
  */
 - (int) mergeFields
 {
-	ASSIGN(fieldInfos, AUTORELEASE([[LCFieldInfos alloc] init]));  // merge field names
+	fieldInfos = [[LCFieldInfos alloc] init];  // merge field names
 	//fieldInfos = [[LCFieldInfos alloc] init];  // merge field names
 	int docCount = 0;
 	int i;
@@ -289,7 +288,7 @@
 			}
 	}
 		[fieldsWriter close];
-		DESTROY(fieldsWriter);
+		fieldsWriter=nil;;
 		return docCount;
 }
 
@@ -315,21 +314,21 @@
 		}
 	}
 	[termVectorsWriter close];
-	DESTROY(termVectorsWriter);
+	termVectorsWriter=nil;;
 }
 
 - (void) mergeTerms;
 {
 	NSString *file = [segment stringByAppendingPathExtension: @"frq"];
-	ASSIGN(freqOutput, [directory createOutput: file]);
+	freqOutput = [directory createOutput: file];
 	file = [segment stringByAppendingPathExtension: @"prx"];
-	ASSIGN(proxOutput, [directory createOutput: file]);
-	ASSIGN(termInfosWriter, AUTORELEASE([[LCTermInfosWriter alloc] initWithDirectory: directory
+	proxOutput = [directory createOutput: file];
+	termInfosWriter = [[LCTermInfosWriter alloc] initWithDirectory: directory
 														   segment: segment
 														fieldInfos: fieldInfos
-														  interval: termIndexInterval]));
+														  interval: termIndexInterval];
 	skipInterval = [termInfosWriter skipInterval];
-	ASSIGN(queue, AUTORELEASE([(LCSegmentMergeQueue *)[LCSegmentMergeQueue alloc] initWithSize: [readers count]]));
+	queue = [(LCSegmentMergeQueue *)[LCSegmentMergeQueue alloc] initWithSize: [readers count]];
 	
 	[self mergeTermInfos];
 	
@@ -355,7 +354,7 @@
 		}
 		else
 			[smi close];
-		DESTROY(smi);
+		smi=nil;;
     }
 	
     NSMutableArray *match = [[NSMutableArray alloc] init];
@@ -390,7 +389,7 @@
 				[smi close];				  // done with a segment
 		}
     }
-	DESTROY(match);
+	match=nil;;
 }
 
 /** Merge one term found in one or more segments. The array <code>smis</code>
@@ -419,7 +418,7 @@
 		[ti setSkipOffset: (long)(skipPointer - freqPointer)];
 		[termInfosWriter addTerm: [[smis objectAtIndex: 0] term]
 						termInfo: ti];
-		DESTROY(ti);
+		ti=nil;;
     }
 }
 
@@ -534,7 +533,7 @@
 						[output writeByte: bytes[k]];
 					}
 				}
-				DESTROY(input);
+				input=nil;;
 			}
 			[output close];
 		}

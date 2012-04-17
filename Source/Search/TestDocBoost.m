@@ -1,12 +1,12 @@
-#include <UnitKit/UnitKit.h>
-#include <Foundation/Foundation.h>
-#include "LCSimpleAnalyzer.h"
-#include "LCRAMDirectory.h"
-#include "LCIndexWriter.h"
-#include "LCTerm.h"
-#include "LCDocument.h"
-#include "LCTermQuery.h"
-#include "LCIndexSearcher.h"
+#import  <UnitKit/UnitKit.h>
+#import  <Foundation/Foundation.h>
+#import  "LCSimpleAnalyzer.h"
+#import  "LCRAMDirectory.h"
+#import  "LCIndexWriter.h"
+#import  "LCTerm.h"
+#import  "LCDocument.h"
+#import  "LCTermQuery.h"
+#import  "LCIndexSearcher.h"
 
 @interface TestDocBoost: NSObject <UKTest>
 {

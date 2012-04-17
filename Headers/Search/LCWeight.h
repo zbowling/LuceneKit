@@ -1,10 +1,10 @@
 #ifndef __LUCENE_SEARCH_WEIGHT__
 #define __LUCENE_SEARCH_WEIGHT__
 
-#include <Foundation/Foundation.h>
-#include "LCIndexReader.h"
-#include "LCScorer.h"
-#include "LCExplanation.h"
+#import  <Foundation/Foundation.h>
+#import  "LCIndexReader.h"
+#import  "LCScorer.h"
+#import  "LCExplanation.h"
 
 @class LCQuery;
 

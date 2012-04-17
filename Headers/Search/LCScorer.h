@@ -1,10 +1,10 @@
 #ifndef __LUCENE_SEARCH_SCORER__
 #define __LUCENE_SEARCH_SCORER__
 
-#include <Foundation/Foundation.h>
-#include "LCSimilarity.h"
-#include "LCHitCollector.h"
-#include "LCExplanation.h"
+#import  <Foundation/Foundation.h>
+#import  "LCSimilarity.h"
+#import  "LCHitCollector.h"
+#import  "LCExplanation.h"
 
 @interface LCScorer: NSObject
 {

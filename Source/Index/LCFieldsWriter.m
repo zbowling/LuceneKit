@@ -1,7 +1,7 @@
-#include "LCFieldsWriter.h"
-#include "LCIndexOutput.h"
-#include "NSData+Additions.h"
-#include "GNUstep.h"
+#import  "LCFieldsWriter.h"
+#import  "LCIndexOutput.h"
+#import  "NSData+Additions.h"
+
 
 @implementation LCFieldsWriter
 
@@ -10,20 +10,19 @@
 			  fieldInfos: (LCFieldInfos *) fn
 {
 	self = [self init];
-	ASSIGN(fieldInfos, fn);
+	fieldInfos = fn;
 	NSString *f = [segment stringByAppendingPathExtension: @"fdt"];
-	ASSIGN(fieldsStream, [d createOutput: f]);
+	fieldsStream = [d createOutput: f];
 	f = [segment stringByAppendingPathExtension: @"fdx"];
-	ASSIGN(indexStream, [d createOutput: f]);
+	indexStream = [d createOutput: f];
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(fieldInfos);
-	DESTROY(fieldsStream);
-	DESTROY(indexStream);
-	[super dealloc];
+	fieldInfos=nil;;
+	fieldsStream=nil;;
+	indexStream=nil;;
 }
 
 - (void) close
@@ -66,16 +65,16 @@
 				NSData *data = nil;
 				// check if it is a binary field
 				if ([field isData]) {
-                    ASSIGN(data, [field data]);
+                    data = [field data];
 				}
 				else {
-					ASSIGN(data, [[field string] dataUsingEncoding: NSUTF8StringEncoding]);
+					data = [[field string] dataUsingEncoding: NSUTF8StringEncoding];
 				}
-				ASSIGN(data, [data compressedData]);
+				data = [data compressedData];
 				int len = [data length];
 				[fieldsStream writeVInt: len];
 				[fieldsStream writeBytes: data length: len];
-				DESTROY(data);
+				data=nil;;
 			} else {
 				// compression is disabled for the current field
 				if ([field isData]) {

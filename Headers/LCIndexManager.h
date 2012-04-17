@@ -1,12 +1,12 @@
 #ifndef __LuceneKit_Index_Manager__
 #define __LuceneKit_Index_Manager__
 
-#include "LCImporter.h"
-#include "LCDirectory.h"
-#include "LCDocument.h"
-#include "LCAnalyzer.h"
-#include "LCIndexModifier.h"
-#include "LCQuery.h"
+#import  "LCImporter.h"
+#import  "LCDirectory.h"
+#import  "LCDocument.h"
+#import  "LCAnalyzer.h"
+#import  "LCIndexModifier.h"
+#import  "LCQuery.h"
 
 /** LCIndexManager try to bridge GNUstep and Lucene.
  * Currently it is designed to work on file system,

@@ -1,5 +1,5 @@
-#include "LCFSIndexInput.h"
-#include "GNUstep.h"
+#import  "LCFSIndexInput.h"
+
 
 @interface LCFSIndexInput (LCPrivate)
 - (void) setClosed: (BOOL) isClosed;
@@ -25,12 +25,12 @@
 - (id) initWithFile: (NSString *) absolutePath
 {
 	self = [self init];
-	ASSIGNCOPY(path, absolutePath);
-	ASSIGN(handle, [NSFileHandle fileHandleForReadingAtPath: path]);
+	path =[ absolutePath copy];
+	handle = [NSFileHandle fileHandleForReadingAtPath: path];
 	isClosed = NO;
 	NSFileManager *manager = [NSFileManager defaultManager];
-	NSDictionary *d = [manager fileAttributesAtPath: path
-					   traverseLink: YES];
+	NSDictionary *d = [manager  attributesOfItemAtPath:[path stringByResolvingSymlinksInPath]
+                                                 error:NULL];
 	length = [[d objectForKey: NSFileSize] longValue];
 	return self;
 }
@@ -107,9 +107,8 @@
 - (void) dealloc
 {
 	[self close];
-	DESTROY(handle);
-	DESTROY(path);
-	[super dealloc];
+	handle=nil;;
+	path=nil;;
 }
 
 - (void) setClosed: (BOOL) c

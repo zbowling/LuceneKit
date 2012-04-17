@@ -1,7 +1,7 @@
 #ifndef __LuceneKit_Search_TopDocCollector__
 #define __LuceneKit_Search_TopDocCollector__
 
-#include "LCHitCollector.h"
+#import  "LCHitCollector.h"
 
 @class LCPriorityQueue;
 @class LCTopDocs;

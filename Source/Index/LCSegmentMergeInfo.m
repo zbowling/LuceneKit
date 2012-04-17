@@ -1,5 +1,5 @@
-#include "LCSegmentMergeInfo.h"
-#include "GNUstep.h"
+#import  "LCSegmentMergeInfo.h"
+
 
 @implementation LCSegmentMergeInfo
 - (id) initWithBase: (int) b termEnumerator: (LCTermEnumerator *) te
@@ -7,9 +7,9 @@
 {
 	self = [super init];
 	base = b;
-	ASSIGN(reader, r);
-	ASSIGN(termEnum, te);
-	ASSIGN(term, [te term]);
+	reader = r;
+	termEnum = te;
+	term = [te term];
 	postings = nil;
 	docMap = nil;
 	return self;
@@ -17,12 +17,11 @@
 
 - (void) dealloc
 {
-	DESTROY(reader);
-	DESTROY(termEnum);
-	DESTROY(term);
-	DESTROY(postings);
-	DESTROY(docMap);
-	[super dealloc];
+	reader=nil;;
+	termEnum=nil;;
+	term=nil;;
+	postings=nil;;
+	docMap=nil;;
 }
 	
 - (NSArray *) docMap
@@ -32,7 +31,7 @@
     // build array which maps document numbers around deletions 
 	if ([reader hasDeletions]) {
 		int maxDoc = [reader maximalDocument];
-		ASSIGN(docMap, AUTORELEASE([[NSMutableArray alloc] init]));
+		docMap = [[NSMutableArray alloc] init];
 		int j = 0;
 		int i;
 		for (i = 0; i < maxDoc; i++) {
@@ -49,7 +48,7 @@
 - (id <LCTermPositions>) postings
 {
 	if (postings == nil) {
-		ASSIGN(postings, [reader termPositions]);
+		postings = [reader termPositions];
 	}
 	return postings;
 }
@@ -57,10 +56,10 @@
 - (BOOL) hasNextTerm
 {
     if ([termEnum hasNextTerm]) {
-		ASSIGN(term, [termEnum term]);
+		term = [termEnum term];
 		return YES;
     } else {
-		DESTROY(term);
+		term=nil;;
 		return NO;
     }
 }

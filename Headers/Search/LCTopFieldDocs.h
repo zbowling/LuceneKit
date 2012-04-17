@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_TOP_FIELD_DOCS__
 #define __LUCENE_SEARCH_TOP_FIELD_DOCS__
 
-#include "LCTopDocs.h"
+#import  "LCTopDocs.h"
 
 @interface LCTopFieldDocs: LCTopDocs
 {

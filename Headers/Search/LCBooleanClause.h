@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_BOOLEAN_CLAUSE__
 #define __LUCENE_SEARCH_BOOLEAN_CLAUSE__
 
-#include <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 
 typedef enum _OCCUR_TYPE
 {

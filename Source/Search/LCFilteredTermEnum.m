@@ -1,5 +1,5 @@
-#include "LCFilteredTermEnum.h"
-#include "GNUstep.h"
+#import  "LCFilteredTermEnum.h"
+
 
 /** Abstract class for enumerating a subset of all terms. 
 
@@ -10,9 +10,8 @@ the enumeration is greater than all that precede it.  */
 
 - (void) dealloc
 {
-  DESTROY(actualEnum);
-  DESTROY(currentTerm);
-  [super dealloc];
+  actualEnum=nil;;
+  currentTerm=nil;;
 }
 
 /** Equality compare on the term */
@@ -28,11 +27,11 @@ the enumeration is greater than all that precede it.  */
     
 - (void) setEnumerator: (LCTermEnumerator *) ae
 {
-	ASSIGN(actualEnum, ae);
+	actualEnum = ae;
 	// Find the first term that matches
 	LCTerm *term = [actualEnum term];
 	if (term != nil && [self isEqualToTerm: term])
-		ASSIGN(currentTerm, term);
+		currentTerm = term;
 	else
 		[self hasNextTerm];
 }
@@ -51,19 +50,19 @@ the enumeration is greater than all that precede it.  */
 - (BOOL) hasNextTerm
 {
 	if (actualEnum == nil) return NO;
-	DESTROY(currentTerm);
+	currentTerm=nil;;
 	while (currentTerm == nil) {
 		if ([self endOfEnumerator] == YES) return NO;
 		if ([actualEnum hasNextTerm]) {
 			LCTerm *term = [actualEnum term];
 			if ([self isEqualToTerm: term]) {
-				ASSIGN(currentTerm, term);
+				currentTerm = term;
 				return YES;
 			}
 		}
 		else return NO;
 	}
-	DESTROY(currentTerm);
+	currentTerm=nil;;
 	return NO;
 }
     
@@ -78,8 +77,8 @@ the enumeration is greater than all that precede it.  */
 - (void) close
 {
 	[actualEnum close];
-	DESTROY(currentTerm);
-	DESTROY(actualEnum);
+	currentTerm=nil;;
+	actualEnum=nil;;
 }
 
 @end

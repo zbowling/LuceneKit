@@ -1,10 +1,10 @@
-#include "LCIndexModifier.h"
-#include "GNUstep.h"
+#import  "LCIndexModifier.h"
+
 
 @interface LCIndexModifier (LCPrivate)
 - (void) initializeDirectory: (id <LCDirectory>) d
-	analyzer: (LCAnalyzer *) a
-	create: (BOOL) c;
+                    analyzer: (LCAnalyzer *) a
+                      create: (BOOL) c;
 @end
 
 @implementation LCIndexModifier
@@ -17,7 +17,7 @@
 	directory = nil;
 	analyzer = nil;
 	open = NO;
-
+    
 	useCompoundFile = YES;
 	maxBufferedDocs = DEFAULT_MIN_MERGE_DOCS;
 	maxFieldLength = DEFAULT_MAX_FIELD_LENGTH;
@@ -27,8 +27,8 @@
 }
 
 - (id) initWithDirectory: (id <LCDirectory>) d
-		analyzer: (LCAnalyzer *) a
-		create: (BOOL) c
+                analyzer: (LCAnalyzer *) a
+                  create: (BOOL) c
 {
 	self = [self init];
 	[self initializeDirectory: d analyzer: a create: c];
@@ -36,34 +36,25 @@
 }
 
 #if 0
-  public IndexModifier(String dirName, Analyzer analyzer, boolean create) throws IOException {
-    Directory dir = FSDirectory.getDirectory(dirName, create);
-    init(dir, analyzer, create);
-  }
-  
-  public IndexModifier(File file, Analyzer analyzer, boolean create) throws IOException {
-    Directory dir = FSDirectory.getDirectory(file, create);
-    init(dir, analyzer, create);
-  }
+public IndexModifier(String dirName, Analyzer analyzer, boolean create) throws IOException {
+Directory dir = FSDirectory.getDirectory(dirName, create);
+init(dir, analyzer, create);
+}
+
+public IndexModifier(File file, Analyzer analyzer, boolean create) throws IOException {
+Directory dir = FSDirectory.getDirectory(file, create);
+init(dir, analyzer, create);
+}
 #endif
 
 - (void) initializeDirectory: (id <LCDirectory>) d
-	analyzer: (LCAnalyzer *) a
-	create: (BOOL) c
+                    analyzer: (LCAnalyzer *) a
+                      create: (BOOL) c
 {
-	ASSIGN(directory, d);
-	ASSIGN(analyzer, a);
-	ASSIGN(indexWriter, AUTORELEASE([[LCIndexWriter alloc] initWithDirectory: d analyzer: a create: c]));
+	directory = d;
+	analyzer = a;
+	indexWriter = [[LCIndexWriter alloc] initWithDirectory: d analyzer: a create: c];
 	open = YES;
-}
-
-- (void) dealloc
-{
-  DESTROY(directory);
-  DESTROY(analyzer);
-  DESTROY(indexWriter);
-  DESTROY(indexReader);
-  [super dealloc];
 }
 
 - (void) assureOpen
@@ -76,14 +67,14 @@
 	if (indexWriter == nil) {
 		if (indexReader != nil) {
 			[indexReader close];
-			DESTROY(indexReader);
+			indexReader=nil;;
 		}
-		ASSIGN(indexWriter, AUTORELEASE([[LCIndexWriter alloc] initWithDirectory: directory analyzer: analyzer create: NO]));
+		indexWriter = [[LCIndexWriter alloc] initWithDirectory: directory analyzer: analyzer create: NO];
 		[indexWriter setUseCompoundFile: useCompoundFile];
 		[indexWriter setMaxBufferedDocuments: maxBufferedDocs];
 		[indexWriter setMaxFieldLength: maxFieldLength];
 		[indexWriter setMergeFactor: mergeFactor];
-    	}
+    }
 }
 
 
@@ -92,9 +83,9 @@
 	if (indexReader == nil) {
 		if (indexWriter != nil) {
 			[indexWriter close];
-			DESTROY(indexWriter);
+			indexWriter=nil;;
 		}
-	ASSIGN(indexReader, [LCIndexReader openDirectory: directory]);
+        indexReader = [LCIndexReader openDirectory: directory];
 	}
 }
 
@@ -103,17 +94,17 @@
 	[self assureOpen];
 	if (indexWriter != nil) {
 		[indexWriter close];
-		DESTROY(indexWriter);
+		indexWriter=nil;;
 		[self createIndexWriter];
 	} else {
 		[indexReader close];
-		DESTROY(indexReader);
+		indexReader=nil;;
 		[self createIndexReader];
 	}
 }
 
 - (void) addDocument: (LCDocument *) doc
-	analyzer: (LCAnalyzer *) docAnalyzer
+            analyzer: (LCAnalyzer *) docAnalyzer
 {
 	[self assureOpen];
 	[self createIndexWriter];
@@ -141,7 +132,7 @@
 	[self createIndexReader];
 	[indexReader deleteDocument: docNum];
 }
-  
+
 - (int) numberOfDocuments
 {
 	[self assureOpen];
@@ -190,7 +181,7 @@
 	[self createIndexWriter];
 	return [indexWriter maxFieldLength];
 }
-  
+
 - (void) setMaxBufferedDocuments: (int) max
 {
 	[self assureOpen];
@@ -228,10 +219,10 @@
 	if (!open) NSLog(@"Index is closed already");
 	if (indexWriter != nil) {
 		[indexWriter close];
-		DESTROY(indexWriter);
+		indexWriter=nil;;
 	} else {
 		[indexReader close];
-		DESTROY(indexReader);
+		indexReader=nil;;
 	}
 	open = NO;
 }
@@ -240,5 +231,5 @@
 {
 	return [NSString stringWithFormat: @"Index@%@", directory];
 }
-  
+
 @end

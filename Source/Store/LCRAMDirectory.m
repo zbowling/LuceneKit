@@ -1,32 +1,28 @@
-#include "LCRAMDirectory.h"
-#include "LCFSDirectory.h"
-#include "LCRAMInputStream.h"
-#include "LCRAMOutputStream.h"
-#include "GNUstep.h"
+#import  "LCRAMDirectory.h"
+#import  "LCFSDirectory.h"
+#import  "LCRAMInputStream.h"
+#import  "LCRAMOutputStream.h"
+
 
 /**
-* A memory-resident {@link Directory} implementation.
+ * A memory-resident {@link Directory} implementation.
  *
  * @version $Id$
  */
 @implementation LCRAMDirectory
 
-- (void) dealloc
-{
-	DESTROY(files);
-	[super dealloc];
-}
-
 /** Constructs an empty {@link Directory}. */
 - (id) init
 {
 	self = [super init];
-	files = [[NSMutableDictionary alloc] init];
+    if (self) {
+        files = [[NSMutableDictionary alloc] init];
+    }
 	return self; 
 }
 
 /**
-* Creates a new <code>RAMDirectory</code> instance from a different
+ * Creates a new <code>RAMDirectory</code> instance from a different
  * <code>Directory</code> implementation.  This can be used to load
  * a disk-based index into memory.
  * <P>
@@ -68,12 +64,12 @@
 	if (closeDirectory)
 		[dir close];
 	
-	DESTROY(buf);
+	buf=nil;;
 	return self;
 }
 
 /**
-* Creates a new <code>RAMDirectory</code> instance from the {@link FSDirectory}.
+ * Creates a new <code>RAMDirectory</code> instance from the {@link FSDirectory}.
  *
  * @param dir a <code>String</code> specifying the full index directory path
  */
@@ -81,7 +77,7 @@
 {
 	LCFSDirectory *d = [[LCFSDirectory alloc] initWithPath: absolutePath
 													create: NO];
-	return [self initWithDirectory: AUTORELEASE(d) close: YES];
+	return [self initWithDirectory: d close: YES];
 }
 
 /** Returns an array of strings, one for each file in the directory. */
@@ -134,14 +130,14 @@
 }
 
 /** Creates a new, empty file in the directory with the given name.
-Returns a stream writing this file. */
+ Returns a stream writing this file. */
 - (LCIndexOutput *) createOutput: (NSString *) name
 {
 	LCRAMFile *f = [[LCRAMFile alloc] init];
 	[files setObject: f forKey: name];
 	LCRAMOutputStream *s = [[LCRAMOutputStream alloc] initWithFile: f];
-	DESTROY(f);
-	return AUTORELEASE(s);
+	f=nil;;
+	return s;
 }
 
 /** Returns a stream reading an existing file. */
@@ -149,12 +145,12 @@ Returns a stream writing this file. */
 {
 	LCRAMFile *f = [files objectForKey: name];
 	LCRAMInputStream *i = [[LCRAMInputStream alloc] initWithFile: f];
-	return AUTORELEASE(i);
+	return i;
 }
 
 /** Construct a {@link Lock}.
-* @param name the name of the lock file
-*/
+ * @param name the name of the lock file
+ */
 #if 0
 public final Lock makeLock(final String name) {
     return new Lock() {

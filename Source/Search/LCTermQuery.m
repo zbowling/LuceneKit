@@ -1,12 +1,12 @@
-#include "LCTermQuery.h"
-#include "LCTermScorer.h"
-#include "LCSimilarity.h"
-#include "LCSearcher.h"
-#include "LCTerm.h"
-#include "LCTermDocs.h"
-#include "LCSmallFloat.h"
-#include "NSString+Additions.h"
-#include "GNUstep.h"
+#import  "LCTermQuery.h"
+#import  "LCTermScorer.h"
+#import  "LCSimilarity.h"
+#import  "LCSearcher.h"
+#import  "LCTerm.h"
+#import  "LCTermDocs.h"
+#import  "LCSmallFloat.h"
+#import  "NSString+Additions.h"
+
 
 @interface LCTermWeight: NSObject <LCWeight>
 {
@@ -26,19 +26,18 @@
 - (id) initWithTerm: (LCTerm *) t
 {
 	self = [super init];
-	ASSIGN(term, t);
+	term = t;
 	return self;
 }
 
 - (void) dealloc
 {
-	DESTROY(term);
-	[super dealloc];
+	term=nil;;
 }
 
 - (id <LCWeight>) createWeight: (LCSearcher *) searcher
 {
-	return AUTORELEASE([[LCTermWeight alloc] initWithTermQuery: self searcher: searcher]);
+	return [[LCTermWeight alloc] initWithTermQuery: self searcher: searcher];
 }
 
 - (void) extractTerms: (NSMutableArray *) terms
@@ -57,7 +56,7 @@
 	}
 	[buffer appendString: [term text]];
 	[buffer appendString: LCStringFromBoost([self boost])];
-	return AUTORELEASE(buffer);
+	return buffer;
 }
 
 - (BOOL) isEqual: (id) o
@@ -87,8 +86,8 @@
 				searcher: (LCSearcher *) s
 {
 	self = [super init];
-	ASSIGN(query, q);
-	ASSIGN(similarity, [query similarity: s]);
+	query = q;
+	similarity = [query similarity: s];
 	idf = [similarity inverseDocumentFrequencyWithTerm: [query term]
 											  searcher: s];
 	return self;
@@ -96,9 +95,8 @@
 
 - (void) dealloc
 {
-	DESTROY(query);
-	DESTROY(similarity);
-	[super dealloc];
+	query=nil;;
+	similarity=nil;;
 }
 
 - (NSString *) description
@@ -128,7 +126,7 @@
 	LCTermScorer *scorer = [[LCTermScorer alloc] initWithWeight: self
 													   termDocuments: termDocs similarity: similarity
 														  norms: [reader norms: [[query term] field]]];
-	return AUTORELEASE(scorer);
+	return scorer;
 }
 
 - (LCExplanation *) explain: (LCIndexReader *) reader
@@ -137,30 +135,30 @@
 	LCExplanation *result = [[LCExplanation alloc] init];
 	[result setRepresentation: [NSString stringWithFormat: @"weight(%@ in %d), product of:", query, doc]];
 	
-	LCExplanation *idfExpl = AUTORELEASE(([[LCExplanation alloc] initWithValue: idf representation: [NSString stringWithFormat: @"idf(docFreq=%d)", [reader documentFrequency: [query term]]]]));
+	LCExplanation *idfExpl = ([[LCExplanation alloc] initWithValue: idf representation: [NSString stringWithFormat: @"idf(docFreq=%d)", [reader documentFrequency: [query term]]]]);
 	// explain query weight
-	LCExplanation *queryExpl = AUTORELEASE([[LCExplanation alloc] init]);
+	LCExplanation *queryExpl = [[LCExplanation alloc] init];
 	[queryExpl setRepresentation: [NSString stringWithFormat: @"queryWeight(%@), product of:", query]];
 	
-	LCExplanation *boostExpl = AUTORELEASE([[LCExplanation alloc] initWithValue: [query boost] representation: @"boost"]);
+	LCExplanation *boostExpl = [[LCExplanation alloc] initWithValue: [query boost] representation: @"boost"];
 	if ([query boost] != 1.0f)
 		[queryExpl addDetail: boostExpl];
 	[queryExpl addDetail: idfExpl];
 	
-	LCExplanation *queryNormExpl = AUTORELEASE([[LCExplanation alloc] initWithValue: queryNorm representation: @"queryNorm"]);
+	LCExplanation *queryNormExpl = [[LCExplanation alloc] initWithValue: queryNorm representation: @"queryNorm"];
 	[queryExpl addDetail: queryNormExpl];
 	
 	[queryExpl setValue: [boostExpl value]+[idfExpl value]+[queryNormExpl value]];
 	[result addDetail: queryExpl];
 	// explain field weight
 	NSString *field = [[query term] field];
-	LCExplanation *fieldExpl = AUTORELEASE([[LCExplanation alloc] init]);
+	LCExplanation *fieldExpl = [[LCExplanation alloc] init];
 	[fieldExpl setRepresentation: [NSString stringWithFormat: @"fieldWeight(%@ in %d), product of:", [query term], doc]];
 	LCExplanation *tfExpl = [[self scorer: reader] explain: doc];
 	[fieldExpl addDetail: tfExpl];
 	[fieldExpl addDetail: idfExpl];
 	
-	LCExplanation *fieldNormExpl = AUTORELEASE([[LCExplanation alloc] init]);
+	LCExplanation *fieldNormExpl = [[LCExplanation alloc] init];
 	NSData *fieldNorms = [reader norms: field];
 	char *n = (char *)[fieldNorms bytes];
 	float fieldNorm = (field != nil) ? [LCSimilarity decodeNorm: n[doc]] : 0.0f;
@@ -176,7 +174,7 @@
 	if ([queryExpl value] == 1.0f)
 		return fieldExpl;
 	
-	return AUTORELEASE(result);
+	return result;
 }
 
 @end

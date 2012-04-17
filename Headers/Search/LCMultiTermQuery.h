@@ -1,7 +1,7 @@
 #ifndef __LUCENE_SEARCH_MULTI_TERM_QUERY__
 #define __LUCENE_SEARCH_MULTI_TERM_QUERY__
 
-#include "LCQuery.h"
+#import  "LCQuery.h"
 
 @class LCTerm;
 @class LCFilteredTermEnumerator;
